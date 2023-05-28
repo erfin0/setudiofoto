@@ -5,8 +5,8 @@
  <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
-
-home
+<?= $this->include('/User/header') ?>
+<?= $this->include('/User/testimoni') ?>
 <?= $this->endSection() ?>
 
 <?= $this->Section('pageScripts') ?>

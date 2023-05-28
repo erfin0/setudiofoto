@@ -1,0 +1,36 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Ink&family=Roboto:wght@500&family=Sanchez&display=swap');
+
+:root {
+    --bs-font-serif: 'Sanchez';
+    --bs-font-sans-serif: 'Roboto';
+    --bs-font-sans-serif-01: 'Reem Kufi Ink';
+    /* --bs-font-sans-serif: 'Quicksand', sans-serif; */
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-body-font-family: var(--bs-font-sans-serif);
+}
+
+.sarif {
+    font-family: var(--bs-font-serif);
+}
+.f01{
+    font-family: var(--bs-font-sans-serif-01);
+}
+.logoname {
+    font-size: 5rem;
+    letter-spacing: 0.286em;
+    font-weight: 500;
+}
+
+.img400 {
+    width: 100%;
+    height: 30rem;
+    object-fit: cover;
+}
+
+.consual-indikator-kanan {
+    left: auto;
+    margin-right: 2rem;
+}
+
+
