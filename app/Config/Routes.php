@@ -29,7 +29,11 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'User\Home::index');
+$routes->group('/',  ['namespace' => '\App\Controllers\User'], static function ($routes) {
+    $routes->get('', 'Home::index');
+    $routes->get('pembayaran', 'Pesanan::pembayaran');
+    $routes->get('booking', 'Pesanan::booking');
+});
 
 service('auth')->routes($routes);
 
