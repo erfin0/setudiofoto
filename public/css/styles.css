@@ -21,30 +21,40 @@
   font-family: 'Sarabun';
 }
 
-.f-tin {  
+.f-tin {
   font-weight: 100;
 }
- .f-el {  
+
+.f-el {
   font-weight: 200;
 }
- .f-me {  
+
+.f-me {
   font-weight: 500;
 }
+
 .f-b {
   font-weight: 700;
 }
 
-.inlogin{
+.inlogin {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid rgb(0, 0, 0);
   border-radius: unset;
 }
-.nondekor{
+
+.nondekor {
   text-decoration: none;
- 
+
 }
 
+.rendembgimg {
+  background-image: url('https://picsum.photos/640/480?pic=13');
+  background-repeat: no-repeat;
+  background-size: cover;
+ 
+}
 
 .logoname {
   font-size: 5rem;

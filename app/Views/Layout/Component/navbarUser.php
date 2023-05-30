@@ -9,7 +9,7 @@
                 <?php $menu = setting()->get('aplikasi.MenuUser') ?? [];
                 foreach ($menu as $m) : ?>
                     <li class="nav-item">
-                        <a class="nav-link text-white mx-2" href="#"><?= $m['menu'] ?? 'menu' ?></a>
+                        <a class="nav-link text-white mx-2" href="<?= $m['url'] ?? '#' ?>"><?= $m['menu'] ?? 'menu' ?></a>
                     </li>
                 <?php endforeach ?>
                 <?php if (auth()->loggedIn()) { ?>

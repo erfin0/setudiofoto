@@ -33,7 +33,7 @@
     <form action="<?= url_to('login') ?>" method="post">
         <?= csrf_field() ?>
 
-        <div class="  m-5  card bg-secondary-subtle">
+        <div class="  m-5  card ">
             <div class="card-body p-5 container">
                 <div class="row justify-content-md-center">
                     <div class="col-sm-12 col-md-9 col-xl-8 ">

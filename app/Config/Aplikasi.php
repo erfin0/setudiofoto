@@ -13,7 +13,7 @@ class Aplikasi extends BaseConfig
         [ 'menu'=>'Jadwal Boking',
         'url'=>''],
         [ 'menu'=>'Testimoni',
-        'url'=>''],
+        'url'=>'#testimoni'],
         [ 'menu'=>'About',
         'url'=>''],        
         [ 'menu'=>'Contact',

@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="<?= base_url() ?>vendors/owl/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>vendors/owl/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>css/styles.css" rel="stylesheet" />
+
+    <script src="<?= base_url() ?>js/jquery-3.7.0.min.js"></script>
+    <script src="<?= base_url() ?>js/popper.min.js"></script>
+    <script src="<?= base_url() ?>vendors/bs-5/js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>vendors/owl/js/owl.carousel.min.js"></script>
     <?= $this->renderSection('pageStyles') ?>
 </head>
 
@@ -29,10 +34,10 @@
         </div>
     </main>
     <?= $this->include('/layout/Component/footer') ?>
-    <script src="<?= base_url() ?>js/jquery-3.7.0.min.js"></script>
+    <!-- <script src="<?= base_url() ?>js/jquery-3.7.0.min.js"></script>
     <script src="<?= base_url() ?>js/popper.min.js"></script>
     <script src="<?= base_url() ?>vendors/bs-5/js/bootstrap.min.js"></script>
-    <script src="<?= base_url() ?>vendors/owl/js/owl.carousel.min.js"></script>
+    <script src="<?= base_url() ?>vendors/owl/js/owl.carousel.min.js"></script> -->
     <?= $this->renderSection('pageScripts') ?>
 </body>
 
