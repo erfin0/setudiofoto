@@ -38,11 +38,11 @@
                 <div class="row justify-content-md-center">
                     <div class="col-sm-12 col-md-9 col-xl-8 ">
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control f-tin inlogin" id="floatingInput" placeholder="name@example.com">
+                            <input type="email" class="form-control f-tin inlogin <?= isset(session('errors')['email']) ? 'is-invalid' : '' ?>" id="floatingInput" placeholder="name@example.com">
                             <label for="floatingInput" class="f-tin ">Email address</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control f-tin inlogin" id="floatingPassword" placeholder="Password">
+                            <input type="password" class="form-control f-tin inlogin <?= isset(session('errors')['password']) ? 'is-invalid' : '' ?> " id="floatingPassword" placeholder="Password">
                             <label for="floatingPassword " class="f-tin ">Password</label>
                         </div>
                         <!-- Remember me -->

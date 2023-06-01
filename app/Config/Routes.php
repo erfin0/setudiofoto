@@ -33,6 +33,7 @@ $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function (
     $routes->get('', 'Home::index');
     $routes->get('pembayaran', 'Pesanan::pembayaran');
     $routes->get('booking', 'Pesanan::booking');
+    $routes->get('pricelist', 'Pricelist::index');
 });
 
 service('auth')->routes($routes);

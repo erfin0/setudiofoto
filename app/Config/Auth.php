@@ -15,8 +15,8 @@ use CodeIgniter\Shield\Authentication\Passwords\DictionaryValidator;
 use CodeIgniter\Shield\Authentication\Passwords\NothingPersonalValidator;
 use CodeIgniter\Shield\Authentication\Passwords\PwnedValidator;
 use CodeIgniter\Shield\Authentication\Passwords\ValidatorInterface;
-use CodeIgniter\Shield\Models\UserModel;
-
+//use CodeIgniter\Shield\Models\UserModel;
+use App\Models\UserModel;
 class Auth extends ShieldAuth
 {
     public const RECORD_LOGIN_ATTEMPT_NONE    = 0; // Do not record at all

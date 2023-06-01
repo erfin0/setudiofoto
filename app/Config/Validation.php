@@ -41,4 +41,57 @@ class Validation extends BaseConfig
     // --------------------------------------------------------------------
     // Rules
     // --------------------------------------------------------------------
+    //--------------------------------------------------------------------
+    // Rules For Registration
+    //--------------------------------------------------------------------
+    public $registration = [
+        'userfullname' => [
+           /*  'label' => 'Auth.userfullname', */
+            'rules' => [
+                'required',
+                'max_length[255]',
+                'min_length[3]',
+            ],
+        ],
+        'whatsapp' => [
+           /*  'label' => 'Auth.whatsapp', */
+            'rules' => [
+                'required',
+                'regex_match[/^(\+62|62)?[\s-]?0?8[1-9]{1}\d{1}[\s-]?\d{4}[\s-]?\d{2,5}$/]',
+            ],
+        ],
+        'address' => [
+           /*  'label' => 'Auth.address', */
+            'rules' => [
+                'required', 'min_length[3]',
+            ],
+        ],
+        'username' => [
+            'label' => 'Auth.username',
+            'rules' => [
+                'required',
+                'max_length[30]',
+                'min_length[3]',
+                'regex_match[/\A[a-zA-Z0-9\.]+\z/]',
+                'is_unique[users.username]',
+            ],
+        ],
+        'email' => [
+            'label' => 'Auth.email',
+            'rules' => [
+                'required',
+                'max_length[254]',
+                'valid_email',
+                'is_unique[auth_identities.secret]',
+            ],
+        ],
+        'password' => [
+            'label' => 'Auth.password',
+            'rules' => 'required|strong_password',
+        ],
+        'password_confirm' => [
+            'label' => 'Auth.passwordConfirm',
+            'rules' => 'required|matches[password]',
+        ],
+    ];
 }

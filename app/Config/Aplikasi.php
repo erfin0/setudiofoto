@@ -7,13 +7,13 @@ class Aplikasi extends BaseConfig
     public string $layoutUser = 'LayoutUser';
     public array $MenuUser=[
        [ 'menu'=>'Price list',
-        'url'=>''],
+        'url'=>'/pricelist'],
         [ 'menu'=>'Portofolio',
         'url'=>''],
         [ 'menu'=>'Jadwal Boking',
         'url'=>''],
         [ 'menu'=>'Testimoni',
-        'url'=>'#testimoni'],
+        'url'=>'/#testimoni'],
         [ 'menu'=>'About',
         'url'=>''],        
         [ 'menu'=>'Contact',

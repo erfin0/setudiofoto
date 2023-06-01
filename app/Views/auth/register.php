@@ -1,6 +1,6 @@
 <?= $this->extend('/layout/' . setting('Aplikasi.layoutUser')) ?>
 
-<?= $this->section('title') ?><?= isset($titel) ? $titel : lang('Auth.login') ?> <?= $this->endSection() ?>
+<?= $this->section('title') ?><?= isset($titel) ? $titel : lang('Auth.register') ?> <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
 
@@ -30,8 +30,8 @@
     <?php if (session('message') !== null) : ?>
         <div class="alert alert-success" role="alert"><?= session('message') ?></div>
     <?php endif ?>
-    <form action="<?= url_to('login') ?>" method="post">
-        <?= csrf_field() ?>
+    <form action="<?= url_to('register') ?>" method="post">
+        <?php csrf_field() ?>
 
         <div class="  m-5  card ">
             <div class="card-body p-5 container">
@@ -40,36 +40,35 @@
                         <img src="https://preview.colorlib.com/theme/bootstrap/login-form-08/images/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
                     </div>
                     <div class="col-12 col-sm-12  col-md-12 col-xl-6 ">
-
                         <div class="form-floating ">
-                            <input type="text" class="form-control f-tin inlogin" name="userfullname" inputmode="text" autocomplete="username" placeholder="<?= lang('Auth.username') ?>" value="<?= old('username') ?>" required />
+                            <input type="text" class="form-control f-tin inlogin <?= isset(session('errors')['userfullname']) ? 'is-invalid' : '' ?> " name="userfullname" inputmode="text" placeholder="<?= lang('Auth.userfullname') ?>" value="<?= old('userfullname') ?>" required />
                             <label for="floatingInput" class="f-tin ">Nama lengkap</label>
                         </div>
                         <div class="form-floating ">
-                            <input type="email" class="form-control f-tin inlogin" name="email" inputmode="email" autocomplete="email" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ?>" required />
+                            <input type="email" class="form-control f-tin inlogin <?= isset(session('errors')['email']) ? 'is-invalid' : '' ?> " name="email" inputmode="email" autocomplete="email" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ?>" required />
                             <label for="floatingInput" class="f-tin ">Email </label>
                         </div>
                         <div class="form-floating ">
-                            <input type="email" class="form-control f-tin inlogin" name="tlp" inputmode="text" placeholder="No Whatsapp" value="<?= old('tlp') ?>" required />
+                            <input type="text" class="form-control f-tin inlogin <?= isset(session('errors')['whatsapp']) ? 'is-invalid' : '' ?> " name="whatsapp" inputmode="text" placeholder="<?= lang('Auth.Whatsapp') ?>" value="<?= old('whatsapp') ?>" required />
                             <label for="floatingInput" class="f-tin ">No Whatsapp</label>
                         </div>
                         <div class="form-floating ">
-                            <input type="email" class="form-control f-tin inlogin" name="address" inputmode="text"  placeholder="address" value="<?= old('address') ?>" required />
+                            <input type="text" class="form-control f-tin inlogin <?= isset(session('errors')['address']) ? 'is-invalid' : '' ?> " name="address" inputmode="text" placeholder="<?= lang('Auth.address"') ?>" value="<?= old('address') ?>" required />
                             <label for="floatingInput" class="f-tin ">Alamat Lengkap</label>
                         </div>
                         <!-- Username -->
                         <div class="form-floating ">
-                            <input type="text" class="form-control f-tin inlogin" name="username" inputmode="text" autocomplete="username" placeholder="<?= lang('Auth.username') ?>" value="<?= old('username') ?>" required />
+                            <input type="text" class="form-control f-tin inlogin <?= isset(session('errors')['username']) ? 'is-invalid' : '' ?> " name="username" inputmode="text" autocomplete="username" placeholder="<?= lang('Auth.username') ?>" value="<?= old('username') ?>" required />
                             <label for="floatingInput" class="f-tin "><?= lang('Auth.username') ?></label>
                         </div>
 
                         <div class="form-floating ">
-                            <input type="password" class="form-control f-tin inlogin" name="password" inputmode="text" autocomplete="new-password" placeholder="<?= lang('Auth.password') ?>" required />
+                            <input type="password" class="form-control f-tin inlogin <?= isset(session('errors')['password']) ? 'is-invalid' : '' ?> " name="password" inputmode="text" autocomplete="new-password" placeholder="<?= lang('Auth.password') ?>" required />
                             <label for="floatingPassword " class="f-tin ">Password</label>
                         </div>
 
                         <div class="form-floating ">
-                            <input type="password" class="form-control f-tin inlogin" name="password_confirm" inputmode="text" autocomplete="new-password" placeholder="<?= lang('Auth.passwordConfirm') ?>" required />
+                            <input type="password" class="form-control f-tin inlogin <?= isset(session('errors')['password_confirm']) ? 'is-invalid' : '' ?>" name="password_confirm" inputmode="text" autocomplete="new-password" placeholder="<?= lang('Auth.passwordConfirm') ?>" required />
                             <label for="floatingPassword " class="f-tin "><?= lang('Auth.passwordConfirm') ?></label>
                         </div>
 
