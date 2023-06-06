@@ -10,20 +10,20 @@
         <h1 class=" mt-5  f-b text-uppercase">pembayaran</h1>
     </div>
     <div class="  m-5  card bg-secondary-subtle">
-        <div class="card-body p-5">
+        <div class=" card-body p-5">
 
             <form action="">
                 <div class="mb-3">
                     <label  class="form-label f-me">Nama</label>
-                    <input required type="text" class="form-control f-tin" placeholder="nama di isi otomatis">
+                    <input value="<?=auth()->user()->username??''?>" required type="text" class="form-control f-tin" placeholder="nama di isi otomatis">
                 </div>
                 <div class="mb-3">
                     <label  class="form-label f-me">Email</label>
-                    <input required type="email" class="form-control f-tin" placeholder="Email di isi otomatis">
+                    <input value="<?=auth()->user()->email??''?>" required type="email" class="form-control f-tin" placeholder="Email di isi otomatis">
                 </div>
                 <div class="mb-3">
                     <label  class="form-label f-me">whatsapp</label>
-                    <input required type="text" class="form-control f-tin" placeholder="Whatshapp di isi otomatis">
+                    <input value="<?=auth()->user()->whatsapp??''?>" required type="text" class="form-control f-tin" placeholder="Whatshapp di isi otomatis">
                 </div>
                 <div class="mb-3">
                     <label  class="form-label f-me">Jumlah Orang</label>

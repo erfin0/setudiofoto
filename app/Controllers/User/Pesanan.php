@@ -10,10 +10,12 @@ class Pesanan extends BaseController
     {
         //
     }
-    public function pembayaran(){
+    public function pembayaran()
+    {
         return view('User/PembayaranView');
     }
-    public function booking(){
+    public function booking()
+    {
         return view('User/BookingView');
     }
 }
