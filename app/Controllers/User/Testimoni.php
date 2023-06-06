@@ -4,11 +4,11 @@ namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 
-class About extends BaseController
+class Testimoni extends BaseController
 {
     public function index()
     {
        
-        return view('User/AboutView');
+        return view('User/TestimoniView');
     }
 }

@@ -11,7 +11,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url() ?>vendors/bs-5/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url() ?>vendors/owl/css/owl.carousel.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?= base_url() ?>vendors/owl/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>vendors/owl/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>css/styles.css" rel="stylesheet" />
 

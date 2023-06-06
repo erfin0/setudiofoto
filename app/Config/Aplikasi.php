@@ -22,7 +22,7 @@ class Aplikasi extends BaseConfig
         ],
         [
             'menu' => 'Testimoni',
-            'url' => '/#testimoni'
+            'url' => '/testimoni'
         ],
         [
             'menu' => 'About',

@@ -35,6 +35,7 @@ $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function (
     $routes->get('booking', 'Pesanan::booking');
     $routes->get('pricelist', 'Pricelist::index');
     $routes->get('about', 'About::index');
+    $routes->get('testimoni', 'Testimoni::index');
 });
 
 service('auth')->routes($routes);
