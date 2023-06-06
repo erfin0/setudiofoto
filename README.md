@@ -13,20 +13,35 @@ More information about the plans for version 4 can be found in [CodeIgniter 4](h
 
 The user guide corresponding to the latest version of the framework can be found
 [here](https://codeigniter4.github.io/userguide/).
+## Installation
 
-## Installation & updates
+Use these steps to create a local installation for development and testing.
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+1. Clone the repo: `git clone https://github.com/erfin0/setudiofoto.git`
+2. Work in the repo directory: `cd setudiofoto`
+3. Make sure the **writable** folder is accessible: `chmod -R 777 writable` (linux)
+4. Install dependencies: `composer install`
+5. Create your **.env** file: `cp env .env`
+6. Edit **.env** and set at least the following:
+	* `CI_ENVIRONMENT = development`		
+    * `database.default.hostname = localhost`
+    * `database.default.database = [namadatabase]`
+    * `database.default.username = [user anda]`
+    * `database.default.password = [password] `
+    * `database.default.DBDriver = MySQLi`
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+The website is intended to live on the same server as the forums, and uses the forum
+database to pull in the most recent posts. When developing locally, this poses a challenge.
+To make local development simpler, a migration and seed have been provided to setup a 
+table with some mock data that can be used in place of having a local MyBB install.
 
-## Setup
+1. Migrate the database: `php spark migrate -all`
+2. Run the seeder: `php spark db:seed All`
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+At this point you should have a usable version of the current code! Try launching it locally:
+
+1. From the repo directory start serving the website: `php spark serve`
+2. In your web browser of choice navigate to the local URL: `http://localhost:8080`
 
 ## Important Change with index.php
 
@@ -39,14 +54,7 @@ framework are exposed.
 
 **Please** read the user guide for a better explanation of how CI4 works!
 
-## Repository Management
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
 
 ## Server Requirements
 
