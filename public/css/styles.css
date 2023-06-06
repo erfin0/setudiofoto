@@ -79,6 +79,11 @@
   font-weight: 500;
 }
 
+.til {
+  font-size: 2.8rem;
+ 
+}
+
 .img400 {
   width: 100%;
   height: 30rem;
@@ -177,8 +182,6 @@ span.img-text {
 span.img-text:hover {
   color: #2caae1;
 }
-
-
 
 img {
   max-width: 100%;
