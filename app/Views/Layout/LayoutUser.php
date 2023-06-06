@@ -32,6 +32,7 @@
             <?= $this->renderSection('main') ?>
         </div>
     </main>
+    <?= $this->include('/layout/Component/chat') ?>
     <?= $this->include('/layout/Component/footer') ?>
     <!-- <script src="<?= base_url() ?>js/jquery-3.7.0.min.js"></script>
     <script src="<?= base_url() ?>js/popper.min.js"></script>

@@ -57,16 +57,17 @@
 }
 
 .text-over-image {
- 
+
   position: absolute;
   margin-top: 5rem;
- 
+
   /* top: 50%; */
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #ffffff80;
   padding: 10px;
 }
+
 .logoname {
   font-size: 5rem;
   letter-spacing: 0.286em;
@@ -81,7 +82,7 @@
 
 .til {
   font-size: 2.8rem;
- 
+
 }
 
 .img400 {
@@ -109,6 +110,21 @@
 input::file-selector-button {
   display: none;
 }
+
+.ngambang {
+  bottom: 3rem;
+  right: 2rem;
+  position: fixed;  
+  z-index: 5;
+}
+.bt-chat{
+  background: var(--bs-primary-bg-subtle);
+/* border: 1px solid #A0ACEE; */
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 15px;
+margin-top: 0.5rem;
+}
+
 
 
 
@@ -191,6 +207,7 @@ img {
   display: flex;
   flex-wrap: wrap;
 }
+
 /*
 .gallery_box li {
   width: 33.333333%;
