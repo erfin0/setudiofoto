@@ -32,17 +32,21 @@
     <?php endif ?>
     <form action="<?= url_to('login') ?>" method="post">
         <?= csrf_field() ?>
-
         <div class="  m-5  card ">
             <div class="card-body p-5 container">
                 <div class="row justify-content-md-center">
                     <div class="col-sm-12 col-md-9 col-xl-8 ">
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control f-tin inlogin <?= isset(session('errors')['email']) ? 'is-invalid' : '' ?>" id="floatingInput" placeholder="name@example.com">
+                        <!-- <div class="form-floating mb-3">
+                            <input name="email" type="email" class="form-control f-tin inlogin <?= isset(session('errors')['email']) ? 'is-invalid' : '' ?>" id="floatingInput" placeholder="name@example.com">
                             <label for="floatingInput" class="f-tin ">Email address</label>
-                        </div>
+                        </div> -->
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control f-tin inlogin <?= isset(session('errors')['password']) ? 'is-invalid' : '' ?> " id="floatingPassword" placeholder="Password">
+                            <input name="username" type="text" class="form-control f-tin inlogin <?= isset(session('errors')['username']) ? 'is-invalid' : '' ?>" id="floatingInput" value="<?= old('username') ?>" placeholder="username">
+                            <label for="floatingInput" class="f-tin ">Username</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input name="password" type="password" class="form-control f-tin inlogin <?= isset(session('errors')['password']) ? 'is-invalid' : '' ?> " id="floatingPassword" placeholder="Password">
                             <label for="floatingPassword " class="f-tin ">Password</label>
                         </div>
                         <!-- Remember me -->
