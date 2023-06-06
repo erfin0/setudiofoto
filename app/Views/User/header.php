@@ -37,7 +37,7 @@
                 </div>
 
             </div>
-            <div class=" p-0 col-sm-12 col-md-12 col-lg-4 ">col-4</div>
+            <div class=" p-0 col-sm-12 col-md-12 col-lg-4 "><img src="https://picsum.photos/600?4" class="d-block  mx-auto img400" alt="..."></div>
         </div>
 
     </div>

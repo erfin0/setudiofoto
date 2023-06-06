@@ -75,6 +75,7 @@
             autoplayTimeout: 1000,
             autoplayHoverPause: true,
             margin: 100,
+            autoWidth:true,
             nav: true,
             loop: true,
             navText: ["<div class='nav-btn prev-slide'><i class='fa-solid fa-angle-left'></i></div>", "<div class='nav-btn next-slide'><i class='fa-solid fa-angle-right'></i></div>"],
