@@ -1,7 +1,7 @@
 <?= $this->extend('/layout/' . setting('Aplikasi.layoutUser')) ?>
 
 <?= $this->section('title') ?>
-<?= isset($titel) ? $titel : 'home' ?>
+<?= isset($titel) ? $titel : 'Pricelist' ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
