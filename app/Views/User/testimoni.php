@@ -6,62 +6,38 @@
         </div>
         <div class="row">
             <div class="col-12 ">
-                <div class="carousel-wrap">
-                    <div class="owl-carousel owl-theme">
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=1" />
-                            <span class="img-text">nightlife</span>
-                        </div>
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=2" />
-                            <span class="img-text">abstract</span>
-                        </div>
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=3" />
-                            <span class="img-text">animals</span>
-                        </div>
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=4" />
-                            <span class="img-text">nature</span>
-                        </div>
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=5" />
-                            <span class="img-text">business</span>
-                        </div>
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=6" />
-                            <span class="img-text">cats</span>
-                        </div>
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=7" />
-                            <span class="img-text">city</span>
-                        </div>
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=8" />
-                            <span class="img-text">food</span>
-                        </div>
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=9" />
-                            <span class="img-text">fashion</span>
-                        </div>
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=10" />
-                            <span class="img-text">people</span>
-                        </div>
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=11" />
-                            <span class="img-text">sports</span>
-                        </div>
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=12" />
-                            <span class="img-text">technics</span>
-                        </div>
-                        <div class="item">
-                            <img src="https://picsum.photos/640/480?pic=13" />
-                            <span class="img-text">transport</span>
-                        </div>
+              
+            <div class="owl-carousel owl-theme owl-loaded">
+                <div class="owl-stage-outer">
+                    <div class="owl-stage">
+                        
+                        <?php for ($i = 0; $i < 14; $i++) { ?>
+                            <div class="owl-item">
+                                <div class="card  border border-0 bg-transparent" style="width: 18rem;">
+                                    <img src="https://picsum.photos/600?<?= $i ?>" class="card-img-top" alt="...">
+                                    <div class="card-body text-center ">
+                                        <p class=" sarif card-text">xxxxxxxxxxxxxxx</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php } ?>
                     </div>
                 </div>
+                <div class="owl-nav">
+                    <div class="owl-prev">prev</div>
+                    <div class="owl-next">next</div>
+                </div>
+                <!--   <div class="owl-dots">
+                    <div class="owl-dot active"><span></span></div>
+                    <div class="owl-dot"><span></span></div>
+                    <div class="owl-dot"><span></span></div>
+                </div>
+            </div> -->
+            </div>
+                    
+
+                
             </div>
         </div>
     </div>
@@ -72,12 +48,13 @@
     $(document).ready(function() {
         $('.owl-carousel').owlCarousel({
             autoplay: true,
+            autoWidth: true,
             autoplayTimeout: 1000,
             autoplayHoverPause: true,
             margin: 100,
-            autoWidth:true,
-            nav: true,
+              nav: true,
             loop: true,
+            responsiveClass: true,
             navText: ["<div class='nav-btn prev-slide'><i class='fa-solid fa-angle-left'></i></div>", "<div class='nav-btn next-slide'><i class='fa-solid fa-angle-right'></i></div>"],
             responsive: {
                 0: {

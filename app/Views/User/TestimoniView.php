@@ -41,7 +41,7 @@
                         
                         <?php for ($i = 0; $i < 14; $i++) { ?>
                             <div class="owl-item">
-                                <div class="card  border border-0" style="width: 18rem;">
+                                <div class="card  border border-0 p-1" style="width: 18rem;">
                                     <img src="https://picsum.photos/600?<?= $i ?>" class="card-img-top" alt="...">
                                     <div class="card-body text-center ">
                                         <p class=" sarif card-text">xxxxxxxxxxxxxxx</p>
@@ -94,11 +94,9 @@
         $(".owl-carousel").owlCarousel();
     });
     $('.owl-carousel').owlCarousel({
-        loop: true,
+        loop: true,       
+        items: 3,       
         margin: 10,
-        items: 3,
-        loop: true,
-        margin: 100,
         autoWidth:true,
         autoplay: true,
         autoplayTimeout: 1000,
