@@ -4,10 +4,10 @@ namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 
-class Pricelist extends BaseController
+class Contact extends BaseController
 {
     public function index()
     {
-        return view('User/PricelistView');
+        return view('User/ContactView');
     }
 }

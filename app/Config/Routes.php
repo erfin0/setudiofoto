@@ -36,6 +36,7 @@ $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function (
     $routes->get('pricelist', 'Pricelist::index');
     $routes->get('about', 'About::index');
     $routes->get('testimoni', 'Testimoni::index');
+    $routes->get('contact', 'Contact::index');
 });
 
 service('auth')->routes($routes);
