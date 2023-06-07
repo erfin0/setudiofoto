@@ -16,10 +16,10 @@ class Aplikasi extends BaseConfig
             'menu' => 'Portofolio',
             'url' => ''
         ],
-        [
+       /*  [
             'menu' => 'Jadwal Boking',
             'url' => ''
-        ],
+        ], */
         [
             'menu' => 'Testimoni',
             'url' => '/testimoni'
