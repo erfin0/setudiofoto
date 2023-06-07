@@ -36,33 +36,30 @@
 </style>
 <section id="galery">
 
+		<!-- Gallery -->
 	<div class="container mb-5 pt-3 d-flex flex-wrap">
-
 		<div class="row">
-			<?php for ($i = 0; $i < 12; $i++) {
-				# code...
-			?>
-				<div class="col-12 col-sm-12 col-md-6 col-xl-4 p-1 rounded">
-					<a href="#0"><img class="rounded mx-auto d-block" src="https://picsum.photos/600/<?= $i * 100 ?>/?<?= $i ?>">
-					</a>
-				</div>
-			<?php } ?>
+			<div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+				<img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp" class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+
+				<img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp" class="w-100 shadow-1-strong rounded mb-4" alt="Wintry Mountain Landscape" />
+			</div>
+
+			<div class="col-lg-4 mb-4 mb-lg-0">
+				<img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp" class="w-100 shadow-1-strong rounded mb-4" alt="Mountains in the Clouds" />
+
+				<img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp" class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+			</div>
+
+			<div class="col-lg-4 mb-4 mb-lg-0">
+				<img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp" class="w-100 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
+
+				<img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp" class="w-100 shadow-1-strong rounded mb-4" alt="Yosemite National Park" />
+			</div>
 		</div>
 		<div class="text-over-image">
 			<p class=" subname text-center sarif text-uppercase m-0">galery</p>
 		</div>
 	</div>
-
-	<div class="container overflow-hidden py-6">
-		<div class="grid-wrapper col">
-		<?php for ($i = 0; $i < 12; $i++) {
-				# code...
-			?>
-			<div class="lc-block">
-				<img class="img-fluid rounded rounded" src="https://picsum.photos/600/<?= $i * 100 ?>/?<?= $i ?>" alt="" loading="lazy">
-			</div>
-			<?php } ?>
-		</div>
-	</div>
-
+	<!-- Gallery -->
 </section>
