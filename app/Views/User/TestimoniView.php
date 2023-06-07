@@ -38,7 +38,7 @@
             <div class="owl-carousel owl-theme owl-loaded">
                 <div class="owl-stage-outer">
                     <div class="owl-stage">
-                        <div class="">...</div>
+                        
                         <?php for ($i = 0; $i < 14; $i++) { ?>
                             <div class="owl-item">
                                 <div class="card  border border-0" style="width: 18rem;">
