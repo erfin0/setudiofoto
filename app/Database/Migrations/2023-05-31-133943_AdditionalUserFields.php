@@ -17,13 +17,12 @@ class AdditionalUserFields extends Migration
             ],
             'whatsapp' => [
                 'type'       => 'varchar',
-                'constraint' => 255,
+                'constraint' => 30,
                 'null'       => true,
                 'after'      => 'userfullname',
             ],
             'address' => [
-                'type'       => 'varchar',
-                'constraint' => 255,
+                'type' => 'TEXT',
                 'null'       => true,
                 'after'      => 'whatsapp',
             ],
@@ -32,6 +31,6 @@ class AdditionalUserFields extends Migration
 
     public function down()
     {
-        $this->forge->dropColumn('users', ['first_name', 'last_name', 'avatar']);
+        $this->forge->dropColumn('users', ['userfullname', 'whatsapp', 'address']);
     }
 }
