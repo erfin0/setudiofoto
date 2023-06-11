@@ -37,6 +37,7 @@ $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function (
     $routes->get('about', 'About::index');
     $routes->get('testimoni', 'Testimoni::index');
     $routes->get('contact', 'Contact::index');
+    $routes->get('pilihwaktu', 'Pesanan::pilihwaktu');
 });
 
 service('auth')->routes($routes);

@@ -18,4 +18,8 @@ class Pesanan extends BaseController
     {
         return view('User/BookingView');
     }
+    public function pilihwaktu()
+    {
+        return view('User/PilihwaktuView');
+    }
 }
