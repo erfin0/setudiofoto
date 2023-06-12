@@ -59,4 +59,40 @@ class Aplikasi extends BaseConfig
         'youtube' => 'https://www.youtube.com/' ,
         'tiktok' => null,
     ];
+
+
+    public string $layoutAdmin = 'LayoutAdmin';
+    public array $MenuAdmin = [
+        [
+            'icon'=>'<i class="fa-solid fa-user-gear"></i>',
+            'menu' => 'Admin',
+            'url' => '/admin/dashboard'
+        ],
+        [
+            'icon'=>'<i class="fa-regular fa-image"></i>',
+            'menu' => 'Portofolio',
+            'url' => '/admin/dashboard'
+        ],
+        [
+            'icon'=>'<i class="fa-solid fa-ticket"></i>',
+            'menu' => 'Booking',
+            'url' => '/admin/dashboard'
+        ],
+        [
+            'icon'=>'<i class="fa-regular fa-credit-card"></i>',
+            'menu' => 'Pembayaran',
+            'url' => '/admin/dashboard'
+        ],
+        [
+            'icon'=>'<i class="fa-solid fa-star"></i>',
+            'menu' => 'Testimoni',
+            'url' => '/admin/dashboard'
+        ],
+        [
+            'icon'=>'<i class="fa-solid fa-users"></i>',
+            'menu' => 'User',
+            'url' => '/admin/dashboard'
+        ],
+       
+    ];
 }

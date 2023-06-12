@@ -39,6 +39,10 @@ $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function (
     $routes->get('contact', 'Contact::index');
     $routes->get('pilihwaktu', 'Pesanan::pilihwaktu');
 });
+$routes->group('/admin',  ['namespace' => '\App\Controllers\Admin'], static function ($routes) {
+    $routes->get('dashboard', 'Dashboard::index');
+    
+});
 
 service('auth')->routes($routes);
 
