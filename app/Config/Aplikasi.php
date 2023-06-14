@@ -66,7 +66,7 @@ class Aplikasi extends BaseConfig
         [
             'icon'=>'<i class="fa-solid fa-user-gear"></i>',
             'menu' => 'Admin',
-            'url' => '/admin/dashboard'
+            'url' => '/admin/admin'
         ],
         [
             'icon'=>'<i class="fa-regular fa-image"></i>',

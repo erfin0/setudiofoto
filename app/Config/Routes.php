@@ -41,7 +41,8 @@ $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function (
 });
 $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin'], static function ($routes) {
     $routes->get('dashboard', 'Dashboard::index');
-    
+    $routes->get('admin', 'Admin::index');
+    $routes->get('addadmin', 'Admin::new');
 });
 
 service('auth')->routes($routes);

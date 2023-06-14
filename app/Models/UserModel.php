@@ -16,7 +16,8 @@ class UserModel extends ShieldUserModel
             ...$this->allowedFields,
 
             // 'first_name',
-            'userfullname','whatsapp','address'
+            'userfullname','whatsapp','address','avatar'
         ];
+       
     }
 }

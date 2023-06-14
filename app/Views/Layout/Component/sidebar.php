@@ -10,8 +10,8 @@
 
           <?php $menu = setting()->get('aplikasi.MenuAdmin') ?? [];
             foreach ($menu as $m) : ?>
-              <li class="nav-item <?=(url_is($m['url']))?'active':'' ?>">
-                  <a class="nav-link text-white mx-2" href="<?= base_url($m['url'] ?? '#') ?>">
+              <li class="nav-item ">
+                  <a class="nav-link text-white mx-2 <?=(current_url() == base_url($m['url']))?'active':'' ?>" href="<?= base_url($m['url'] ?? '#') ?>">
                       <?= $m['icon'] ?? '' ?> <?= $m['menu'] ?? 'menu' ?>
                   </a>
               </li>

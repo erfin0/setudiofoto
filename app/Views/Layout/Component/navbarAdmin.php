@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary-subtle border-bottom">
     <div class="container-fluid">
         <button class="btn btn-primary" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
         <div></div>
