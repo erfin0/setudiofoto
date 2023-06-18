@@ -11,7 +11,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url() ?>vendors/bs-5/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url() ?>css/admin.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?= base_url() ?>vendors/DataTables-1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?= base_url() ?>vendors/DataTables-1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />    
+    <link rel="stylesheet" href="<?= base_url() ?>vendors/Responsive-2.4.1/css/responsive.bootstrap5.min.css" rel="stylesheet" />
     
 
     <script src="<?= base_url() ?>js/jquery-3.7.0.min.js"></script>
@@ -19,6 +20,8 @@
     <script src="<?= base_url() ?>vendors/bs-5/js/bootstrap.min.js"></script>
     <script src="<?= base_url() ?>vendors/DataTables-1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="<?= base_url() ?>vendors/DataTables-1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="<?= base_url() ?>vendors/Responsive-2.4.1/js/dataTables.responsive.min.js"></script>
+    <script src="<?= base_url() ?>vendors/Responsive-2.4.1/js/responsive.bootstrap5.min.js"></script>
     <script src="<?= base_url() ?>js/admin.js"></script>
     <?= $this->renderSection('pageStyles') ?>
 </head>

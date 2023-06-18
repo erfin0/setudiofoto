@@ -18,6 +18,7 @@ class Datapesanan extends Migration
             'keterangan' => ['type' => 'text', 'null' => true],
             'max_time'  => ['type' => 'time', 'null' => true],
         ]);
+        $this->forge->addKey('id', true);
         $this->forge->createTable('paket', true);
 
         $this->forge->addField([
@@ -26,6 +27,7 @@ class Datapesanan extends Migration
             'keterangan' => ['type' => 'text', 'null' => true],
 
         ]);
+        $this->forge->addKey('id', true);
         $this->forge->createTable('testimoni', true);
 
         $this->forge->addField([
@@ -39,6 +41,7 @@ class Datapesanan extends Migration
             'tgl_booking_start'  => ['type' => 'datetime', 'null' => true],
             'tgl_booking_end' => ['type' => 'datetime', 'null' => true],
         ]);
+        $this->forge->addKey('id', true);
         $this->forge->addForeignKey('users_id', 'users', 'id');
         $this->forge->addForeignKey('paket_id', 'paket', 'id');
         $this->forge->createTable('booking', true);
@@ -50,7 +53,7 @@ class Datapesanan extends Migration
             'jenis'  => ['type' => 'varchar', 'constraint' => 255],
 
         ]);
-
+        $this->forge->addKey('id', true);
         $this->forge->addForeignKey('booking_id', 'booking', 'id');
         $this->forge->createTable('pembayaran', true);
     }

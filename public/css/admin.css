@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
 
 
 body{
@@ -67,5 +67,18 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   #sidebarToggle {
     display: none;
   }
-
+  .f-tin {
+    font-weight: 100;
+  }
+  
+  .f-el {
+    font-weight: 200;
+  }
+  .f-sm {
+    font-weight: 300;
+  }
+  
+  .f-me {
+    font-weight: 500;
+  }
 }

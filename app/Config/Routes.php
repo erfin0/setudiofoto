@@ -47,7 +47,15 @@ $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin'], static func
     $routes->post('admin', 'Admin::create');
     $routes->post('admin/(:num)/update', 'Admin::update/$1');
 
- 
+    $routes->get('portofolio', 'Portofolio::index');
+    $routes->get('portofolio/new', 'Portofolio::new');
+    $routes->post('portofolio', 'Portofolio::create');
+    $routes->post('portofolio/(:num)/update', 'Portofolio::update/$1');
+    $routes->delete('portofolio/(:num)', 'Portofolio::delete/$1');
+    $routes->get('portofolio/(:num)/edit', 'Portofolio::edit/$1');
+
+
+    $routes->post('tabel/portofolio', 'Portofolio::tabel');
 });
 
 service('auth')->routes($routes);
