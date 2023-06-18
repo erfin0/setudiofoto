@@ -1,14 +1,14 @@
 <?= $this->extend('/layout/' . setting('Aplikasi.layoutAdmin')) ?>
 
 <?= $this->section('title') ?>
-<?= isset($titel) ? $titel : 'Add admin' ?>
+<?= isset($titel) ? $titel : 'edit admin' ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">
-            <i class="fa-solid fa-user"></i> Daftar Admin
+            <i class="fa-solid fa-user"></i> Edit Admin
         </h5>
 
     </div>
@@ -39,11 +39,12 @@
                 <div class="card-header py-3">
                     <h5 class="text-center">Foto Profil </h5>
                 </div>
+              
                 <div class="card-body ">
                     <div class="text-center">
                         <?php //isset($user) ? $user->renderAvatar(140) : (new \Bonfire\Users\User())->renderAvatar(140) 
                         ?>
-                        <img id="avatar" src="<?= base_url("img/avatar.png") ?>" class="rounded-circle  " style="max-width: 35%;height: auto;width: 100rem;aspect-ratio: 1 / 1;object-fit: cover;" alt="">
+                        <img id="avatar" src="<?=$user->avatarLink() ?>" class="rounded-circle  " style="max-width: 35%;height: auto;width: 100rem;aspect-ratio: 1 / 1;object-fit: cover;" alt="">
                         <div class="mt-5">
                             <button type="button" id="upimage" class="btn btn-dark px-5">Upload</button>
                         </div>
@@ -57,7 +58,9 @@
                     <h5>Data Admin </h5>
                 </div>
                 <div class="card-body">
-                    <form class="row g-3" action="<?= base_url("/admin/admin") ?>" method="post" enctype="multipart/form-data">
+
+                    <form class="row g-3" action="<?= base_url("/admin/admin/$user->id/update") ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= $user->id ?>">
                         <?= csrf_field() ?>
                         <div class="col-md-6">
                             <label class="form-label">Nama</label>
@@ -73,7 +76,7 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control <?= isset(session('errors')['password']) ? 'is-invalid' : '' ?> " name="password" required value="<?= old('password', $user->password ?? '') ?>">
+                            <input type="password" class="form-control <?= isset(session('errors')['password']) ? 'is-invalid' : '' ?> " name="password"   value="<?= old('password', $user->password ?? '') ?>">
                         </div>
                         <div class="col-12">
                             <label class="form-label">Email</label>

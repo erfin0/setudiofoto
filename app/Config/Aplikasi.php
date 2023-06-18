@@ -71,7 +71,7 @@ class Aplikasi extends BaseConfig
         [
             'icon'=>'<i class="fa-regular fa-image"></i>',
             'menu' => 'Portofolio',
-            'url' => '/admin/dashboard'
+            'url' => '/admin/portofolio'
         ],
         [
             'icon'=>'<i class="fa-solid fa-ticket"></i>',

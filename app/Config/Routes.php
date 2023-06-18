@@ -42,7 +42,12 @@ $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function (
 $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin'], static function ($routes) {
     $routes->get('dashboard', 'Dashboard::index');
     $routes->get('admin', 'Admin::index');
-    $routes->get('addadmin', 'Admin::new');
+    $routes->get('admin/new', 'Admin::new');
+    $routes->get('admin/(:num)/edit', 'Admin::edit/$1');
+    $routes->post('admin', 'Admin::create');
+    $routes->post('admin/(:num)/update', 'Admin::update/$1');
+
+ 
 });
 
 service('auth')->routes($routes);

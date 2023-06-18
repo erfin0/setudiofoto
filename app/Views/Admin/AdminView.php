@@ -10,7 +10,7 @@
         <h5 class="card-title">
             <i class="fa-solid fa-user"></i> Daftar Admin
         </h5>
-        <a type="button" href="<?= base_url('admin/addadmin')?>" class="btn btn-dark mt-5 float-end"><i class="fa-solid fa-user-plus"></i> Add admin</a>
+        <a type="button" href="<?= base_url('admin/admin/new')?>" class="btn btn-dark mt-5 float-end"><i class="fa-solid fa-user-plus"></i> Add admin</a>
       
     </div>
 </div>
@@ -18,7 +18,7 @@
     <div class="row bg-body py-3">
        
         <div class="table-responsive">
-            <table class="table table-primary" id="tabeladmin">
+            <table class="table  table-bordered" id="tabeladmin">
                 <thead>
                     <tr>
                         <th> email </th>
@@ -35,7 +35,7 @@
                                 <td><?=$list->email??''?></td>
                                 <td><?=$list->username??''?></td>
                                 <td><?=$list->last_active??''?></td>
-                                <td>R1C3</td>
+                                <td><a  class="btn  btn-light" href="<?= base_url("admin/admin/$list->id/edit") ?>" role="button"> <i class="fa-solid fa-pen-to-square"></i></a></td>
                             </tr>
 
                     <?php }
