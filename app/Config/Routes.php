@@ -38,10 +38,12 @@ $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function (
     $routes->get('testimoni', 'Testimoni::index');
     $routes->get('contact', 'Contact::index');
     $routes->get('pilihwaktu', 'Pesanan::pilihwaktu');
+    $routes->get('portofolio', 'Portofolio::index');
 });
 $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin'], static function ($routes) {
     $routes->get('dashboard', 'Dashboard::index');
     $routes->get('admin', 'Admin::index');
+    $routes->get('user', 'Admin::user');
     $routes->get('admin/new', 'Admin::new');
     $routes->get('admin/(:num)/edit', 'Admin::edit/$1');
     $routes->post('admin', 'Admin::create');
@@ -54,8 +56,16 @@ $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin'], static func
     $routes->delete('portofolio/(:num)', 'Portofolio::delete/$1');
     $routes->get('portofolio/(:num)/edit', 'Portofolio::edit/$1');
 
+    $routes->get('booking', 'Pesanan::booking');
+    $routes->get('pembayaran', 'Pesanan::pembayaran');
+    $routes->get('testimoni', 'Testimoni::index');
+
+    $routes->get('paket', 'Paket::index');
+    $routes->get('paket/new', 'Paket::new');
+ $routes->post('paket', 'Paket::create');
 
     $routes->post('tabel/portofolio', 'Portofolio::tabel');
+    $routes->post('tabel/paket', 'Paket::tabel');
 });
 
 service('auth')->routes($routes);

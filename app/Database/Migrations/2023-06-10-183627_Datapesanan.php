@@ -16,7 +16,8 @@ class Datapesanan extends Migration
             'max_peserta' => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'null' => true],
             'harga_perpeserta' => ['type' => 'double',  'unsigned' => true, 'null' => true],
             'keterangan' => ['type' => 'text', 'null' => true],
-            'max_time'  => ['type' => 'time', 'null' => true],
+            'max_time'  => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'image' => ['type' => 'varchar', 'constraint' => 255],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('paket', true);

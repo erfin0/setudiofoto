@@ -71,8 +71,7 @@
                     "width": "4%"
                 }, {
                     "targets": [2],
-                    "width": "10%",
-                    orderable: false,
+                    "width": "10%"
                 },
                 {
                     responsivePriority: 1,

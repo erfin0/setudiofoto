@@ -4,6 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 use App\Entities\Portofolio;
+
 class PortofolioModel extends Model
 {
     protected $DBGroup          = 'default';
@@ -14,8 +15,8 @@ class PortofolioModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'judul' ,
-        'keterangan' ,
+        'judul',
+        'keterangan',
         'image',
     ];
 
@@ -47,13 +48,13 @@ class PortofolioModel extends Model
 
 
     protected $column_order = [
-        'judul' ,
-        'keterangan' ,
-       
+        'judul',
+        'keterangan',
+
     ];
     protected $column_search = [
-        'judul' ,
-        'keterangan' ,
+        'judul',
+        'keterangan',
     ];
     protected $order = ['id' => 'DESC'];
 
@@ -98,5 +99,9 @@ class PortofolioModel extends Model
     public function countAll()
     {
         return $this->countAllResults();
+    }
+    public function getrandom($limit)
+    {       
+        return $this->orderBy('id', 'RANDOM')->findAll($limit);
     }
 }

@@ -14,7 +14,7 @@ class Aplikasi extends BaseConfig
         ],
         [
             'menu' => 'Portofolio',
-            'url' => ''
+            'url' => '/portofolio'
         ],
        /*  [
             'menu' => 'Jadwal Boking',
@@ -76,23 +76,29 @@ class Aplikasi extends BaseConfig
         [
             'icon'=>'<i class="fa-solid fa-ticket"></i>',
             'menu' => 'Booking',
-            'url' => '/admin/dashboard'
+            'url' => '/admin/booking'
         ],
         [
             'icon'=>'<i class="fa-regular fa-credit-card"></i>',
             'menu' => 'Pembayaran',
-            'url' => '/admin/dashboard'
+            'url' => '/admin/pembayaran'
         ],
         [
             'icon'=>'<i class="fa-solid fa-star"></i>',
             'menu' => 'Testimoni',
-            'url' => '/admin/dashboard'
+            'url' => '/admin/testimoni'
         ],
         [
             'icon'=>'<i class="fa-solid fa-users"></i>',
             'menu' => 'User',
-            'url' => '/admin/dashboard'
+            'url' => '/admin/user'
         ],
+        [
+            'icon'=>' <i class="fa-solid fa-calendar-days"></i>',
+            'menu' => 'Paket',
+            'url' => '/admin/paket'
+        ],
+       
        
     ];
 }

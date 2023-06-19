@@ -5,7 +5,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
-<div class="card">
+<div class="card" style="height: 9rem;">
     <div class="card-body">
         <h5 class="card-title">
             <i class="fa-solid fa-user"></i> Edit Admin

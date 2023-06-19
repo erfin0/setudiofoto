@@ -8,13 +8,22 @@ use App\Entities\Paket;
 class PaketModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'pakets';
+    protected $table            = 'paket';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = Paket::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'name',
+        'jenis',
+        'harga',
+        'max_peserta',
+        'harga_perpeserta',
+        'keterangan',
+        'max_time',
+        'image'
+    ];
 
     // Dates
     protected $useTimestamps = false;
@@ -39,4 +48,73 @@ class PaketModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    protected $column_order = [
+        'name',
+        'jenis',
+        'max_peserta',
+        'harga',        
+        'harga_perpeserta',
+        'keterangan',
+        'max_time',
+        
+
+    ];
+    protected $column_search = [
+        'name',
+        'jenis',
+        'harga',
+        'max_peserta',
+        'harga_perpeserta',
+        'keterangan',
+        'max_time',
+    ];
+    protected $order = ['id' => 'DESC'];
+
+    private function getDatatablesQuery()
+    {
+        $i = 0;
+        foreach ($this->column_search as $item) {
+            if ($_POST['search']['value']) {
+                if ($i === 0) {
+                    $this->groupStart();
+                    $this->like($item, $_POST['search']['value']);
+                } else {
+                    $this->orLike($item, $_POST['search']['value']);
+                }
+                if (count($this->column_search) - 1 == $i)
+                    $this->groupEnd();
+            }
+            $i++;
+        }
+
+        if (isset($_POST['order'])) {
+            $this->orderBy($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else if (isset($this->order)) {
+            $order = $this->order;
+            $this->orderBy(key($order), $order[key($order)]);
+        }
+    }
+
+    public function getDatatables()
+    {
+        $this->getDatatablesQuery();
+        if ($_POST['length'] != -1)
+            return $this->findAll($_POST['length'],  $_POST['start']);
+    }
+
+    public function countFiltered()
+    {
+        $this->getDatatablesQuery();
+        return $this->countAllResults();
+    }
+
+    public function countAll()
+    {
+        return $this->countAllResults();
+    }
+    public function getrandom($limit)
+    {
+        return $this->orderBy('id', 'RANDOM')->findAll($limit);
+    }
 }

@@ -1,16 +1,16 @@
 <?= $this->extend('/layout/' . setting('Aplikasi.layoutAdmin')) ?>
 
 <?= $this->section('title') ?>
-<?= isset($titel) ? $titel : 'Portofolio' ?>
+<?= isset($titel) ? $titel : 'Paket' ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">
-            <i class="fa-regular fa-images"></i> Daftar Portofolio
+            <i class="fa-solid fa-calendar-days"></i> Daftar paket
         </h5>
-        <a type="button" href="<?= base_url('admin/portofolio/new') ?>" class="btn btn-dark mt-5 float-end"><i class="fa-regular fa-image"></i> Add Portofolio</a>
+        <a type="button" href="<?= base_url('admin/paket/new') ?>" class="btn btn-dark mt-5 float-end"><i class="fa-solid fa-calendar-days"></i> Add Paket</a>
 
     </div>
 </div>
@@ -39,8 +39,13 @@
             <table class="table  table-bordered" id="tabeladmin">
                 <thead>
                     <tr>
-                        <th>Judul </th>
-                        <th> Keterangan </th>
+                        <th>name</th>
+                        <th>jenis</th>
+                        <th>max peserta</th>
+                        <th>harga</th>                        
+                        <th>harga perpeserta</th>
+                        <th>keterangan</th>
+                        <th>max_time</th>
                         <th> # </th>
                     </tr>
                 </thead>
@@ -62,7 +67,7 @@
             processing: true,
             serverSide: true,
             "ajax": {
-                "url": "<?= site_url('/admin/tabel/portofolio') ?>",
+                "url": "<?= site_url('/admin/tabel/paket') ?>",
                 "type": "POST",
                 "data": function(data) {},
             },
@@ -70,7 +75,7 @@
                     "targets": [0],
                     "width": "4%"
                 }, {
-                    "targets": [2],
+                    "targets": [7],
                     "width": "10%",
                     orderable: false,
                 },
@@ -92,7 +97,7 @@
     function del(id) {
         if (confirm('Are you sure delete this data?')) {
             $.ajax({
-                url: '<?= base_url("admin/portofolio/") ?>' + id,
+                url: '<?= base_url("admin/paket/") ?>' + id,
                 type: 'DELETE',
                 success: function(result) {
                     table.ajax.reload(null, false);
