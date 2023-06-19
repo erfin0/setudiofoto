@@ -42,7 +42,7 @@
                         <th>name</th>
                         <th>jenis</th>
                         <th>max peserta</th>
-                        <th>harga</th>                        
+                        <th>harga</th>
                         <th>harga perpeserta</th>
                         <th>keterangan</th>
                         <th>max_time</th>
@@ -101,6 +101,10 @@
                 type: 'DELETE',
                 success: function(result) {
                     table.ajax.reload(null, false);
+                },
+                error: function(xhr) {
+                    alert('tidak bisa menghapus');
+                   
                 }
             });
         }

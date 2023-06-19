@@ -62,7 +62,10 @@ $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin'], static func
 
     $routes->get('paket', 'Paket::index');
     $routes->get('paket/new', 'Paket::new');
- $routes->post('paket', 'Paket::create');
+    $routes->post('paket', 'Paket::create');
+    $routes->get('paket/(:num)/edit', 'Paket::edit/$1');
+    $routes->post('paket/(:num)/update', 'Paket::update/$1');
+    $routes->delete('paket/(:num)', 'Paket::delete/$1');
 
     $routes->post('tabel/portofolio', 'Portofolio::tabel');
     $routes->post('tabel/paket', 'Paket::tabel');

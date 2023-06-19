@@ -16,11 +16,21 @@ class Paket extends BaseController
     {
         return view('Admin/PaketaddView');
     }
+    public function edit(int $paketId)
+    {
+        $model = new PaketModel();
+        $paket =  $model->find($paketId);
+        if ($paket === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('paket tidak di temukan');
+        }
+        $data['paket'] = $paket;
+        return view('Admin/PaketeditView', $data);
+    }
     public function create()
     {
         $rules = [
 
-            'name' => 'required|max_length[255]|min_length[3]',
+            'name' => 'required|max_length[255]|min_length[3]|is_unique[paket.name]',
             'jenis' => 'required|max_length[255]',
             'harga' => 'numeric',
             'max_peserta' => 'permit_empty|numeric',
@@ -47,6 +57,78 @@ class Paket extends BaseController
 
         return redirect()->to(base_url("admin/paket"))->with('message', 'tersimpan');
     }
+    public function update($paketId = null)
+    {
+
+        $model = new PaketModel();
+        $paket =  $model->find($paketId);
+        if ($paket === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('paket tidak di temukan');
+        }
+
+        $rules = [
+            'name' => "required|max_length[255]|min_length[3]|is_unique[paket.name,id,{$paketId}]",
+            'jenis' => 'required|max_length[255]',
+            'harga' => 'numeric',
+            'max_peserta' => 'permit_empty|numeric',
+            'harga_perpeserta' => 'permit_empty|numeric',
+            'max_time' => 'numeric',
+            'keterangan' => 'required|min_length[3]',
+        ];
+        $imgrules = ['image' => 'uploaded[image]'
+            . '|is_image[image]'
+            . '|mime_in[image,image/jpg,image/jpeg,image/gif,image/png,image/webp]'
+            . '|max_size[image,2000]'
+            . '|max_dims[image,1920,1080]',];
+
+        $rules =  ($this->request->getFile('image') != "") ? array_merge($rules,  $imgrules) : $rules;
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $data = [
+            'id' => $paketId,
+            'name' =>  $this->request->getPost('name'),
+            'jenis' =>  $this->request->getPost('jenis'),
+            'harga' =>  $this->request->getPost('harga'),
+            'max_peserta' =>  $this->request->getPost('max_peserta'),
+            'harga_perpeserta' =>  $this->request->getPost('harga_perpeserta'),
+            'max_time' =>  $this->request->getPost('max_time'),
+            'keterangan' =>  $this->request->getPost('keterangan'),
+        ];
+
+        if ($this->request->getFile('image') != "") {
+            $data['image'] = $this->simpan_img('image');
+        }
+
+        $model->update($paketId, $data);
+        return redirect()->back()->with('message', 'tersimpan');
+    }
+    public function delete(int $paketId)
+    {
+        $model = new PaketModel();
+        $paket =  $model->find($paketId);
+        if ($paket === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('poto tidak di temukan');
+        }
+
+        if (!$model->delete($paketId)) {
+            return redirect()->back()->withInput()->with('errors', $model->errors());
+        } else {
+            return  'ok';
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
     public function tabel()
     {
         /*  'name',
@@ -69,9 +151,9 @@ class Paket extends BaseController
             $row[] = $list->jenis;
             $row[] = $list->max_peserta;
             $row[] = number_to_currency($list->harga, 'idr', 'id_ID');
-            $row[] = number_to_currency($list->harga_perpeserta, 'idr', 'id_ID');          
+            $row[] = number_to_currency($list->harga_perpeserta, 'idr', 'id_ID');
             $row[] = $list->keterangan;
-            $row[] = $list->max_time;           
+            $row[] = $list->max_time;
             $row[] = '<a class="btn mt-1 mx-1 btn-light" href="'
                 . base_url("admin/paket/$list->id/edit")
                 . '" role="button"> <i class="fa-solid fa-pen-to-square"></i></a>'
