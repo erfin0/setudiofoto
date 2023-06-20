@@ -22,14 +22,7 @@ class Datapesanan extends Migration
         $this->forge->addKey('id', true);
         $this->forge->createTable('paket', true);
 
-        $this->forge->addField([
-            'id' =>  ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'gambar'   => ['type' => 'varchar', 'constraint' => 255],
-            'keterangan' => ['type' => 'text', 'null' => true],
-
-        ]);
-        $this->forge->addKey('id', true);
-        $this->forge->createTable('testimoni', true);
+       
 
         $this->forge->addField([
             'id' =>  ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
@@ -47,6 +40,20 @@ class Datapesanan extends Migration
         $this->forge->addForeignKey('paket_id', 'paket', 'id');
         $this->forge->createTable('booking', true);
 
+
+        $this->forge->addField([
+            'id' =>  ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'gambar'   => ['type' => 'varchar', 'constraint' => 255],
+            'keterangan' => ['type' => 'text', 'null' => true],
+            'users_id' => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'booking_id' => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+
+        ]);
+        $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('users_id', 'users', 'id');
+        $this->forge->addForeignKey('booking_id', 'booking', 'id');
+        $this->forge->createTable('testimoni', true);
+
         $this->forge->addField([
             'id' =>  ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'booking_id' => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
@@ -62,8 +69,8 @@ class Datapesanan extends Migration
     public function down()
     {
         $this->forge->dropTable('pembayaran', true);
-        $this->forge->dropTable('booking', true);
         $this->forge->dropTable('testimoni', true);
+        $this->forge->dropTable('booking', true);      
         $this->forge->dropTable('paket', true);
     }
 }

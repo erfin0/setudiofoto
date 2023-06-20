@@ -11,4 +11,14 @@ class Testimoni extends BaseController
        
         return view('User/TestimoniView');
     }
+    public function new()
+    {
+       
+        return view('User/TestimoniaddView');
+    }
+    public function create()
+    {
+        
+    }
+
 }

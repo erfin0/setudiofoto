@@ -1,16 +1,15 @@
 <?= $this->extend('/layout/' . setting('Aplikasi.layoutAdmin')) ?>
 
 <?= $this->section('title') ?>
-<?= isset($titel) ? $titel : 'Portofolio' ?>
+<?= isset($titel) ? $titel : 'testimoni' ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">
-            <i class="fa-regular fa-images"></i> Daftar Portofolio
+            <i class="fa-regular fa-comments"></i> Daftar testimoni
         </h5>
-        <a type="button" href="<?= base_url('admin/portofolio/new') ?>" class="btn btn-dark mt-5 float-end"><i class="fa-regular fa-image"></i> Add Portofolio</a>
 
     </div>
 </div>
@@ -41,6 +40,7 @@
                     <tr>
                         <th>Judul </th>
                         <th> Keterangan </th>
+                        <th>commant</th>
                         <th> # </th>
                     </tr>
                 </thead>
@@ -62,17 +62,19 @@
             processing: true,
             serverSide: true,
             "ajax": {
-                "url": "<?= site_url('/admin/tabel/portofolio') ?>",
+                "url": "<?= site_url('/admin/tabel/testimoni') ?>",
                 "type": "POST",
                 "data": function(data) {},
             },
             "columnDefs": [{
-                    "targets": [0],
+                    "targets": [0,3],
                     "width": "4%"
                 }, {
-                    "targets": [2],
-                    "width": "10%"
-                },
+                    "targets": [2,3],
+                    
+                    orderable: false,
+
+                }, 
                 {
                     responsivePriority: 1,
                     targets: 2
@@ -91,7 +93,7 @@
     function del(id) {
         if (confirm('Are you sure delete this data?')) {
             $.ajax({
-                url: '<?= base_url("admin/portofolio/") ?>' + id,
+                url: '<?= base_url("admin/testimoni/") ?>' + id,
                 type: 'DELETE',
                 success: function(result) {
                     table.ajax.reload(null, false);

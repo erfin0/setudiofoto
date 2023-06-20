@@ -59,6 +59,8 @@ $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin'], static func
     $routes->get('booking', 'Pesanan::booking');
     $routes->get('pembayaran', 'Pesanan::pembayaran');
     $routes->get('testimoni', 'Testimoni::index');
+    $routes->get('testimoni/(:num)/comment', 'Testimoni::comment/$1');
+    $routes->post('testimoni/(:num)/comment', 'Testimoni::create_comment/$1');
 
     $routes->get('paket', 'Paket::index');
     $routes->get('paket/new', 'Paket::new');
@@ -69,6 +71,7 @@ $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin'], static func
 
     $routes->post('tabel/portofolio', 'Portofolio::tabel');
     $routes->post('tabel/paket', 'Paket::tabel');
+    $routes->post('tabel/testimoni', 'Testimoni::tabel');
 });
 
 service('auth')->routes($routes);

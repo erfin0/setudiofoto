@@ -1,17 +1,16 @@
 <?= $this->extend('/layout/' . setting('Aplikasi.layoutAdmin')) ?>
 
 <?= $this->section('title') ?>
-<?= isset($titel) ? $titel : 'Portofolio' ?>
+<?= isset($titel) ? $titel : 'pembayaran' ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
-<div class="card">
+<div class="card" style="height: 9rem;">
     <div class="card-body">
         <h5 class="card-title">
-            <i class="fa-regular fa-images"></i> Daftar Portofolio
+        <i class="fa-regular fa-credit-card"></i> Daftar pembayaran
         </h5>
-        <a type="button" href="<?= base_url('admin/portofolio/new') ?>" class="btn btn-dark mt-5 float-end"><i class="fa-regular fa-image"></i> Add Portofolio</a>
-
+       
     </div>
 </div>
 <div class="container-fluid px-4 mt-3">
@@ -62,7 +61,7 @@
             processing: true,
             serverSide: true,
             "ajax": {
-                "url": "<?= site_url('/admin/tabel/portofolio') ?>",
+                "url": "<?= site_url('/admin/tabel/pembayaran') ?>",
                 "type": "POST",
                 "data": function(data) {},
             },
@@ -91,7 +90,7 @@
     function del(id) {
         if (confirm('Are you sure delete this data?')) {
             $.ajax({
-                url: '<?= base_url("admin/portofolio/") ?>' + id,
+                url: '<?= base_url("admin/pembayaran/") ?>' + id,
                 type: 'DELETE',
                 success: function(result) {
                     table.ajax.reload(null, false);

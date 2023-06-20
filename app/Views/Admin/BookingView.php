@@ -1,16 +1,15 @@
 <?= $this->extend('/layout/' . setting('Aplikasi.layoutAdmin')) ?>
 
 <?= $this->section('title') ?>
-<?= isset($titel) ? $titel : 'Portofolio' ?>
+<?= isset($titel) ? $titel : 'Booking' ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
-<div class="card">
+<div class="card" style="height: 9rem;">
     <div class="card-body">
         <h5 class="card-title">
-            <i class="fa-regular fa-images"></i> Daftar Portofolio
+            <i class="fa-solid fa-calendar-day"></i> Daftar Booking
         </h5>
-        <a type="button" href="<?= base_url('admin/portofolio/new') ?>" class="btn btn-dark mt-5 float-end"><i class="fa-regular fa-image"></i> Add Portofolio</a>
 
     </div>
 </div>
@@ -62,7 +61,7 @@
             processing: true,
             serverSide: true,
             "ajax": {
-                "url": "<?= site_url('/admin/tabel/portofolio') ?>",
+                "url": "<?= site_url('/admin/tabel/boking') ?>",
                 "type": "POST",
                 "data": function(data) {},
             },
@@ -88,17 +87,17 @@
 
     });
 
-    function del(id) {
-        if (confirm('Are you sure delete this data?')) {
-            $.ajax({
-                url: '<?= base_url("admin/portofolio/") ?>' + id,
-                type: 'DELETE',
-                success: function(result) {
-                    table.ajax.reload(null, false);
-                }
-            });
-        }
-    }
+    /*  function del(id) {
+         if (confirm('Are you sure delete this data?')) {
+             $.ajax({
+                 url: '<?= base_url("admin/Booking/") ?>' + id,
+                 type: 'DELETE',
+                 success: function(result) {
+                     table.ajax.reload(null, false);
+                 }
+             });
+         }
+     } */
 </script>
 
 <?= $this->endSection() ?>
