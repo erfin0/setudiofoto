@@ -40,7 +40,7 @@ $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function (
     $routes->get('pilihwaktu', 'Pesanan::pilihwaktu');
     $routes->get('portofolio', 'Portofolio::index');
 });
-$routes->group('/admin',  ['namespace' => '\App\Controllers\Admin'], static function ($routes) {
+$routes->group('/admin',  ['namespace' => '\App\Controllers\Admin', /* 'filter' => 'group:admin' */], static function ($routes) {
     $routes->get('dashboard', 'Dashboard::index');
     $routes->get('admin', 'Admin::index');
     $routes->get('user', 'Admin::user');

@@ -34,8 +34,11 @@ class Datapesanan extends Migration
             'Total_harga' => ['type' => 'double',  'unsigned' => true, 'default' => 0],
             'tgl_booking_start'  => ['type' => 'datetime', 'null' => true],
             'tgl_booking_end' => ['type' => 'datetime', 'null' => true],
+            'create_by' => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
+            'created_at'  => ['type' => 'datetime', 'null' => true],
         ]);
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('create_By', 'users', 'id');
         $this->forge->addForeignKey('users_id', 'users', 'id');
         $this->forge->addForeignKey('paket_id', 'paket', 'id');
         $this->forge->createTable('booking', true);
@@ -59,7 +62,7 @@ class Datapesanan extends Migration
             'booking_id' => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
             'nominal' => ['type' => 'double',  'unsigned' => true, 'default' => 0],
             'jenis'  => ['type' => 'varchar', 'constraint' => 255],
-
+            'created_at'  => ['type' => 'datetime', 'null' => true],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('booking_id', 'booking', 'id');

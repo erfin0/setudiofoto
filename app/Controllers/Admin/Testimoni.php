@@ -42,7 +42,7 @@ class Testimoni extends BaseController
         $data =
             [
                 'commen' => $this->request->getPost('comment'),
-                'users_id' => 1, // auth()->getUser()->id,
+               // 'users_id' => 1, // auth()->getUser()->id,
                 'testimoni_id' => $testimoniId
             ];
 

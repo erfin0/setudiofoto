@@ -36,15 +36,22 @@ class TestimoniModel extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
+    protected $beforeInsert   = ['insertUserBefore'];
     protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
+    protected $beforeUpdate   = ['insertUserBefore'];
     protected $afterUpdate    = [];
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+
+
+    public function insertUserBefore($data)
+    {
+        $data['users_id'] =   auth()->getUser()->id;
+        return $data;
+    }
 
 
     protected $column_order = [

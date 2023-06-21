@@ -24,8 +24,8 @@ class Portofolio extends BaseController
             'image' => 'uploaded[image]'
                 . '|is_image[image]'
                 . '|mime_in[image,image/jpg,image/jpeg,image/gif,image/png,image/webp]'
-                . '|max_size[image,2000]'
-                . '|max_dims[image,1920,1080]',
+                . '|max_size[image,5000]'
+                . '|max_dims[image,6920,6080]',
         ];
 
         if (!$this->validate($rules)) {
