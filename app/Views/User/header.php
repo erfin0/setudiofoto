@@ -32,6 +32,15 @@
                         <div class="carousel-item">
                             <img src="https://picsum.photos/600?3" class="d-block  mx-auto img400" alt="...">
                         </div>
+                        <div class="carousel-item active" data-bs-interval="10000">
+                            <img src="https://picsum.photos/600?1" class="d-block  mx-auto img400 " alt="...">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <img src="https://picsum.photos/600?2" class="d-block  mx-auto img400" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://picsum.photos/600?3" class="d-block  mx-auto img400" alt="...">
+                        </div>
                     </div>
 
                 </div>
