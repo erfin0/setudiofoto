@@ -28,30 +28,7 @@
             <a type="button" class="btn btn-dark px-4">BOOK NOW</a>
 
         </div>
-        <div class="photo-gallery">
-            <?php
-            // Get the images from the database.
-            $images = [
-                'https://picsum.photos/600?1',
-                'https://picsum.photos/600?2',
-                'https://picsum.photos/600?3',
-                'https://picsum.photos/600?4',
-                'https://picsum.photos/600?5',
-                'https://picsum.photos/600?6',
-                'https://picsum.photos/600?7',
-                'https://picsum.photos/600?8',
-                'https://picsum.photos/600?9',
-                'https://picsum.photos/600?19',
-            ];
-
-            // Loop through the images and display them in the gallery.
-            foreach ($images as $image) {
-            ?>
-                <img src="<?php echo $image; ?>" />
-            <?php
-            }
-            ?>
-        </div>
+       
     </div>
 
 </section>

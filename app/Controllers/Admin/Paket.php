@@ -40,8 +40,8 @@ class Paket extends BaseController
             'image' => 'uploaded[image]'
                 . '|is_image[image]'
                 . '|mime_in[image,image/jpg,image/jpeg,image/gif,image/png,image/webp]'
-                . '|max_size[image,2000]'
-                . '|max_dims[image,1920,1080]',
+                . '|max_size[image,5000]'
+                . '|max_dims[image,6920,6080]',];
         ];
 
         if (!$this->validate($rules)) {
@@ -78,8 +78,8 @@ class Paket extends BaseController
         $imgrules = ['image' => 'uploaded[image]'
             . '|is_image[image]'
             . '|mime_in[image,image/jpg,image/jpeg,image/gif,image/png,image/webp]'
-            . '|max_size[image,2000]'
-            . '|max_dims[image,1920,1080]',];
+            . '|max_size[image,5000]'
+            . '|max_dims[image,6920,6080]',];
 
         $rules =  ($this->request->getFile('image') != "") ? array_merge($rules,  $imgrules) : $rules;
         if (!$this->validate($rules)) {

@@ -12,7 +12,7 @@
         <div class="px-5 mx-auto text-center ">
             <p class=" mt-5 mb-0 sarif text-uppercase"><?= setting()->get('aplikasi.slogan') ?></p>
             <p class="logoname sarif text-uppercase"><?= setting()->get('aplikasi.perusahaan') ?></p>
-            <a type="button" class="btn btn-dark px-4">BOOK NOW</a>
+            <a type="button"  href="<?=base_url('pricelist')?>" class="btn btn-dark px-4">BOOK NOW</a>
 
         </div>
     </div>
@@ -36,7 +36,7 @@
                             foreach ($potohider as $potox) { ?>
                                 <div class="carousel-item <?= ($a) ? 'active' : '' ?>" data-bs-interval="10000">
                                     <img src="<?= $potox->ximage('max') ?> " class="d-block  mx-auto img400 " alt="...">
-                                    <div class="text-over-image d-none d-md-block">
+                                    <div class=" carousel-caption  d-none d-md-block">
                                         <h1><?= $potox->judul ?></h1>
                                         <p><?= $potox->keterangan ?></p>
                                     </div>
@@ -56,10 +56,53 @@
     </div>
 
 </section>
+<section id="testimoni">
 
-<?= $this->include('/User/testimoni') ?>
+    <div class="container mb-5 pt-3 bg-secondary-subtle">
+        <div class="mt-3">
+            <h3 class="text-center f01 text-capitalize">testimoni</h3>
+        </div>
+        <div class="row">
+            <div class="col-12 ">
+              
+            <div class="owl-carousel owl-theme owl-loaded">
+                <div class="owl-stage-outer">
+                    <div class="owl-stage">
+                        
+                        <?php if (isset($testimoni)) {
+                             foreach ($testimoni as $testi) { ?>
+                            <div class="owl-item">
+                                <div class="card  border border-0 bg-transparent" style="width: 18rem;">
+                                    <img src="<?= $testi->ximage('mini') ?>" class="card-img-top" alt="" style="object-fit: cover;width: 100%;height: 100%;max-height: 14rem;">
+                                    <div class="card-body text-center ">
+                                        <p class=" sarif card-text"><?= $testi->keterangan?></p>
+                                    </div>
+                                </div>
+                            </div>
 
+                        <?php }} ?>
+                    </div>
+                </div>
+                <div class="owl-nav">
+                    <div class="owl-prev">prev</div>
+                    <div class="owl-next">next</div>
+                </div>
+                <!--   <div class="owl-dots">
+                    <div class="owl-dot active"><span></span></div>
+                    <div class="owl-dot"><span></span></div>
+                    <div class="owl-dot"><span></span></div>
+                </div>
+            </div> -->
+            </div>
+                    
 
+                
+            </div>
+        </div>
+    </div>
+
+    </div>
+</section>
 
 
 
@@ -99,5 +142,32 @@
 
 <?= $this->Section('pageScripts') ?>
 
+<script>
+    $(document).ready(function() {
+        $('.owl-carousel').owlCarousel({
+            autoplay: true,
+            autoWidth: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: true,
+            margin: 100,
+              nav: true,
+            loop: true,
+            responsiveClass: true,
+            navText: ["<div class='nav-btn prev-slide'><i class='fa-solid fa-angle-left'></i></div>", "<div class='nav-btn next-slide'><i class='fa-solid fa-angle-right'></i></div>"],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        });
+
+    });
+</script>
 
 <?= $this->endSection() ?>
