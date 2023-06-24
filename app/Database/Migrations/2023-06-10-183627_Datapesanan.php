@@ -38,7 +38,7 @@ class Datapesanan extends Migration
             'created_at'  => ['type' => 'datetime', 'null' => true],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('create_By', 'users', 'id');
+        $this->forge->addForeignKey('create_by', 'users', 'id');
         $this->forge->addForeignKey('users_id', 'users', 'id');
         $this->forge->addForeignKey('paket_id', 'paket', 'id');
         $this->forge->createTable('booking', true);
