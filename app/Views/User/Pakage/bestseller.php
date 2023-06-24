@@ -9,20 +9,25 @@
                 <div class="owl-carousel owl-theme owl-loaded ">
                     <div class="owl-stage-outer">
                         <div class="owl-stage">
-                            <?php for ($i = 0; $i < 3; $i++) { ?>
-                                <div class="owl-item">
-                                    <div class="card  border border-0" style="width: 30rem">
-                                        <img style="height: 20rem;" src="https://picsum.photos/640?pic=<?= $i ?>" />
-                                        
-                                        <div class="card-body mx-auto text-center">
+                            <?php if (isset($paket)) {
+                                foreach ($paket as $paketbes) { ?>
+                                    <div class="owl-item">
+                                        <div class="card  border border-0" style="width: 30rem">
+                                            <img style="max-height: 20rem;width: auto;aspect-ratio: 1 / 1;object-fit: cover; " src="<?= $paketbes->ximage('max') ?>" />
 
-                                            <a type="button" class="btn btn-dark px-4">BOOK NOW</a>
+                                            <div class="card-body mx-auto  text-over-image  text-center" style="margin-top: 10rem;">
+                                                <h3><?= $paketbes->name ?></h3>
+                                                <h5><?= $paketbes->jenis ?></h5>
+                                                <p><?= $paketbes->keterangan ?></p>
+                                                <h4> <?= number_to_currency($paketbes->harga, 'idr', 'id_ID') ?></h4>
+                                                <a type="button" href="<?= base_url("pilihwaktu?paket=$paketbes->id") ?>" class="btn btn-dark px-4 ">BOOK NOW</a>
 
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
+                            <?php }
+                            } ?>
                         </div>
                     </div>
                 </div>

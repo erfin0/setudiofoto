@@ -31,16 +31,16 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function ($routes) {
     $routes->get('', 'Home::index');
-    $routes->get('pembayaran', 'Pesanan::pembayaran');
-    $routes->get('booking', 'Pesanan::booking');
+    $routes->get('pembayaran', 'Pesanan::pembayaran',['filter' => 'session']);
+    $routes->get('booking', 'Pesanan::booking',['filter' => 'session']);
     $routes->get('pricelist', 'Pricelist::index');
     $routes->get('about', 'About::index');
     $routes->get('testimoni', 'Testimoni::index');
     $routes->get('contact', 'Contact::index');
-    $routes->get('pilihwaktu', 'Pesanan::pilihwaktu');
+    $routes->get('pilihwaktu', 'Pesanan::pilihwaktu',['filter' => 'session']);
     $routes->get('portofolio', 'Portofolio::index');
 });
-$routes->group('/admin',  ['namespace' => '\App\Controllers\Admin', /* 'filter' => 'group:admin' */], static function ($routes) {
+$routes->group('/admin',  ['namespace' => '\App\Controllers\Admin',  'filter' => 'group:admin' ], static function ($routes) {
     $routes->get('dashboard', 'Dashboard::index');
     $routes->get('admin', 'Admin::index');
     $routes->get('user', 'Admin::user');

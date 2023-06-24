@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e4b343b8ad24f7adf438de93b55896fe",
+    "content-hash": "238ab0803cf938d4b3f459c72f6050ce",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -137,16 +137,16 @@
         },
         {
             "name": "codeigniter4/shield",
-            "version": "v1.0.0-beta.6",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/shield.git",
-                "reference": "b5fbc784e8ab6ee8e9de103e62b15f8248c05a9f"
+                "reference": "3412fac1a2a59d80ddca5c34812e2b2c24c113ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/b5fbc784e8ab6ee8e9de103e62b15f8248c05a9f",
-                "reference": "b5fbc784e8ab6ee8e9de103e62b15f8248c05a9f",
+                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/3412fac1a2a59d80ddca5c34812e2b2c24c113ec",
+                "reference": "3412fac1a2a59d80ddca5c34812e2b2c24c113ec",
                 "shasum": ""
             },
             "require": {
@@ -167,6 +167,7 @@
                 "ext-curl": "Required to use the password validation rule via PwnedValidator class.",
                 "ext-openssl": "Required to use the JWT Authenticator."
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -206,7 +207,7 @@
                 "slack": "https://codeigniterchat.slack.com",
                 "source": "https://github.com/codeigniter4/shield"
             },
-            "time": "2023-04-26T08:31:55+00:00"
+            "time": "2023-06-21T23:37:40+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -2296,7 +2297,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "codeigniter4/shield": 10
+        "codeigniter4/shield": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

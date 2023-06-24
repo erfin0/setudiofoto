@@ -1,20 +1,25 @@
 <section>
     <div class="container  mb-5">
-        
+
         <div class="row row-cols-auto justify-content-around">
-            <?php for ($i = 0; $i < 9; $i++) { ?>
-                <div class="col my-3">
-                    <div class="card  p-3">
-                        <img src="https://picsum.photos/600?<?= $i ?>" class="d-block img20 " alt="...">
-                        <div class="card-body mx-auto text-center">
-                                                      
-                                <a type="button" class="btn btn-dark px-4">BOOK NOW</a>
-                            
-                           
+            <?php if (isset($paket)) {
+                foreach ($paket as $paketbes) { ?>
+                    <div class="col-12 col-lg-4 mb-3">
+                        <div class="card p-3 h-100">
+                            <img src="<?= $paketbes->ximage('max') ?>" class="d-block img20 " style="height:auto;" alt="<?= $paketbes->name ?>">
+                            <div class="card-body mx-auto text-center">
+                                <h3><?= $paketbes->name ?></h3>
+                                <h5><?= $paketbes->jenis ?></h5>
+                                <p ><?= $paketbes->keterangan ?></p>
+                                <h4 class="mb-5"> <?= number_to_currency($paketbes->harga, 'idr', 'id_ID') ?></h4>
+                                <a type="button" href="<?=base_url("pilihwaktu?paket=$paketbes->id")?>" class="btn btn-dark px-4 btboking">BOOK NOW</a>
+
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php } ?>
+            <?php }
+            } ?>
         </div>
     </div>
 </section>

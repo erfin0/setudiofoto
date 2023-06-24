@@ -408,7 +408,7 @@ class Auth extends ShieldAuth
         
         // If the user is an administrator, redirect to the admin dashboard.
         if (auth()->user()->inGroup('admin')) {
-            $url = '/admin';
+            $url = '/admin/admin';
         }
 
         return $this->getUrl($url);

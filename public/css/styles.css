@@ -101,9 +101,12 @@
   left: auto;
   margin-right: 2rem;
 }
+
 .zoom:hover {
-  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(1.5);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
+
 .form-select {
   padding: .375rem .75rem .375rem 2.25rem;
   background-position: left .75rem center;
@@ -116,15 +119,16 @@ input::file-selector-button {
 .ngambang {
   bottom: 3rem;
   right: 2rem;
-  position: fixed;  
+  position: fixed;
   z-index: 5;
 }
-.bt-chat{
+
+.bt-chat {
   background: var(--bs-primary-bg-subtle);
-/* border: 1px solid #A0ACEE; */
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 15px;
-margin-top: 0.5rem;
+  /* border: 1px solid #A0ACEE; */
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  margin-top: 0.5rem;
 }
 
 
@@ -312,4 +316,14 @@ img {
 .grid-wrapper .big {
   grid-column: span 2;
   grid-row: span 2;
+}
+
+.btboking {
+  margin-top:5rem ;
+  margin-right: 4rem !important;
+  margin-left: 4rem !important;
+  bottom: 1rem;
+  position: absolute;
+  left: 0;
+  right: 0;
 }

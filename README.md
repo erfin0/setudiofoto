@@ -43,6 +43,10 @@ At this point you should have a usable version of the current code! Try launchin
 1. From the repo directory start serving the website: `php spark serve`
 2. In your web browser of choice navigate to the local URL: `http://localhost:8080`
 
+login admin:
+user = admin
+password = saya tidaktau
+
 ## Important Change with index.php
 
 `index.php` is no longer in the root of the project! It has been moved inside the *public* folder,

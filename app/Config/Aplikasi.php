@@ -33,9 +33,9 @@ class Aplikasi extends BaseConfig
             'url' => '/contact'
         ],
     ];
-    public string $perusahaan = 'xxxstudio';
+    public string $perusahaan = 'Wilis Photo';
     public string $slogan = 'capture your most beautiful moments';
-    public string $about = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br>xxxxxxxxxxxxxxxxxxxxxxxxxx<br>xxxxxxxxxxxxxxxxxxxxxxxxx<br>xxxxxxxxxxxxxxxxxxxxxxxxx';
+    public string $about = 'Melayani pas photo,foto panggilan dan cetak foto dari berbagai media seperti Hp,CD,Flashdisk dengan kualitas cetak unggul';
     public array $about_team = [
         [
             'title' => 'xxxxxxxxx',
@@ -46,17 +46,18 @@ class Aplikasi extends BaseConfig
         ]
     ];
     public array $contact = [
-        'alamat' => 'Jl kesana kesini no,3567, selalu',
-        'map' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d252994.32062682518!2d110.38321545801648!3d-7.785980452530815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5788f3c4d097%3A0x80cd3a492e0cd50!2sSekretariat%20Negara%20Istana%20Kepresidenan!5e0!3m2!1sid!2sid!4v1686150030857!5m2!1sid!2sid',
-        'wa' => '+6286321323232',
-        'mail' => null,
-        'twitter' => 'https://twitter.com/?lang=id',
+        'alamat' => 'Jl. Imogiri Timur No 141, Giwangan, Kec. Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55163',
+      
+        'map' => 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15810.46939705836!2d110.3900343!3d-7.8302609!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5704ae19ca9f%3A0xb05bec832fda2bdd!2sWilis%20Photo!5e0!3m2!1sid!2sid!4v1687626983848!5m2!1sid!2sid',
+        'wa' => '+6287839594951',
+        'mail' => 'photowilis88@gmail.com',
+        'twitter' => null,
         'facebook' => null,
         'google' => null,
         'instagram' => null,
         'linkedin' => null,
         'github' => null,
-        'youtube' => 'https://www.youtube.com/' ,
+        'youtube' => null ,
         'tiktok' => null,
     ];
 

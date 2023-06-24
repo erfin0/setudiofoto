@@ -147,11 +147,11 @@ class Paket extends BaseController
         foreach ($lists as $list) {
             $no++;
             $row = [];
-            $row[] = '<img src="' . $list->ximage('mini') . '"  style="height: 50px;">'  . $list->name;
+            $row[] = '<img src="' . $list->ximage('mini') . '"  style="height: 50px;">'  .'<p>'. $list->name. '</p>';
             $row[] = $list->jenis;
             $row[] = $list->max_peserta;
             $row[] = number_to_currency($list->harga, 'idr', 'id_ID');
-            $row[] = number_to_currency($list->harga_perpeserta, 'idr', 'id_ID');
+            $row[] = number_to_currency($list->harga_perpeserta ?? 0, 'idr', 'id_ID');
             $row[] = $list->keterangan;
             $row[] = $list->max_time;
             $row[] = '<a class="btn mt-1 mx-1 btn-light" href="'
