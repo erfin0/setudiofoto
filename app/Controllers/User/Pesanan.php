@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers\User;
-
+use App\Models\PaketModel;
 use App\Controllers\BaseController;
 
 class Pesanan extends BaseController
@@ -20,6 +20,14 @@ class Pesanan extends BaseController
     }
     public function pilihwaktu()
     {
-        return view('User/PilihwaktuView');
+        helper('number');
+        $paketmodel= new  PaketModel();
+        $terpilih= $paketmodel->find( $this->request->getGet('paket'));
+        if (!$terpilih){
+            return  redirect()->to('/pricelist');
+        }
+        $data['terpilih']=$terpilih;
+        
+        return view('User/PilihwaktuView',$data);
     }
 }
