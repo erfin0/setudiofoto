@@ -8,7 +8,15 @@
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-body-font-family: var(--bs-font-sans-serif);
 }
+.zoom {
+  transition: transform .2s;
 
+}
+
+.zoom:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
 .sarif {
   font-family: var(--bs-font-serif);
 }

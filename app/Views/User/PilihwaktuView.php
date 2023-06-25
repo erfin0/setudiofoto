@@ -22,7 +22,7 @@
                         <h5><?= $terpilih->jenis ?></h5>
                         <p><?= $terpilih->keterangan ?></p>
                         <h4 class="mb-5"> <?= number_to_currency($terpilih->harga, 'idr', 'id_ID') ?></h4>
-                       
+
                     </div>
                 </div>
             </div>
@@ -30,12 +30,38 @@
     </div>
 </section>
 <section>
-    <div class="container  mb-5 bg-secondary-subtle py-3">
+    <div class="container  mb-5  ">
 
         <div class="row justify-content-evenly">
-        <a type="button" href="<?= base_url("pilihwaktu?paket=$terpilih->id") ?>" class="btn btn-dark px-4 btboking">BOOK NOW</a>
+
+            <?php
+
+                                            use SebastianBergmann\LinesOfCode\Counter;
+
+            $today = date('Y-m-d');
+            $con = 1;
+            $a = true;
+            while ($con <= 8) {
+                $date = date('Y-m-d', strtotime('+' . $con . ' days', strtotime($today))); ?>
+                <div class="p-3 zoom rounded-2 border col text-center <?= ($con==3)? 'border border-danger':'' ?>" style="background-color: var(<?= $a ? '--bs-secondary-bg' : '--bs-primary-bg-subtle' ?>);">
+                    <?= date('d M', strtotime($date)) ?> <br>
+                    <?= date('D', strtotime($date)) ?>
+                </div>
+            <?php $a = !$a;
+                $con++;
+            }
+            ?>
         </div>
     </div>
+
+    <div class="container  mb-5 ">
+
+        <div class="row justify-content-evenly">
+           
+
+        </div>
+    </div>
+    <a type="button" href="<?= base_url("pilihwaktu?paket=$terpilih->id") ?>" class="btn btn-dark px-4  ">BOOK NOW</a>
 </section>
 <?= $this->endSection() ?>
 

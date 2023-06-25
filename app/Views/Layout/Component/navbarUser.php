@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-secondary  py-3" data-bs-theme="dark">
     <div class="container">
-        <a class="navbar-brand" href="<?= base_url() ?>">Navbar</a>
+        <a class="navbar-brand" href="<?= base_url() ?>">
+    <img style="height: 60px;-webkit-filter: invert(100%);" src="<?= base_url('img/logo.png') ?>" alt="<?=setting()->get('aplikasi.perusahaan') ??'' ?>"> <?=setting()->get('aplikasi.perusahaan') ??'' ?>
+    </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
