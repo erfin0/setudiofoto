@@ -35,25 +35,21 @@
         <div class="row justify-content-evenly">
 
             <?php
-
-                                            use SebastianBergmann\LinesOfCode\Counter;
-
             $today = date('Y-m-d');
             $con = 1;
             $a = true;
             while ($con <= 8) {
                 $date = date('Y-m-d', strtotime('+' . $con . ' days', strtotime($today))); ?>
-                <div class="p-3 zoom rounded-2 border col text-center <?= ($con==3)? 'border border-danger':'' ?>" style="background-color: var(<?= $a ? '--bs-secondary-bg' : '--bs-primary-bg-subtle' ?>);">
+                <a href="<?=base_url("/booking?tgl=$date") ?>"  class="btn p-3 zoom rounded-2 border col text-center <?= ($con==3)? 'border border-danger':'' ?>" style="background-color: var(<?= $a ? '--bs-secondary-bg' : '--bs-primary-bg-subtle' ?>);">
                     <?= date('d M', strtotime($date)) ?> <br>
                     <?= date('D', strtotime($date)) ?>
-                </div>
+                </a>
             <?php $a = !$a;
                 $con++;
             }
             ?>
         </div>
     </div>
-
     <div class="container  mb-5 ">
 
         <div class="row justify-content-evenly">

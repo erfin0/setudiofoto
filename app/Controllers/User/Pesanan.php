@@ -17,7 +17,8 @@ class Pesanan extends BaseController
     }
     public function booking()
     {
-        return view('User/BookingView');
+        $data['tgl'] = $this->request->getGet('tgl');
+        return view('User/BookingView', $data);
     }
     public function pilihwaktu()
     {
@@ -37,12 +38,11 @@ class Pesanan extends BaseController
                 $timepilih = $tmptime;
             }
         }
-      //  $terpilih =  $this->request->getGet('stime') ?? date('Y-m-d');
+        //  $terpilih =  $this->request->getGet('stime') ?? date('Y-m-d');
 
-        $data['stime'] =$timepilih;
-        $_SESSION['paket'] = $this->request->getGet('paket');     
+        $data['stime'] = $timepilih;
+        $_SESSION['paket'] = $this->request->getGet('paket');
         $data['terpilih'] = $terpilih;
-        d($data);
         return view('User/PilihwaktuView', $data);
     }
 }
