@@ -36,17 +36,18 @@
 
             <?php
 
-                                            use SebastianBergmann\LinesOfCode\Counter;
-
             $today = date('Y-m-d');
+            $tgl = $tgl ?? date('Y-m-d', strtotime('+ 1 days', strtotime($today)));
             $con = 1;
             $a = true;
             while ($con <= 8) {
                 $date = date('Y-m-d', strtotime('+' . $con . ' days', strtotime($today))); ?>
-                <div class="p-3 zoom rounded-2 border col text-center <?= ($con==3)? 'border border-danger':'' ?>" style="background-color: var(<?= $a ? '--bs-secondary-bg' : '--bs-primary-bg-subtle' ?>);">
+                <a href="<?= base_url('/pilihwaktu?paket=') . $terpilih->id . '&tgl=' . $date ?>" class="btn p-3 zoom rounded-2 border col text-center <?= ($tgl == $date) ? 'border border-danger' : '' ?>" style="background-color: var(<?= $a ? '--bs-secondary-bg' : '--bs-primary-bg-subtle' ?>);">
                     <?= date('d M', strtotime($date)) ?> <br>
                     <?= date('D', strtotime($date)) ?>
-                </div>
+
+                </a>
+
             <?php $a = !$a;
                 $con++;
             }
@@ -54,11 +55,13 @@
         </div>
     </div>
 
-    <div class="container  mb-5 ">
+    <div class="container text-center ">
 
-        <div class="row justify-content-evenly">
-           
-
+        <div class="row justify-content-evenly row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+            <?php for ($i = 8; $i < 21; $i++) {               
+            ?>
+                <a href="<?=base_url("/booking?tgl=$tgl&time=") ?><?= ($i <10)?'0':''?><?= $i ?>-00" class="btn col px-3 m-3 btn-secondary" href="#" role="button"><?= ($i <10)?'0':''?><?= $i ?>:00</a> 
+            <?php } ?>
         </div>
     </div>
     <a type="button" href="<?= base_url("pilihwaktu?paket=$terpilih->id") ?>" class="btn btn-dark px-4  ">BOOK NOW</a>
@@ -66,6 +69,33 @@
 <?= $this->endSection() ?>
 
 <?= $this->Section('pageScripts') ?>
+<script>
+    function remove_parameters() {
+        const url = window.location.href;
+        const urlObj = new URL(url);
+        urlObj.search = '';
+        urlObj.hash = '';
+        const uri = urlObj.toString();
+        if (history.pushState) {
+            window.history.pushState({
+                path: uri
+            }, '', uri);
+        }
+    }
 
+    function update_query_parameters(key, val) {
+        uri = window.location.href
+            .replace(RegExp("([?&]" + key + "(?=[=&#]|$)[^#&]*|(?=#|$))"), "&" + key + "=" + encodeURIComponent(val))
+            .replace(/^([^?&]+)&/, "$1?");
+        if (history.pushState) {
+            window.history.pushState({
+                path: uri
+            }, '', uri);
+        }
+    }
+    dateparameter = function(e) {
+        update_query_parameters('tgl', $(e).data("tgl"));
+    }
+</script>
 
 <?= $this->endSection() ?>

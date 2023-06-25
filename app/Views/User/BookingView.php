@@ -31,11 +31,11 @@
                 </div>
                 <div class="mb-3">
                     <label  class="form-label f-me">Tanggal Booking</label>
-                    <input required type="text" class="form-control f-tin" placeholder="Tanggal">
+                    <input required  type="date" value="<?=$tgl??''?>" class="form-control f-tin" placeholder="Tanggal">
                 </div>
                 <div class="mb-5">
                     <label  class="form-label f-me">Waktu Booking</label>
-                    <input required type="text" class="form-control f-tin" placeholder="Waktu ">
+                    <input required type="time" value="<?=$time??''?>" class="form-control f-tin" placeholder="Waktu ">
                 </div>
                 <div class="d-grid gap-1 mb-5">
                     <button type="submit" class="btn btn-dark  f-me ">Request Booking</button>
