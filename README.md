@@ -17,6 +17,7 @@ The user guide corresponding to the latest version of the framework can be found
 
 Use these steps to create a local installation for development and testing.
 
+
 1. Clone the repo: `git clone https://github.com/erfin0/setudiofoto.git`
 2. Work in the repo directory: `cd setudiofoto`
 3. Make sure the **writable** folder is accessible: `chmod -R 777 writable` (linux)
@@ -43,9 +44,21 @@ At this point you should have a usable version of the current code! Try launchin
 1. From the repo directory start serving the website: `php spark serve`
 2. In your web browser of choice navigate to the local URL: `http://localhost:8080`
 
+or 
+
+jika mengunakan windows dan xamppl 
+
+1. git clone di folder htdocs xamppl
+2. ubah **.env** seperti diatas 
+   * tambahkan  `app.baseURL = 'http://localhost/setudiofoto/public/'`
+3. di web browser `http://localhost/setudiofoto/public/`
+
 login admin:
 user = admin
 password = saya tidaktau
+
+jika inggin upload ke hosting bisa akses di `https://www.google.com/search?q=upload+codeigniter+4+ke+hosting`
+
 
 ## Important Change with index.php
 
