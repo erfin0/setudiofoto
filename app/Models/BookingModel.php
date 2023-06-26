@@ -24,7 +24,6 @@ class BookingModel extends Model
         'tgl_booking_start',
         'tgl_booking_end',
         'create_by',
-        'created_at',
     ];
 
     // Dates
@@ -42,19 +41,31 @@ class BookingModel extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
+    protected $beforeInsert   = ['insertbokingBefore'];
     protected $afterInsert    = [];
     protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
+    protected $afterUpdate    = ['insertbokingBefore'];
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
 
-    public function insertUserBefore($data)
+    public function insertbokingBefore($data)
     {
-        $data['create_by'] =   auth()->getUser()->id;
+        $modelpaket = new PaketModel();
+        $paketterpilih = $modelpaket->find($data['data']['paket_id']);
+        $data['data']['create_by'] =   auth()->getUser()->id;
+        $data['data']['tgl_booking_start'] =  $data['data']['tgl_pesan'];
+        $data['data']['Total_harga'] = $paketterpilih->harga;
+        //jika dalam databse paket ada batasan peserta atau harga perpeserta ada dan max simal pesereta melebihi 
+        if (($paketterpilih->max_peserta!==null) && ($paketterpilih->harga_perpeserta !==null)  && ($paketterpilih->max_peserta < $data['data']['qty_peserta'])) {
+            //total harga ditambah dengan harga perpeserta dikali jumlah sisa
+            $data['data']['Total_harga'] += $paketterpilih->harga_perpeserta * ((int)$data['data']['qty_peserta'] - (int)$paketterpilih->max_peserta);
+        }
+        $data['data']['tgl_booking_end'] = date('Y-m-d H:i:s', strtotime( $data['data']['tgl_pesan'] . "+$paketterpilih->max_time minutes")); 
+
+
         return $data;
     }
 }
