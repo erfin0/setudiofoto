@@ -60,7 +60,7 @@
         <div class="row justify-content-evenly row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             <?php for ($i = 8; $i < 21; $i++) {               
             ?>
-                <a href="<?=base_url("/booking?tgl=$tgl&time=") ?><?= ($i <10)?'0':''?><?= $i ?>-00" class="btn col px-3 m-3 btn-secondary" href="#" role="button"><?= ($i <10)?'0':''?><?= $i ?>:00</a> 
+                <a href="<?=base_url("/booking?tgl=$tgl&time=") ?><?= ($i <10)?'0':''?><?= $i ?>:00" class="btn col px-3 m-3 btn-secondary" href="#" role="button"><?= ($i <10)?'0':''?><?= $i ?>:00</a> 
             <?php } ?>
         </div>
     </div>

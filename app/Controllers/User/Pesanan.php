@@ -19,18 +19,17 @@ class Pesanan extends BaseController
     {
         $data['tgl'] = $this->request->getGet('tgl');
         $data['time'] = $this->request->getGet('time');
-        d($data);
-        return view('User/BookingView');
+        return view('User/BookingView', $data);
     }
     public function pilihwaktu()
     {
         helper('number');
         $paketmodel = new  PaketModel();
         $terpilih = $paketmodel->find($this->request->getGet('paket'));
-        if (!$terpilih || $this->request->getGet('paket')==null) {
+        if (!$terpilih || $this->request->getGet('paket') == null) {
             return  redirect()->to('/pricelist');
         }
-        $timepilih =date('Y-m-d', strtotime('+ 1 days', strtotime(date('Y-m-d'))));
+        $timepilih = date('Y-m-d', strtotime('+ 1 days', strtotime(date('Y-m-d'))));
 
         if ($this->request->getGet('tgl') != null) {
             $tmptime = date('Y-m-d', strtotime($_GET['tgl']));
@@ -40,11 +39,13 @@ class Pesanan extends BaseController
                 $timepilih = $tmptime;
             }
         }
-      //  $terpilih =  $this->request->getGet('tgl') ?? date('Y-m-d');
+        //  $terpilih =  $this->request->getGet('tgl') ?? date('Y-m-d');
 
-        $data['tgl'] =$timepilih;
-        $_SESSION['paket'] = $this->request->getGet('paket');     
+        $data['tgl'] = $timepilih;
+        $_SESSION['paket'] = $this->request->getGet('paket');
         $data['terpilih'] = $terpilih;
-               return view('User/PilihwaktuView', $data);
+        return view('User/PilihwaktuView', $data);
     }
+
+   
 }
