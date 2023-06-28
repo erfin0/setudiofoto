@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
+use App\Models\PaketModel;
 
 class Booking extends Entity
 {
@@ -23,12 +24,17 @@ class Booking extends Entity
     ]; 
  */
     //  date('Y-m-d H:i:s', strtotime($this->request->getPost('date')));
-   
-    public function setTglPesan(string $tgl_pesan): Booking 
+
+
+    public function setTglPesan(string $tgl_pesan): Booking
     {
-        $this->attributes['tgl_pesan'] = date('Y-m-d H:i:s', strtotime($tgl_pesan)); 
+        $this->attributes['tgl_pesan'] = date('Y-m-d H:i:s', strtotime($tgl_pesan));
 
         return $this;
     }
-   
+    public function paket()
+    {
+        $model = new  PaketModel();
+        return $model->find($this->attributes['paket_id']);
+    }
 }

@@ -11,7 +11,7 @@ class Pesanan extends BaseController
 {
     public function index()
     {
-        //
+        return view('User/PesananView');
     }
     public function pembayaran()
     {
@@ -51,28 +51,24 @@ class Pesanan extends BaseController
         $data['tgl'] = $timepilih;
         $_SESSION['paket'] = $this->request->getGet('paket');
         $data['terpilih'] = $terpilih;
-        d($data);
         return view('User/PilihwaktuView', $data);
     }
-    private function waktudiizinkan($datetime) 
+    private function waktudiizinkan($datetime): bool
     {
         $modelboking = new BookingModel();
         $data  = $modelboking
-        ->where('DATE(tgl_pesan)',date("Y-m-d", strtotime($datetime)))
-        ->where('TIME(tgl_booking_start)<=',date("H:i:s", strtotime($datetime)))
-        ->where('TIME(tgl_booking_end) >=', date("H:i:s", strtotime($datetime)))
-        ->countAllResults();
-        return ($data);
+            ->where('DATE(tgl_pesan)', date("Y-m-d", strtotime($datetime)))
+            ->where('TIME(tgl_booking_start)<=', date("H:i:s", strtotime($datetime)))
+            ->where('TIME(tgl_booking_end) >=', date("H:i:s", strtotime($datetime)))
+            ->countAllResults();
+        return ($data > 0);
     }
     private function listwaktu($datetime)
     {
         $data = [];
         for ($i = 0; $i <= 12; $i++) {
             $val = date('Y-m-d H:i:s', strtotime($datetime . "+8 hours +" . ($i * 60) . " minutes"));
-            $data[] = [
-                'time'=>$val,
-                 'bool'=> $this->waktudiizinkan($val),
-            ];
+            $data[$val] =  $this->waktudiizinkan($val);
         }
         return $data;
     }
@@ -96,7 +92,7 @@ class Pesanan extends BaseController
             'paket_id' => $this->request->getPost('paket_id'),
             'users_id' => auth()->getUser()->id,
             'tgl_pesan' => $this->request->getPost('tgl_pesan'),
-            //'status',
+            'status' => 'Menunggu Pembayaran',
             'qty_peserta' => $this->request->getPost('qty_peserta'),
             //'Total_harga',
             //'tgl_booking_start',
@@ -106,6 +102,35 @@ class Pesanan extends BaseController
 
         $model->save($booking);
 
-        return redirect()->to(base_url("booking"))->with('message', 'tersimpan');
+        return redirect()->to(base_url("transaksi"))->with('message', 'tersimpan');
+    }
+
+    public function tabel_transaksi()
+    {
+        $model = new BookingModel();
+        $lists = $model->getDatatables();
+        $data = [];
+        $no = $this->request->getPost('start');
+        foreach ($lists as $list) {
+            $no++;
+            $paket=$list->paket();
+            $row = [];
+            $row[] = date('d F Y H:i', strtotime($list->tgl_pesan));
+            $row[] = "$paket->name $paket->jenis <br> <small> $paket->keterangan <small>";
+            $row[] = $list->status;
+            $row[] = '<a class="btn mt-1 mx-1 btn-light" href="'
+                .base_url("pembayaran/$list->id")
+                .'" role="button"> <i class="fa-solid fa-money-bill"></i></a>'
+                .'<button class="btn mt-1 mx-1 btn-outline-danger" onclick="del(' . $list->id . ')"> <i class="fa-solid fa-trash-can"></i></button>';
+            $data[] = $row;
+        }
+        $output = [
+            'draw' => $this->request->getPost('draw'),
+            'recordsTotal' => $model->countAll(),
+            'recordsFiltered' => $model->countFiltered(),
+            'data' => $data,
+
+        ];
+        echo json_encode($output);
     }
 }

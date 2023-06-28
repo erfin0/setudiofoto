@@ -21,13 +21,13 @@
     <?= $this->renderSection('pageStyles') ?>
 </head>
 
-<body>
+<body  class="d-flex flex-column min-vh-100">
     <!-- navbar Component -->
     <header>
         <?= $this->include('/layout/Component/navbarUser') ?>
     </header>
     <!-- sidebar Component -->
-    <main>
+    <main class="flex-shrink-0">
         <div>
             <?= $this->renderSection('main') ?>
         </div>

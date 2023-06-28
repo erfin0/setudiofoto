@@ -31,7 +31,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function ($routes) {
     $routes->get('', 'Home::index');
-    $routes->get('pembayaran', 'Pesanan::pembayaran',['filter' => 'session']);
+    $routes->get('pembayaran/(:num)', 'Pesanan::pembayaran/$1',['filter' => 'session']);
     $routes->get('booking', 'Pesanan::booking',['filter' => 'session']);
     $routes->post('booking', 'Pesanan::create_booking',['filter' => 'session']);
     $routes->get('pricelist', 'Pricelist::index');
@@ -39,6 +39,8 @@ $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function (
     $routes->get('testimoni', 'Testimoni::index');
     $routes->get('contact', 'Contact::index');
     $routes->get('pilihwaktu', 'Pesanan::pilihwaktu',['filter' => 'session']);
+    $routes->get('transaksi', 'Pesanan::index',['filter' => 'session']);
+    $routes->post('tabel/transaksi', 'Pesanan::tabel_transaksi',['filter' => 'session']);
     $routes->get('portofolio', 'Portofolio::index');
 });
 $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin',  'filter' => 'group:admin' ], static function ($routes) {
