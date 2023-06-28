@@ -61,7 +61,7 @@ class Pesanan extends BaseController
         ->where('DATE(tgl_pesan)',date("Y-m-d", strtotime($datetime)))
         ->where('TIME(tgl_booking_start)<=',date("H:i:s", strtotime($datetime)))
         ->where('TIME(tgl_booking_end) >=', date("H:i:s", strtotime($datetime)))
-        ->findAll();
+        ->countAllResults();
         return ($data);
     }
     private function listwaktu($datetime)
