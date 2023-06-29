@@ -40,6 +40,11 @@ $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function (
     $routes->get('contact', 'Contact::index');
     $routes->get('pilihwaktu', 'Pesanan::pilihwaktu',['filter' => 'session']);
     $routes->get('transaksi', 'Pesanan::index',['filter' => 'session']);
+    $routes->post('transaksi/(:num)/batal', 'Pesanan::batal_transaksi/$1',['filter' => 'session']);
+    $routes->get('transaksi/(:num)/pembayaran', 'Pesanan::pembayaran/$1',['filter' => 'session']);
+    $routes->post('transaksi/(:num)/pembayaran', 'Pesanan::bayar_transaksi/$1',['filter' => 'session']);
+  
+
     $routes->post('tabel/transaksi', 'Pesanan::tabel_transaksi',['filter' => 'session']);
     $routes->get('portofolio', 'Portofolio::index');
 });

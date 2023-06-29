@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Entities\Pembayaran;
+
 use CodeIgniter\Model;
 
 class PembayaranModel extends Model
@@ -10,13 +12,19 @@ class PembayaranModel extends Model
     protected $table            = 'pembayaran';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
+    protected $returnType       = Pembayaran::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'booking_id' ,
+        'nominal'  ,
+        'bukti' ,
+        'jenis'  ,
+
+    ];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

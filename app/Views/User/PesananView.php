@@ -36,7 +36,6 @@
     <?php endif ?>
 
     <div class="my-5 f-el">
-
         <table class="table  table-bordered" id="tabeladmin">
             <thead>
                 <tr>
@@ -44,19 +43,14 @@
                     <th>Daftar booking </th>
                     <th>Status </th>
                     <th>action </th>
+                    <th>testimoni </th>
                 </tr>
             </thead>
             <tbody>
-
             </tbody>
         </table>
-
     </div>
-
-
-
 </div>
-
 <?= $this->endSection() ?>
 
 <?= $this->Section('pageScripts') ?>
@@ -67,7 +61,6 @@
 <script src="<?= base_url() ?>vendors/Responsive-2.4.1/js/responsive.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function() {
-
         table = $('#tabeladmin').DataTable({
             processing: true,
             serverSide: true,
@@ -92,8 +85,7 @@
             ],
             responsive: true,
         });
-
-
     });
+   
 </script>
 <?= $this->endSection() ?>

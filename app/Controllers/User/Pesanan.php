@@ -4,8 +4,11 @@ namespace App\Controllers\User;
 
 use App\Models\BookingModel;
 use App\Models\PaketModel;
+use App\Models\PembayaranModel;
+use App\Entities\Pembayaran;
 use App\Entities\Booking;
 use App\Controllers\BaseController;
+
 
 class Pesanan extends BaseController
 {
@@ -13,9 +16,28 @@ class Pesanan extends BaseController
     {
         return view('User/PesananView');
     }
-    public function pembayaran()
+    public function pembayaran($id)
     {
-        return view('User/PembayaranView');
+        $model = new BookingModel();
+        $pembayaran = $model->where('users_id',auth()->getUser()->id)->find($id);
+        if (!$pembayaran) {
+            return redirect()->to(base_url("transaksi"))->with('message', 'Pembayaran tidak ditemukan');
+        }
+        if ($pembayaran->status == "lunas") {
+            return redirect()->to(base_url("transaksi"))->with('message', 'Pembayaran sudah lunas tidak perlu dibayar');
+        }
+        $data['pesanan'] = $pembayaran;
+      
+        return view('User/PembayaranView', $data);
+    }
+    public function testimoni_new($id)
+    {
+        $model = new BookingModel();
+        $booking = $model->find($id);
+        if (!$booking) {
+            return redirect()->to(base_url("transaksi"))->with('message', 'pesanan tidak ditemukan');
+        }      
+        return view('User/TestimoniAddView');
     }
     public function booking()
     {
@@ -60,6 +82,7 @@ class Pesanan extends BaseController
             ->where('DATE(tgl_pesan)', date("Y-m-d", strtotime($datetime)))
             ->where('TIME(tgl_booking_start)<=', date("H:i:s", strtotime($datetime)))
             ->where('TIME(tgl_booking_end) >=', date("H:i:s", strtotime($datetime)))
+            ->where("status <>'batal'")
             ->countAllResults();
         return ($data > 0);
     }
@@ -113,15 +136,19 @@ class Pesanan extends BaseController
         $no = $this->request->getPost('start');
         foreach ($lists as $list) {
             $no++;
-            $paket=$list->paket();
+            $batal = '<form method="post"  action="' . base_url("transaksi/$list->id/batal") . '">  <button type="submit" class="btn mt-1 mx-1 btn-outline-danger"> <i class="fa-solid fa-ban"></i> Batal</button> </form>';
+            $paket = $list->paket();
             $row = [];
             $row[] = date('d F Y H:i', strtotime($list->tgl_pesan));
             $row[] = "$paket->name $paket->jenis <br> <small> $paket->keterangan <small>";
             $row[] = $list->status;
-            $row[] = '<a class="btn mt-1 mx-1 btn-light" href="'
-                .base_url("pembayaran/$list->id")
-                .'" role="button"> <i class="fa-solid fa-money-bill"></i></a>'
-                .'<button class="btn mt-1 mx-1 btn-outline-danger" onclick="del(' . $list->id . ')"> <i class="fa-solid fa-trash-can"></i></button>';
+            $aksi = (in_array($list->status, ['lunas', 'batal', 'menungu confirmasi'])) ? '' : '<a class="btn mt-1 mx-1 btn-light" href="'
+                . base_url("transaksi/$list->id/pembayaran")
+                . '" role="button"> <i class="fa-solid fa-money-bill"></i> Bayar</a>';
+            $aksi .= ($list->status == 'Menunggu Pembayaran') ? $batal : '';
+
+            $row[] = $aksi;
+            $row[] = 'addtesti';
             $data[] = $row;
         }
         $output = [
@@ -132,5 +159,72 @@ class Pesanan extends BaseController
 
         ];
         echo json_encode($output);
+    }
+
+    public function batal_transaksi($id)
+    {
+        $model = new BookingModel();
+        $pembayaran = $model->where('users_id',auth()->getUser()->id)->find($id);
+        if (!$pembayaran) {
+            return redirect()->to(base_url("transaksi"))->with('message', 'tidak ditemukan atau sudah terhapus');
+        }
+        if ($pembayaran->status == "lunas") {
+            return redirect()->to(base_url("transaksi"))->with('message', 'Pembayaran sudah lunas tidak bisadibatalkan');
+        }
+        $model->update($id, ["status" => "batal"]);
+        return redirect()->to(base_url("transaksi"))->with('message', "pesanan tanggal $pembayaran->tgl_pesan telah dibatalkan");
+    }
+    public function bayar_transaksi($id)
+    {
+        $model = new BookingModel();
+        $pembayaran =$model->where('users_id',auth()->getUser()->id)->find($id);
+        if (!$pembayaran) {
+            return redirect()->to(base_url("transaksi"))->with('message', 'tidak ditemukan atau sudah terhapus');
+        }
+        if ($pembayaran->status == "lunas") {
+            return redirect()->to(base_url("transaksi"))->with('message', 'Pembayaran sudah dilunasi');
+        }
+
+        $rules = [
+            'jenis' => 'in_list[Dp,Lunas]',
+            'image' => 'uploaded[image]'
+                . '|is_image[image]'
+                . '|mime_in[image,image/jpg,image/jpeg,image/gif,image/png,image/webp]'
+                . '|max_size[image,5000]'
+                . '|max_dims[image,6920,6080]',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $modelbayar = new PembayaranModel();
+        $data = [
+            'booking_id' => $id,
+            // 'nominal',
+            'bukti' => $this->simpan_img('image'),
+            'jenis' => $this->request->getPost('jenis'),
+        ];
+        $modelbayar->insert($data);
+
+        $model->update($id, ["status" => "Menunggu konfirmasi"]);
+        return redirect()->to(base_url("transaksi"))->with('message', "pesanan tanggal $pembayaran->tgl_pesan menunggu konfirmasi dari admin");
+    }
+    private function simpan_img($files)
+    {
+        $dataBerkas = $this->request->getFile($files);
+        if (!empty($dataBerkas)) {
+            if ($dataBerkas->getName() !== "") {
+                $path = FCPATH . '/uploads/buktitf/';
+                if (!is_dir($path)) {
+                    mkdir($path, 0777, true);
+                }
+                $fileName = $dataBerkas->getRandomName();
+                $dataBerkas->move($path, $fileName);
+                $data['img'] =  $fileName;
+                return $fileName;
+            }
+        }
+        return "";
     }
 }

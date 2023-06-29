@@ -44,7 +44,7 @@ class BookingModel extends Model
     protected $beforeInsert   = ['insertbokingBefore'];
     protected $afterInsert    = [];
     protected $beforeUpdate   = [];
-    protected $afterUpdate    = ['insertbokingBefore'];
+    protected $afterUpdate    = [];
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
