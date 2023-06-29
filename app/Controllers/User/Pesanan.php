@@ -208,7 +208,7 @@ class Pesanan extends BaseController
         ];
         $modelbayar->insert($data);
 
-        $model->update($id, ["status" => "Menunggu konfirmasi"]);
+        $model->update($id, ["status" => "Menunggu konfirmasi Pembayaran"]);
         return redirect()->to(base_url("transaksi"))->with('message', "pesanan tanggal $pembayaran->tgl_pesan menunggu konfirmasi dari admin");
     }
     private function simpan_img($files)
