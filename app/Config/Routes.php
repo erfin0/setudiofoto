@@ -87,6 +87,7 @@ $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin',  'filter' =>
     $routes->post('tabel/paket', 'Paket::tabel');
     $routes->post('tabel/testimoni', 'Testimoni::tabel');
     $routes->post('tabel/booking', 'Pesanan::tabel_booking');
+    $routes->post('tabel/pembayaran', 'Pesanan::tabel_pembayaran');
 });
 
 service('auth')->routes($routes);

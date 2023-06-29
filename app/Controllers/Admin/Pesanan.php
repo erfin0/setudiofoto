@@ -62,6 +62,50 @@ class Pesanan extends BaseController
         ];
         echo json_encode($output);
     }
+    public function  tabel_pembayaran()
+    {
+        $model = new BookingModel();
+        $lists = $model->getDatatables();
+        $data = [];
+        $no = $this->request->getPost('start');
+        foreach ($lists as $list) {
+            $no++;
+            $row = [];
+            $paket = $list->paket();
+            $row[] =  date('d F Y H:i', strtotime($list->tgl_pesan));
+            $row[] = '<a href="' . $list->PenikikPemesan()->linkwa() . '" target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-whatsapp fa-lg" style="color: #00ff80;"></i>  ' . $list->PenikikPemesan()->userfullname . '</a>';
+            $row[] = "$paket->name $paket->jenis <br> <small> $paket->keterangan <small>";
+            $row[] = date('d F Y H:i', strtotime($list->tgl_booking_start)) . '<br>sampai<br>' . date('d F Y H:i', strtotime($list->tgl_booking_end));
+            $row[] = ($list->qty_peserta == 0) ? '-' : $list->qty_peserta;
+
+            $row[] = number_to_currency($list->Total_harga, 'idr', 'id_ID');
+            // $row[] = number_to_currency($list->terbayar() ?? 0, 'idr', 'id_ID');
+            $row[] = $list->status;
+            $aksi = '<form method="post"   action="' . base_url("admin/booking/$list->id/setuju") . '">'
+                . '<button type="submit" onclick="if (confirm(\'Setuju dengan ini\')) return true; else return false;" class="btn mt-1 mx-1 btn-outline-secondary">'
+                . '<i class="fa-regular fa-circle-check"></i>Approve'
+                . ' </button> '
+                . '</form>';
+            $aksi .= '<form method="post"   action="' . base_url("admin/booking/$list->id/batal") . '">'
+                . '<button type="submit" onclick="if (confirm(\'Yakin akan Menolak\')) return true; else return false;" class="btn mt-1 mx-1 btn-outline-danger">'
+                . '<i class="fa-regular fa-circle-xmark"></i> Tolak'
+                . ' </button> '
+                . '</form>';
+         
+
+            $row[] = ($list->status == 'Menunggu Persetujuan') ? $aksi : '';
+            $data[] = $row;
+        }
+        $output = [
+            'draw' => $this->request->getPost('draw'),
+            'recordsTotal' => $model->countAll(),
+            'recordsFiltered' => $model->countFiltered(),
+            'data' => $data,
+
+        ];
+        echo json_encode($output);
+    }
+   
 
     public function booking_setuju($id){
         $model = new BookingModel();
