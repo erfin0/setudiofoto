@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\BookingModel;
+
 class Pesanan extends BaseController
 {
     public function index()
@@ -18,8 +19,8 @@ class Pesanan extends BaseController
     {
         return view('Admin/PembayaranView');
     }
-    public function tabel_booking(){
-
+    public function tabel_booking()
+    {
         $model = new BookingModel();
         $lists = $model->getDatatables();
         $data = [];
@@ -27,12 +28,29 @@ class Pesanan extends BaseController
         foreach ($lists as $list) {
             $no++;
             $row = [];
-            $row[] = '<img src="' . $list->ximage('mini') . '"  style="height: 50px;">'  . $list->judul;
-            $row[] = $list->keterangan;
-            $row[] = '<a class="btn mt-1 mx-1 btn-light" href="'
-                . base_url("admin/portofolio/$list->id/edit")
-                . '" role="button"> <i class="fa-solid fa-pen-to-square"></i></a>'
-                .'<button class="btn mt-1 mx-1 btn-outline-danger" onclick="del('.$list->id.')"> <i class="fa-solid fa-trash-can"></i></button>';
+            $paket = $list->paket();
+            $row[] =  date('d F Y H:i', strtotime($list->tgl_pesan));
+            $row[] = '<a href="' . $list->PenikikPemesan()->linkwa() . '" target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-whatsapp fa-lg" style="color: #00ff80;"></i>  ' . $list->PenikikPemesan()->userfullname . '</a>';
+            $row[] = "$paket->name $paket->jenis <br> <small> $paket->keterangan <small>";
+            $row[] = date('d F Y H:i', strtotime($list->tgl_booking_start)) . '<br>sampai<br>' . date('d F Y H:i', strtotime($list->tgl_booking_end));
+            $row[] = ($list->qty_peserta == 0) ? '-' : $list->qty_peserta;
+
+            $row[] = number_to_currency($list->Total_harga, 'idr', 'id_ID');
+            // $row[] = number_to_currency($list->terbayar() ?? 0, 'idr', 'id_ID');
+            $row[] = $list->status;
+            $aksi = '<form method="post"   action="' . base_url("admin/booking/$list->id/setuju") . '">'
+                . '<button type="submit" onclick="if (confirm(\'Setuju dengan ini\')) return true; else return false;" class="btn mt-1 mx-1 btn-outline-secondary">'
+                . '<i class="fa-regular fa-circle-check"></i>Approve'
+                . ' </button> '
+                . '</form>';
+            $aksi .= '<form method="post"   action="' . base_url("admin/booking/$list->id/batal") . '">'
+                . '<button type="submit" onclick="if (confirm(\'Yakin akan Menolak\')) return true; else return false;" class="btn mt-1 mx-1 btn-outline-danger">'
+                . '<i class="fa-regular fa-circle-xmark"></i> Tolak'
+                . ' </button> '
+                . '</form>';
+         
+
+            $row[] = ($list->status == 'Menunggu Persetujuan') ? $aksi : '';
             $data[] = $row;
         }
         $output = [
@@ -45,4 +63,30 @@ class Pesanan extends BaseController
         echo json_encode($output);
     }
 
+    public function booking_setuju($id){
+        $model = new BookingModel();
+        $booking =$model->find($id);
+        if (!$booking) {
+            return redirect()->to(base_url("admin/booking"))->with('message', 'tidak ditemukan atau sudah terhapus');
+        }
+        if ($booking->status != "Menunggu Persetujuan") {
+            return redirect()->to(base_url("admin/booking"))->with('message', 'pesanan ini tidak Menunggu Persetujuan');
+        }
+        $model->update($id, ["status" => "Menunggu Pembayaran"]); 
+        return redirect()->to(base_url("admin/booking"))->with('message', "pesanan ".   $booking->PenikikPemesan()->userfullname ." Menunggu Pembayaran");
+    }
+    
+    public function booking_batal($id){
+        $model = new BookingModel();
+        $booking =$model->find($id);
+        if (!$booking) {
+            return redirect()->to(base_url("admin/booking"))->with('message', 'tidak ditemukan atau sudah terhapus');
+        }
+        if ($booking->status != "Menunggu Persetujuan") {
+            return redirect()->to(base_url("admin/booking"))->with('message', 'pesanan ini tidak Menunggu Persetujuan');
+        }
+        $model->update($id, ["status" => "Permintaan ditolak"]); 
+        return redirect()->to(base_url("admin/booking"))->with('message', "pesanan ".   $booking->PenikikPemesan()->userfullname ." ditolak");
+   
+    }
 }

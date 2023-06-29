@@ -82,7 +82,8 @@ class Pesanan extends BaseController
             ->where('DATE(tgl_pesan)', date("Y-m-d", strtotime($datetime)))
             ->where('TIME(tgl_booking_start)<=', date("H:i:s", strtotime($datetime)))
             ->where('TIME(tgl_booking_end) >=', date("H:i:s", strtotime($datetime)))
-            ->where("status <>'batal'")
+          //  ->where("status <>'batal'")
+          ->whereNotIn('status',['Permintaan ditolak','batal'])
             ->countAllResults();
         return ($data > 0);
     }
@@ -115,7 +116,7 @@ class Pesanan extends BaseController
             'paket_id' => $this->request->getPost('paket_id'),
             'users_id' => auth()->getUser()->id,
             'tgl_pesan' => $this->request->getPost('tgl_pesan'),
-            'status' => 'Menunggu Pembayaran',
+            'status' => 'Menunggu Persetujuan',
             'qty_peserta' => $this->request->getPost('qty_peserta'),
             //'Total_harga',
             //'tgl_booking_start',
@@ -136,16 +137,16 @@ class Pesanan extends BaseController
         $no = $this->request->getPost('start');
         foreach ($lists as $list) {
             $no++;
-            $batal = '<form method="post"  action="' . base_url("transaksi/$list->id/batal") . '">  <button type="submit" class="btn mt-1 mx-1 btn-outline-danger"> <i class="fa-solid fa-ban"></i> Batal</button> </form>';
+            $batal = '<form method="post"   action="' . base_url("transaksi/$list->id/batal") . '">  <button type="submit" onclick="if (confirm(\'Yakin akan membatalkan\')) return true; else return false;" class="btn mt-1 mx-1 btn-outline-danger"> <i class="fa-solid fa-ban"></i> Batal</button> </form>';
             $paket = $list->paket();
             $row = [];
             $row[] = date('d F Y H:i', strtotime($list->tgl_pesan));
             $row[] = "$paket->name $paket->jenis <br> <small> $paket->keterangan <small>";
             $row[] = $list->status;
-            $aksi = (in_array($list->status, ['lunas', 'batal', 'menungu confirmasi'])) ? '' : '<a class="btn mt-1 mx-1 btn-light" href="'
+            $aksi = (in_array($list->status, ['Menunggu Pembayaran', 'Bukti pembayaran ditolak'])) ?  '<a class="btn mt-1 mx-1 btn-light" href="'
                 . base_url("transaksi/$list->id/pembayaran")
-                . '" role="button"> <i class="fa-solid fa-money-bill"></i> Bayar</a>';
-            $aksi .= ($list->status == 'Menunggu Pembayaran') ? $batal : '';
+                . '" role="button"> <i class="fa-solid fa-money-bill"></i> Bayar</a>':'';
+            $aksi .= (in_array($list->status, ['Menunggu Persetujuan','Menunggu Pembayaran'])) ? $batal : '';
 
             $row[] = $aksi;
             $row[] = 'addtesti';

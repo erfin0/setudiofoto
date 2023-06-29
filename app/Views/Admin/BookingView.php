@@ -38,12 +38,18 @@
             <table class="table  table-bordered" id="tabeladmin">
                 <thead>
                     <tr>
-                        <th>Judul </th>
-                        <th> Keterangan </th>
-                        <th> # </th>
+                        <th>Tanggal </th>
+                        <th>Pesanan dari</th>
+                        <th>Paket </th> 
+                        <th>Waktu </th>  
+                        <th>Peserta </th>                     
+                        <th>Total Harga</th>
+                        <th>Status</th>
+                        <th>Approve</th>
                     </tr>
                 </thead>
                 <tbody>
+                    
 
                 </tbody>
             </table>
@@ -61,7 +67,7 @@
             processing: true,
             serverSide: true,
             "ajax": {
-                "url": "<?= site_url('/admin/tabel/boking') ?>",
+                "url": "<?= site_url('/admin/tabel/booking') ?>",
                 "type": "POST",
                 "data": function(data) {},
             },
