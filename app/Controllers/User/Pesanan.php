@@ -19,7 +19,7 @@ class Pesanan extends BaseController
     public function pembayaran($id)
     {
         $model = new BookingModel();
-        $pembayaran = $model->where('users_id',auth()->getUser()->id)->find($id);
+        $pembayaran = $model->where('users_id', auth()->getUser()->id)->find($id);
         if (!$pembayaran) {
             return redirect()->to(base_url("transaksi"))->with('message', 'Pembayaran tidak ditemukan');
         }
@@ -27,7 +27,7 @@ class Pesanan extends BaseController
             return redirect()->to(base_url("transaksi"))->with('message', 'Pembayaran sudah lunas tidak perlu dibayar');
         }
         $data['pesanan'] = $pembayaran;
-      
+
         return view('User/PembayaranView', $data);
     }
     public function testimoni_new($id)
@@ -36,7 +36,7 @@ class Pesanan extends BaseController
         $booking = $model->find($id);
         if (!$booking) {
             return redirect()->to(base_url("transaksi"))->with('message', 'pesanan tidak ditemukan');
-        }      
+        }
         return view('User/TestimoniAddView');
     }
     public function booking()
@@ -82,8 +82,8 @@ class Pesanan extends BaseController
             ->where('DATE(tgl_pesan)', date("Y-m-d", strtotime($datetime)))
             ->where('TIME(tgl_booking_start)<=', date("H:i:s", strtotime($datetime)))
             ->where('TIME(tgl_booking_end) >=', date("H:i:s", strtotime($datetime)))
-          //  ->where("status <>'batal'")
-          ->whereNotIn('status',['Permintaan ditolak','batal'])
+            //  ->where("status <>'batal'")
+            ->whereNotIn('status', ['Permintaan ditolak', 'batal'])
             ->countAllResults();
         return ($data > 0);
     }
@@ -145,11 +145,11 @@ class Pesanan extends BaseController
             $row[] = $list->status;
             $aksi = (in_array($list->status, ['Menunggu Pembayaran', 'Bukti pembayaran ditolak'])) ?  '<a class="btn mt-1 mx-1 btn-light" href="'
                 . base_url("transaksi/$list->id/pembayaran")
-                . '" role="button"> <i class="fa-solid fa-money-bill"></i> Bayar</a>':'';
-            $aksi .= (in_array($list->status, ['Menunggu Persetujuan','Menunggu Pembayaran'])) ? $batal : '';
-
+                . '" role="button"> <i class="fa-solid fa-money-bill"></i> Bayar</a>' : '';
+            $aksi .= (in_array($list->status, ['Menunggu Persetujuan', 'Menunggu Pembayaran'])) ? $batal : '';
+            $testi = '<a class="btn btn-light" href="' . base_url("booking/$list->id/testimoni") . '" role="button">Testimoni</a>';
             $row[] = $aksi;
-            $row[] = 'addtesti';
+            $row[] = (in_array($list->status, ["lunas", "selesai"])) ? $testi : '';
             $data[] = $row;
         }
         $output = [
@@ -165,7 +165,7 @@ class Pesanan extends BaseController
     public function batal_transaksi($id)
     {
         $model = new BookingModel();
-        $pembayaran = $model->where('users_id',auth()->getUser()->id)->find($id);
+        $pembayaran = $model->where('users_id', auth()->getUser()->id)->find($id);
         if (!$pembayaran) {
             return redirect()->to(base_url("transaksi"))->with('message', 'tidak ditemukan atau sudah terhapus');
         }
@@ -178,7 +178,7 @@ class Pesanan extends BaseController
     public function bayar_transaksi($id)
     {
         $model = new BookingModel();
-        $pembayaran =$model->where('users_id',auth()->getUser()->id)->find($id);
+        $pembayaran = $model->where('users_id', auth()->getUser()->id)->find($id);
         if (!$pembayaran) {
             return redirect()->to(base_url("transaksi"))->with('message', 'tidak ditemukan atau sudah terhapus');
         }

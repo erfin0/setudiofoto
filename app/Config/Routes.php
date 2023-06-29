@@ -31,24 +31,27 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->group('/',  ['namespace' => '\App\Controllers\User'], static function ($routes) {
     $routes->get('', 'Home::index');
-    $routes->get('pembayaran/(:num)', 'Pesanan::pembayaran/$1',['filter' => 'session']);
-    $routes->get('booking', 'Pesanan::booking',['filter' => 'session']);
-    $routes->post('booking', 'Pesanan::create_booking',['filter' => 'session']);
+    $routes->get('pembayaran/(:num)', 'Pesanan::pembayaran/$1', ['filter' => 'session']);
+    $routes->get('booking', 'Pesanan::booking', ['filter' => 'session']);
+    $routes->post('booking', 'Pesanan::create_booking', ['filter' => 'session']);
+    $routes->get('booking/(:num)/testimoni', 'Testimoni::boking_testimoni_new/$1');
+    $routes->post('booking/(:num)/testimoni', 'Testimoni::boking_testimoni_create/$1');
+
     $routes->get('pricelist', 'Pricelist::index');
     $routes->get('about', 'About::index');
     $routes->get('testimoni', 'Testimoni::index');
     $routes->get('contact', 'Contact::index');
-    $routes->get('pilihwaktu', 'Pesanan::pilihwaktu',['filter' => 'session']);
-    $routes->get('transaksi', 'Pesanan::index',['filter' => 'session']);
-    $routes->post('transaksi/(:num)/batal', 'Pesanan::batal_transaksi/$1',['filter' => 'session']);
-    $routes->get('transaksi/(:num)/pembayaran', 'Pesanan::pembayaran/$1',['filter' => 'session']);
-    $routes->post('transaksi/(:num)/pembayaran', 'Pesanan::bayar_transaksi/$1',['filter' => 'session']);
-  
+    $routes->get('pilihwaktu', 'Pesanan::pilihwaktu', ['filter' => 'session']);
+    $routes->get('transaksi', 'Pesanan::index', ['filter' => 'session']);
+    $routes->post('transaksi/(:num)/batal', 'Pesanan::batal_transaksi/$1', ['filter' => 'session']);
+    $routes->get('transaksi/(:num)/pembayaran', 'Pesanan::pembayaran/$1', ['filter' => 'session']);
+    $routes->post('transaksi/(:num)/pembayaran', 'Pesanan::bayar_transaksi/$1', ['filter' => 'session']);
 
-    $routes->post('tabel/transaksi', 'Pesanan::tabel_transaksi',['filter' => 'session']);
+
+    $routes->post('tabel/transaksi', 'Pesanan::tabel_transaksi', ['filter' => 'session']);
     $routes->get('portofolio', 'Portofolio::index');
 });
-$routes->group('/admin',  ['namespace' => '\App\Controllers\Admin',  'filter' => 'group:admin' ], static function ($routes) {
+$routes->group('/admin',  ['namespace' => '\App\Controllers\Admin',  'filter' => 'group:admin'], static function ($routes) {
     $routes->get('dashboard', 'Dashboard::index');
     $routes->get('admin', 'Admin::index');
     $routes->get('user', 'Admin::user');
@@ -67,7 +70,7 @@ $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin',  'filter' =>
     $routes->get('booking', 'Pesanan::booking');
     $routes->post('booking/(:num)/setuju', 'Pesanan::booking_setuju/$1');
     $routes->post('booking/(:num)/batal', 'Pesanan::booking_batal/$1');
-   
+
     $routes->get('pembayaran', 'Pesanan::pembayaran');
     $routes->get('testimoni', 'Testimoni::index');
     $routes->get('testimoni/(:num)/comment', 'Testimoni::comment/$1');
