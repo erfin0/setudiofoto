@@ -143,7 +143,7 @@ class Pesanan extends BaseController
             $row[] = date('d F Y H:i', strtotime($list->tgl_pesan));
             $row[] = "$paket->name $paket->jenis <br> <small> $paket->keterangan <small>";
             $row[] = $list->status;
-            $aksi = (in_array($list->status, ['Menunggu Pembayaran', 'Bukti pembayaran ditolak'])) ?  '<a class="btn mt-1 mx-1 btn-light" href="'
+            $aksi = (in_array($list->status, ['Menunggu Pembayaran', 'Bukti pembayaran ditolak','Belum lunas'])) ?  '<a class="btn mt-1 mx-1 btn-light" href="'
                 . base_url("transaksi/$list->id/pembayaran")
                 . '" role="button"> <i class="fa-solid fa-money-bill"></i> Bayar</a>' : '';
             $aksi .= (in_array($list->status, ['Menunggu Persetujuan', 'Menunggu Pembayaran'])) ? $batal : '';
@@ -202,7 +202,7 @@ class Pesanan extends BaseController
         $modelbayar = new PembayaranModel();
         $data = [
             'booking_id' => $id,
-            // 'nominal',
+            'nominal'=> $this->request->getPost('nominal'),
             'bukti' => $this->simpan_img('image'),
             'jenis' => $this->request->getPost('jenis'),
         ];

@@ -15,6 +15,7 @@ class Booking extends Entity
     Menunggu Pembayaran
     Menunggu konfirmasi Pembayaran
     Bukti pembayaran ditolak
+    
     batal
     lunas
     selesai   

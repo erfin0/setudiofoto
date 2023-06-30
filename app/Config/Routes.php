@@ -83,8 +83,14 @@ $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin',  'filter' =>
     $routes->get('paket/(:num)/edit', 'Paket::edit/$1');
     $routes->post('paket/(:num)/update', 'Paket::update/$1');
     $routes->delete('paket/(:num)', 'Paket::delete/$1');
+
+    //pembayaran
+    $routes->post('pembayaran/(:num)/setuju', 'Pesanan::pembayarna_setuju/$1');
+    $routes->post('pembayaran/(:num)/tolak', 'Pesanan::pembayarna_tolak/$1');
+    /* 
     $routes->get('pembayaran/(:num)', 'Pesanan::tampilpembayarna/$1');
-    
+    $routes->post('pembayaran', 'Pesanan::savepembayarna'); */
+
     $routes->post('tabel/portofolio', 'Portofolio::tabel');
     $routes->post('tabel/paket', 'Paket::tabel');
     $routes->post('tabel/testimoni', 'Testimoni::tabel');

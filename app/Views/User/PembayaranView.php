@@ -48,7 +48,12 @@
                         <input type="file" onchange="preview('gbr')" class="form-control f-sarabon f-el" name="image" id="upinput" aria-describedby="helpId" required>
                     </div>
                 </div>
-
+                <div class="mb-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="upimg">Rp</span> 
+                        <input type="number"  class="form-control f-sarabon f-el" name="nominal"    required>
+                    </div>
+                </div>
                 <div class="d-grid gap-1 mb-5">
                     <button type="submit" class="btn btn-dark f-sarabon f-me">Konfirmasi Pembayaran</button>
                 </div>

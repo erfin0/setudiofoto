@@ -41,10 +41,10 @@
                         <th>Tanggal </th>
                         <th>Pesanan dari</th>
                         <th>Paket </th>
-                        <th>Waktu </th>
                         <th>Total Harga</th>
-                        <th>Sudah dibayar</th>
                         <th>Status</th>
+                        <th>Bukti</th>
+                        <th>Nominal</th>
                         <th>Approve</th>
                     </tr>
                 </thead>
