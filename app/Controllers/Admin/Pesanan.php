@@ -131,7 +131,7 @@ class Pesanan extends BaseController
     public function tampilpembayarna($id)
     {
         $pembayaranmodel = new PembayaranModel();
-        $data['pembayaran'] = $pembayaranmodel->where('booking_id', $id);
+        $data['pembayaran'] = $pembayaranmodel->where(['booking_id'=>$id,'setuju'=>null])->findAll();
         return view('Admin/bayarView', $data);
     }
 }

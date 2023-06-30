@@ -20,7 +20,7 @@ class PembayaranModel extends Model
         'nominal'  ,
         'bukti' ,
         'jenis'  ,
-
+        'setuju'
     ];
 
     // Dates
