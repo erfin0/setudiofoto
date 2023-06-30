@@ -8,8 +8,9 @@
 <div class="card" style="height: 9rem;">
     <div class="card-body">
         <h5 class="card-title">
-            <i class="fa-solid fa-calendar-day"></i> Daftar Booking
+            <i class="fa-solid fa-calendar-day"></i> Tambah Booking
         </h5>
+        <a type="button" href="<?= base_url('admin/booking/new') ?>" class="btn btn-dark mt-5 float-end"><i class="fa-solid fa-calendar-days"></i> Add booking</a>
 
     </div>
 </div>
