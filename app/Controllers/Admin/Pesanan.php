@@ -16,6 +16,10 @@ class Pesanan extends BaseController
     {
         return view('Admin/BookingView');
     }
+    public function booking_new()
+    {
+        return view('Admin/BookingNewView');
+    }
     public function pembayaran()
     {
         return view('Admin/PembayaranView');
@@ -100,8 +104,8 @@ class Pesanan extends BaseController
                 . '<i class="fa-regular fa-circle-xmark"></i> Tolak'
                 . ' </button> '
                 . '</form>';
-
-            $row[] = ($list->status == 'Menunggu konfirmasi Pembayaran') ? $aksi : '';
+                $row[] = ($listx->setuju== null) ? $aksi : '';
+          //  $row[] = ($list->status == 'Menunggu konfirmasi Pembayaran') ? $aksi : '';
             $data[] = $row;
         }
         $output = [
