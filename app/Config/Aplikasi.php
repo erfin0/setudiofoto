@@ -102,4 +102,20 @@ class Aplikasi extends BaseConfig
        
        
     ];
+
+
+    public array $chat=[
+        [
+            'tanya'=> 'berap1a?',
+            'jawap' =>'karena1'
+        ],
+        [
+            'tanya' => 'berapa2?',
+            'jawap' => 'karena2'
+        ],
+        [
+            'tanya' => 'berapa3?',
+            'jawap' => 'karena3'
+        ]
+    ];
 }
