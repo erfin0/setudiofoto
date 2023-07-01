@@ -1,12 +1,25 @@
 <div class="ngambang">
 
   <div class="collapse" id="collapseExample">
-    <div class="card card-body" style="width: 25rem;">
-      <div id="messagesh">
+    <div class="card" style="width: 25rem;">
+      <div class="card-header">
+        <?php $contact = setting()->get('aplikasi.contact') ?>
+
+        <?= isset($contact['mail']) ? '<a class="btn p-0 m-1  " href="mailto:' . $contact['mail'] . '" role="button"> <i class="zoom fa-solid fa-envelope  fa-lg"></i></a>' : '' ?>
+
+        <!-- wa -->
+        <?= isset($contact['wa']) ? '<a class="btn p-0 m-1  " href="https://wa.me/' . $contact['wa'] . '" role="button"><i class="zoom fa-brands fa-whatsapp fa-bounce fa-lg" style="color: #008000;"></i></a>' : '' ?>
 
       </div>
-      <div class="row" id="messages">
+      <div class="card-body">
 
+
+        <div id="messagesh">
+
+        </div>
+        <div class="row mb-3" id="messages" >
+
+        </div>
       </div>
     </div>
   </div>
@@ -18,20 +31,20 @@
 
 
 <script>
-  const array =JSON.parse('<?=json_encode(setting('Aplikasi.chat'))?>');
- /*   [{
-      'tanya': 'berap1a?',
-      'jawap': 'karena1'
-    },
-    {
-      'tanya': 'berapa2?',
-      'jawap': 'karena2'
-    },
-    {
-      'tanya': 'berapa3?',
-      'jawap': 'karena3'
-    }
-  ]; */
+  const array = JSON.parse('<?= json_encode(setting('Aplikasi.chat')) ?>');
+  /*   [{
+       'tanya': 'berap1a?',
+       'jawap': 'karena1'
+     },
+     {
+       'tanya': 'berapa2?',
+       'jawap': 'karena2'
+     },
+     {
+       'tanya': 'berapa3?',
+       'jawap': 'karena3'
+     }
+   ]; */
   tampil();
 
   function tampil() {
@@ -42,8 +55,8 @@
   }
 
   function balas(index) {
-    g = '<div class="col-12">  <span class="badge float-end text-bg-primary">' + array[index].tanya + '</span></div>';
-    g += '<div class="col-12"><span class="">🦸 ' + array[index].jawap + '</span></div>';
+    g = '<div class="col-12">  <button class="btn btn-outline-secondary float-end my-2">' + array[index].tanya + '</button></div>';
+    g += '<div class="col-3" ><h1>🦸</h1> </div><div class="col-7"><p class=""> ' + array[index].jawap + '</p></div>';
     //   g='<button type="button" onclick="balas('+i+')" class="btn m-1 btn-primary btn-sm">'+array[i].tanya+'</button>';
     $("#messages").append(g);
   }
