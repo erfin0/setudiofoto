@@ -28,7 +28,6 @@ class Testimoni extends BaseController
     {
         $rules = [
             'comment' => 'required',
-
         ];
         $model = new TestimoniModel();
         $testimoni =  $model->find($testimoniId);
@@ -42,7 +41,7 @@ class Testimoni extends BaseController
         $data =
             [
                 'commen' => $this->request->getPost('comment'),
-               // 'users_id' => 1, // auth()->getUser()->id,
+               'users_id' =>   auth()->getUser()->id,
                 'testimoni_id' => $testimoniId
             ];
 
@@ -61,7 +60,7 @@ class Testimoni extends BaseController
             $no++;
             $comm = $list->getcommnt();
             $row = [];
-            $row[] = '<img src="' . $list->ximage('mini') . '"  style="height: 50px;">'  . $list->getauthorname ?? '';
+            $row[] = '<img src="' . $list->ximage('mini') . '"  style="height: 50px;"> <br>'  . $list->getauthorname() ?? '';
             $row[] = $list->keterangan;
             $row[] = $comm;
             $row[] = '<a class="btn mt-1 mx-1 btn-light" href="'

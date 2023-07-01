@@ -17,7 +17,7 @@ class Testimoni extends Entity
     }
     public function  ximage($jenis = null)
     {
-        $img = $this->attributes['image'] ?? '';
+        $img = $this->attributes['gambar'] ?? '';
         switch ($jenis) {
             case 'mini':
                 return base_url("uploads/testimoni/thumbnail{$img}");
@@ -26,7 +26,7 @@ class Testimoni extends Entity
                 return base_url("uploads/testimoni/{$img}");
                 break;
             default:
-                return $this->attributes['image'];
+                return $this->attributes['gambar'];
                 break;
         }
     }
@@ -49,6 +49,7 @@ class Testimoni extends Entity
 
     private function getusername($id)
     {
+        
         $users = auth()->getProvider();
         $penulis = $users->find($id);
         if ($penulis) {

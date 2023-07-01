@@ -57,7 +57,7 @@ login admin:
 user = admin
 password = saya tidaktau
 
-jika inggin upload ke hosting bisa akses di `https://www.google.com/search?q=upload+codeigniter+4+ke+hosting`
+jika inggin upload ke hosting bisa akses di [google](https://www.google.com/search?q=upload+codeigniter+4+ke+hosting)
 
 
 ## Important Change with index.php

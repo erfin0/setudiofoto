@@ -8,9 +8,9 @@
 <div class="card" style="height: 9rem;">
     <div class="card-body">
         <h5 class="card-title">
-        <i class="fa-regular fa-credit-card"></i> Daftar pembayaran
+            <i class="fa-regular fa-credit-card"></i> Daftar pembayaran
         </h5>
-       
+
     </div>
 </div>
 <div class="container-fluid px-4 mt-3">
@@ -38,9 +38,14 @@
             <table class="table  table-bordered" id="tabeladmin">
                 <thead>
                     <tr>
-                        <th>Judul </th>
-                        <th> Keterangan </th>
-                        <th> # </th>
+                        <th>Tanggal </th>
+                        <th>Pesanan dari</th>
+                        <th>Paket </th>
+                        <th>Total Harga</th>
+                        <th>Status</th>
+                        <th>Bukti</th>
+                        <th>Nominal</th>
+                        <th>Approve</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,6 +56,28 @@
 
     </div>
 </div>
+
+
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="modalbody" class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <?= $this->endSection() ?>
 
 <?= $this->Section('pageScripts') ?>
@@ -87,16 +114,12 @@
 
     });
 
-    function del(id) {
-        if (confirm('Are you sure delete this data?')) {
-            $.ajax({
-                url: '<?= base_url("admin/pembayaran/") ?>' + id,
-                type: 'DELETE',
-                success: function(result) {
-                    table.ajax.reload(null, false);
-                }
-            });
-        }
+    function tampilbukti(id) {
+        $("#modalbody").html('');
+        $.get("pembayaran/"+id, function(data) {
+            $("#modalbody").html(data);            
+        });       
+        $('#staticBackdrop').modal('show');
     }
 </script>
 
