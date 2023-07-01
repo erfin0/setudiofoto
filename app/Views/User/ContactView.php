@@ -24,7 +24,7 @@
                     <?= isset($contact['mail'])?'<a class="btn p-0 m-1  " href="mailto:'.$contact['mail'].'" role="button"> <i class="zoom fa-solid fa-envelope  fa-lg"></i></a>':'' ?>
                       
                         <!-- wa -->
-                        <?= isset($contact['wa'])?'<a class="btn p-0 m-1  " href="https://wa.me/'.$contact['wa'].'" role="button"><i class="zoom fa-brands fa-whatsapp  fa-lg"></i></a>':'' ?>
+                        <?= isset($contact['wa'])?'<a class="btn p-0 m-1  " href="'.linkwa($contact['wa']).'" role="button"><i class="zoom fa-brands fa-whatsapp  fa-lg"></i></a>':'' ?>
 
                         <!-- Facebook -->
                          <?= isset($contact['facebook'])?'<a class="btn p-0 m-1  " href="'.$contact['facebook'].'" role="button"><i class="zoom fa-brands fa-facebook fa-lg"></i></i></a>':'' ?>

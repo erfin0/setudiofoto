@@ -8,7 +8,7 @@
         <?= isset($contact['mail']) ? '<a class="btn p-0 m-1  " href="mailto:' . $contact['mail'] . '" role="button"> <i class="zoom fa-solid fa-envelope  fa-lg"></i></a>' : '' ?>
 
         <!-- wa -->
-        <?= isset($contact['wa']) ? '<a class="btn p-0 m-1  " href="https://wa.me/' . $contact['wa'] . '" role="button"><i class="zoom fa-brands fa-whatsapp fa-bounce fa-lg" style="color: #008000;"></i></a>' : '' ?>
+        <?= isset($contact['wa']) ? '<a  target="_blank" class="btn p-0 m-1  " href="' . linkwa($contact['wa']). '" role="button"><i class="zoom fa-brands fa-whatsapp fa-bounce fa-lg" style="color: #008000;"></i></a>' : '' ?>
 
       </div>
       <div class="card-body">
