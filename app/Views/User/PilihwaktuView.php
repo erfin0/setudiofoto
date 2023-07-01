@@ -42,12 +42,12 @@
             $a = true;
             while ($con <= 8) {
                 $date = date('Y-m-d', strtotime('+' . $con . ' days', strtotime($today))); ?>
+
                 <a href="<?= base_url('/pilihwaktu?paket=') . $terpilih->id . '&tgl=' . $date ?>" class="btn p-3 zoom rounded-2 border col text-center <?= ($tgl == $date) ? 'border border-danger' : '' ?>" style="background-color: var(<?= $a ? '--bs-secondary-bg' : '--bs-primary-bg-subtle' ?>);">
                     <?= date('d M', strtotime($date)) ?> <br>
                     <?= date('D', strtotime($date)) ?>
 
                 </a>
-
             <?php $a = !$a;
                 $con++;
             }
@@ -55,11 +55,13 @@
         </div>
     </div>
 
+
     <div class="container text-center ">
         <div class="row justify-content-evenly row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             <?php foreach($waktuterboking as $key =>$val){?>
                 <a href="<?= base_url("/booking?tgl=".date('Y-m-d', strtotime($key))."&time=".date('H:i', strtotime($key)) )?>" class="btn col px-3 m-3 btn-secondary <?=($val)?'disabled':''?>"   role="button"><?= date('H:i', strtotime($key))?></a>
             <?php } ?>
+
         </div>
        
     </div>

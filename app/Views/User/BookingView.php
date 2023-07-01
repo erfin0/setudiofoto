@@ -32,6 +32,7 @@
     <div class="card bg-secondary-subtle">
         <div class=" card-body p-5">
 
+
             <form action="<?= base_url("booking") ?>" method="post">
                 <input name='paket_id' type="hidden" value="<?= $_SESSION['paket'] ?>">
                 <input type="hidden" name="tgl_pesan" value=<?= date("Y-m-d\TH:i:s", strtotime($tgl . ',' . $time)); ?> id="">
@@ -62,6 +63,7 @@
                     <div class="d-grid gap-1 mb-5">
                         <button type="submit" class="btn btn-dark  f-me ">Request Booking</button>
                     </div>
+
             </form>
         </div>
     </div>

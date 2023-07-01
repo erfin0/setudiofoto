@@ -42,6 +42,7 @@ class Pesanan extends BaseController
     public function booking()
     {
         $data['tgl'] = $this->request->getGet('tgl');
+
         $data['time'] = $this->request->getGet('time');
         if ($data['tgl'] == null ||  $data['time'] == null) {
             return  redirect()->to('/pilihwaktu');
@@ -69,8 +70,10 @@ class Pesanan extends BaseController
             }
         }
 
+
         $data['waktuterboking'] = $this->listwaktu($timepilih);
         $data['tgl'] = $timepilih;
+
         $_SESSION['paket'] = $this->request->getGet('paket');
         $data['terpilih'] = $terpilih;
         return view('User/PilihwaktuView', $data);
