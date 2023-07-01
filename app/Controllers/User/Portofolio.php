@@ -8,8 +8,9 @@ class Portofolio extends BaseController
 {
     public function index()
     {
-        $s= new PortofolioModel();
-        $data['poto']=[];// $s->getrandom(10) ;
+        $potomodel= new  PortofolioModel();     
+        $data['poto']= $potomodel->getrandom(6);
+        $data['potohider']= $potomodel->getrandom(6);
         return view('User/portofolioView',$data);
     }
 }

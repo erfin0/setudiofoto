@@ -73,7 +73,7 @@
                              foreach ($testimoni as $testi) { ?>
                             <div class="owl-item">
                                 <div class="card  border border-0 bg-transparent" style="width: 18rem;">
-                                    <img src="<?= $testi->ximage('mini') ?>" class="card-img-top" alt="" style="object-fit: cover;width: 100%;height: 100%;max-height: 14rem;">
+                                    <img src="<?= $testi->ximage('max') ?>" class="card-img-top" alt="" style="object-fit: cover;width: 100%;height: 100%;max-height: 14rem;">
                                     <div class="card-body text-center ">
                                         <p class=" sarif card-text"><?= $testi->keterangan?></p>
                                     </div>
