@@ -20,7 +20,7 @@
     <script src="<?= base_url() ?>vendors/owl/js/owl.carousel.min.js"></script>
     <?= $this->renderSection('pageStyles') ?>
 </head>
-
+<?php helper('imgd') ?>
 <body  class="d-flex flex-column min-vh-100">
     <!-- navbar Component -->
     <header>

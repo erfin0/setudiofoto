@@ -5,6 +5,8 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\BookingModel;
 use App\Models\PembayaranModel;
+use App\Models\PaketModel;
+use App\Entities\Booking;
 
 class Pesanan extends BaseController
 {
@@ -12,14 +14,50 @@ class Pesanan extends BaseController
     {
         //
     }
+    
     public function booking()
     {
         return view('Admin/BookingView');
     }
     public function booking_new()
     {
-        return view('Admin/BookingNewView');
+        $paketmodel =new PaketModel();
+        $data['paket']=$paketmodel->findAll();
+        d($data);
+        return view('Admin/BookingNewView',$data);
     }
+    public function create()
+    {
+        $rules = [
+            'qty_peserta' => 'permit_empty|numeric',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $booking = new Booking();
+        $model = new BookingModel();
+
+        $data = [
+            'paket_id' => $this->request->getPost('paket_id'),
+            'users_id' =>  $this->request->getPost('users_id'),
+            'tgl_pesan' => $this->request->getPost('tgl_pesan'),
+            'status' => 'Menunggu Persetujuan',
+            'qty_peserta' => $this->request->getPost('qty_peserta'),
+            //'Total_harga',
+            //'tgl_booking_start',
+            //'tgl_booking_end',
+        ];
+        $booking->fill($data);
+
+        $model->save($booking);
+
+        return redirect()->to(base_url("admin/booking"))->with('message', 'tersimpan');
+    }
+
+
+
     public function pembayaran()
     {
         return view('Admin/PembayaranView');

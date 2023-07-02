@@ -200,7 +200,7 @@ class Admin extends BaseController
             }
         }
 
-       
+
         $identity = $user->getEmailIdentity();
         $identity->secret = $this->request->getPost('email');
         $password = $this->request->getPost('password');
@@ -215,5 +215,30 @@ class Admin extends BaseController
         $user->syncGroups(...($this->request->getPost('groups') ?? []));
         // }
         return redirect()->to($user->adminLink('edit'))->with('message', 'tersimpan');
+    }
+    public function tabel()
+    {
+        helper('number');
+        $model = new UserModel();
+        $lists = $model->getDatatables();
+        $data = [];
+        $no = $this->request->getPost('start');
+        foreach ($lists as $list) {
+            $no++;
+            $row = [];
+            $row[] = $list->email;
+            $row[] = $list->userfullname;
+            $row[] = $list->whatsapp;
+            $row[] = $list->address;
+            $row[] = '<button data-userfullname="'.$list->userfullname.'" data-email="'.$list->email.'" data-id="'.$list->id.'" data-wa="'.$list->whatsapp.'" onclick="terpilih(this)" class="btn btn-outline-dark"><i class="fa-solid fa-check"></i></button>';
+            $data[] = $row;
+        }
+        $output = [
+            'draw' => $this->request->getPost('draw'),
+            'recordsTotal' => $model->countAll(),
+            'recordsFiltered' => $model->countFiltered(),
+            'data' => $data,
+        ];
+        echo json_encode($output);
     }
 }

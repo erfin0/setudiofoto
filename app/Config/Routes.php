@@ -69,6 +69,7 @@ $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin',  'filter' =>
     $routes->get('portofolio/(:num)/edit', 'Portofolio::edit/$1');
 
     $routes->get('booking', 'Pesanan::booking');
+    $routes->post('booking', 'Pesanan::create');
     $routes->post('booking/(:num)/setuju', 'Pesanan::booking_setuju/$1');
     $routes->post('booking/(:num)/batal', 'Pesanan::booking_batal/$1');
     $routes->get('booking/new', 'Pesanan::booking_new');
@@ -97,6 +98,7 @@ $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin',  'filter' =>
     $routes->post('tabel/testimoni', 'Testimoni::tabel');
     $routes->post('tabel/booking', 'Pesanan::tabel_booking');
     $routes->post('tabel/pembayaran', 'Pesanan::tabel_pembayaran');
+    $routes->post('tabel/users', 'Admin::tabel');
 });
 
 service('auth')->routes($routes);
