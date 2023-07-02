@@ -20,7 +20,7 @@ class Admin extends BaseController
     public function user()
     {
         $userModel = new UserFilter;
-        $data['admin'] = $userModel->filter(['role' => ['user']])->findAll();
+        $data['admin'] = $userModel->ggrub('user')->findAll();
         return view('Admin/UserView', $data);
     }
     public function new()
