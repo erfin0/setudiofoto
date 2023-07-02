@@ -59,6 +59,7 @@ $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin',  'filter' =>
     $routes->get('admin/new', 'Admin::new');
     $routes->get('admin/(:num)/edit', 'Admin::edit/$1');
     $routes->post('admin', 'Admin::create');
+    $routes->post('user', 'Admin::user_create');
     $routes->post('admin/(:num)/update', 'Admin::update/$1');
 
     $routes->get('portofolio', 'Portofolio::index');
@@ -92,6 +93,9 @@ $routes->group('/admin',  ['namespace' => '\App\Controllers\Admin',  'filter' =>
     /* 
     $routes->get('pembayaran/(:num)', 'Pesanan::tampilpembayarna/$1');
     $routes->post('pembayaran', 'Pesanan::savepembayarna'); */
+   
+    $routes->get('booking/(:num)/pembayaran', 'Pesanan::booking_pembayaran/$1');
+    $routes->post('booking/(:num)/pembayaran', 'Pesanan::booking_pembayaran_pos/$1');
 
     $routes->post('tabel/portofolio', 'Portofolio::tabel');
     $routes->post('tabel/paket', 'Paket::tabel');

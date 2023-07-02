@@ -26,6 +26,9 @@ class Pesanan extends BaseController
         if ($pembayaran->status == "lunas") {
             return redirect()->to(base_url("transaksi"))->with('message', 'Pembayaran sudah lunas tidak perlu dibayar');
         }
+        if ($pembayaran->status == "batal") {
+            return redirect()->to(base_url("transaksi"))->with('message', 'Pembayaran sudah dibatalkan');
+        }
         $data['pesanan'] = $pembayaran;
 
         return view('User/PembayaranView', $data);
@@ -112,9 +115,14 @@ class Pesanan extends BaseController
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
+       
 
         $booking = new Booking();
         $model = new BookingModel();
+
+        if (! $model->waktudiizinkan($this->request->getPost('tgl_pesan'))){
+            return redirect()->back()->withInput()->with('errors', ['tgl_pesan'=>"tanggal ini sudah terpakai"]);
+        }
 
         $data = [
             'paket_id' => $this->request->getPost('paket_id'),

@@ -46,6 +46,7 @@
                         <th>Peserta </th>                     
                         <th>Total Harga</th>
                         <th>Status</th>
+                        <th>keterangan</th>
                         <th>Approve</th>
                     </tr>
                 </thead>

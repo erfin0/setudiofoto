@@ -6,9 +6,11 @@ use App\Controllers\BaseController;
 use App\Models\UserFilter;
 use App\Models\UserModel;
 use App\Entities\User;
+use CodeIgniter\API\ResponseTrait;
 
 class Admin extends BaseController
 {
+    use ResponseTrait;
     public function index()
     {
         $userModel = new UserFilter;
@@ -140,6 +142,75 @@ class Admin extends BaseController
         // }
         return redirect()->to($user->adminLink('edit'))->with('message', 'tersimpan');
     }
+    public function user_create()
+    {
+       
+        $users = new UserModel();
+        /**
+         * @var User
+         */
+      
+        $user =  new User();
+
+        $rules = [
+            'userfullname' => [
+                'rules' => [
+                    'required',
+                    'max_length[255]',
+                    'min_length[3]',
+                ],
+            ],
+            'whatsapp' => [
+                'rules' => [
+                    'required',
+                    'regex_match[/^(\+62|62)?[\s-]?0?8[1-9]{1}\d{1}[\s-]?\d{4}[\s-]?\d{2,5}$/]',
+                ],
+            ],
+
+            /* 'username' => [
+                'label' => 'Auth.username',
+                'rules' => [
+                    'required',
+                    'max_length[30]',
+                    'min_length[3]',
+                    'regex_match[/\A[a-zA-Z0-9\.]+\z/]',
+                    'is_unique[users.username]',
+                ],
+            ], */
+            'email' => [
+                'label' => 'Auth.email',
+                'rules' => [
+                    'required',
+                    'max_length[254]',
+                    'valid_email',
+                    'is_unique[auth_identities.secret]',
+                ],
+
+            ],
+
+
+        ];
+
+        if (!$this->validate($rules)) {
+            return $this->fail($this->validator->getErrors());
+        }
+        $data = [
+            'userfullname' => $this->request->getPost('userfullname'),
+            'whatsapp' =>     $this->request->getPost('whatsapp'),
+            'username' => 'user' . uniqid(),
+            'email' =>  $this->request->getPost('email'),
+        ];
+        $user->fill($data);
+        $id = $users->insert($user);
+        $dibuat = $users->find($id);
+        return $this->respondCreated([
+            'id' => $dibuat->id,
+            'userfullname' => $dibuat->userfullname,
+            'whatsapp' =>     $dibuat->whatsapp,
+            'username' => $dibuat->username,
+            'email' =>  $dibuat->email,
+        ]);
+    }
     public function update($userId = null)
     {
         // return redirect()->back()->withInput()->with('errors',json_encode( $this->request->getPost()));
@@ -230,7 +301,7 @@ class Admin extends BaseController
             $row[] = $list->userfullname;
             $row[] = $list->whatsapp;
             $row[] = $list->address;
-            $row[] = '<button data-userfullname="'.$list->userfullname.'" data-email="'.$list->email.'" data-id="'.$list->id.'" data-wa="'.$list->whatsapp.'" onclick="terpilih(this)" class="btn btn-outline-dark"><i class="fa-solid fa-check"></i></button>';
+            $row[] = '<button data-userfullname="' . $list->userfullname . '" data-email="' . $list->email . '" data-id="' . $list->id . '" data-wa="' . $list->whatsapp . '" onclick="terpilih(this)" class="btn btn-outline-dark"><i class="fa-solid fa-check"></i></button>';
             $data[] = $row;
         }
         $output = [
