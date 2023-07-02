@@ -46,7 +46,7 @@ class Pesanan extends BaseController
             'paket_id' => $this->request->getPost('paket_id'),
             'users_id' =>  $this->request->getPost('users_id'),
             'tgl_pesan' => $this->request->getPost('tgl_pesan'),
-            'status' => 'Menunggu Persetujuan',
+            'status' => 'Menunggu Pembayaran', //'Menunggu Persetujuan',
             'qty_peserta' => $this->request->getPost('qty_peserta'),
             //'Total_harga',
             //'tgl_booking_start',
@@ -168,7 +168,7 @@ class Pesanan extends BaseController
         $bayar = $pembayaranmodel->find($id);
 
         $pembayaranmodel->update($id, ["setuju" => "disetujui"]);
-        $adacode=$model->find($id) ;
+        $adacode=$model->find($bayar->booking_id) ;
         $datar["status"]= ($bayar->jenis == 'Dp') ? "Belum lunas" : "lunas";
         if ($adacode->code==''){
             $datar["code"] = 'odr-' . uniqid();

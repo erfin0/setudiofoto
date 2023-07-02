@@ -128,7 +128,7 @@ class Pesanan extends BaseController
             'paket_id' => $this->request->getPost('paket_id'),
             'users_id' => auth()->getUser()->id,
             'tgl_pesan' => $this->request->getPost('tgl_pesan'),
-            'status' => 'Menunggu Persetujuan',
+            'status' => 'Menunggu Pembayaran', 
             'qty_peserta' => $this->request->getPost('qty_peserta'),
             //'Total_harga',
             //'tgl_booking_start',
