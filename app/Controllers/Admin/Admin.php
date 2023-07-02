@@ -19,9 +19,10 @@ class Admin extends BaseController
     }
     public function user()
     {
-        $userModel = new UserFilter;
+       /*  $userModel = new UserFilter;
         $data['admin'] = $userModel->ggrub('user')->findAll();
-        return view('Admin/UserView', $data);
+        d($data); */
+        return view('Admin/UserView');
     }
     public function new()
     {

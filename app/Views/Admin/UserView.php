@@ -25,25 +25,11 @@
                         <th> username </th>
                         <th> whatsapp </th>
                         <th> address </th>
-                        <th> last active</th>
+                        <th> #</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    if (isset($admin)) {
-                        foreach ($admin as $list) { ?>
-                            <tr>
-                                <td><?= $list->email ?? '' ?></td>
-                                <td><?= $list->username ?? '' ?></td>
-                                <td><?= $list->whatsapp ?? '' ?></td>
-                                <td><?= $list->address ?? '' ?></td>
-                                <td><?= $list->last_active ?? '' ?></td>
-                            </tr>
-
-                    <?php }
-                    } ?>
-
 
                 </tbody>
             </table>
@@ -56,8 +42,42 @@
 <?= $this->Section('pageScripts') ?>
 <script>
     $(document).ready(function() {
-        $('#tabeladmin').DataTable();
+        // $('#tabeladmin').DataTable();
+        table = $('#tabeladmin').DataTable({
+            processing: true,
+            serverSide: true,
+            "ajax": {
+                "url": "<?= site_url('/admin/tabel/users') ?>",
+                "type": "POST",
+                "data": function(data) {
+                    data.user='user';
+                },
+            },
+            /*  "columnDefs": [{
+                     "targets": [0],
+                     "width": "4%"
+                 }, {
+                     "targets": [2],
+                     "width": "10%",
+                     orderable: false,
+                 },
+                 {
+                     responsivePriority: 1,
+                     targets: 2
+                 },
+                 {
+                     responsivePriority: 0,
+                     targets: 0
+                 },
+             ], */
+            responsive: true,
+        });
     });
+
+    function terpilih(e) {
+        ury = "<?= base_url('admin/admin/') ?>" + $(e).attr('data-id') + "/edit";
+        window.location.href = ury;
+    }
 </script>
 
 <?= $this->endSection() ?>

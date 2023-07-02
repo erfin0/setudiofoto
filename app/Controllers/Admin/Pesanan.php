@@ -23,8 +23,7 @@ class Pesanan extends BaseController
     {
         $paketmodel = new PaketModel();
         $data['paket'] = $paketmodel->findAll();
-        d($data);
-        return view('Admin/BookingNewView', $data);
+              return view('Admin/BookingNewView', $data);
     }
     public function create()
     {

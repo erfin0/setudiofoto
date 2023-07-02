@@ -57,6 +57,14 @@ class UserModel extends ShieldUserModel
             $order = $this->order;
             $this->orderBy(key($order), $order[key($order)]);
         }
+        if (isset($_POST['user'])) {
+            if ($_POST['user']=='user'){
+                $this->join('auth_groups_users agu', 'agu.user_id = users.id')
+                ->where('agu.group', 'user');
+            } ;
+           
+        }
+      
     }
 
     public function getDatatables()
