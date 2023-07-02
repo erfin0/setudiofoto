@@ -59,7 +59,7 @@
     <div class="container text-center ">
         <div class="row justify-content-evenly row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             <?php foreach($waktuterboking as $key =>$val){?>
-                <a href="<?= base_url("/booking?tgl=".date('Y-m-d', strtotime($key))."&time=".date('H:i', strtotime($key)) )?>" class="btn col px-3 m-3 btn-secondary <?=($val)?'disabled':''?>"   role="button"><?= date('H:i', strtotime($key))?></a>
+                <a href="<?= base_url("/booking?tgl=".date('Y-m-d', strtotime($key))."&time=".date('H:i', strtotime($key)) )?>" class="btn col px-3 m-3 btn-secondary <?=(!$val)?'disabled':''?>"   role="button"><?= date('H:i', strtotime($key))?></a>
             <?php } ?>
 
         </div>

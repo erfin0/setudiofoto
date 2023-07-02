@@ -78,7 +78,7 @@ class Pesanan extends BaseController
         $data['terpilih'] = $terpilih;
         return view('User/PilihwaktuView', $data);
     }
-    private function waktudiizinkan($datetime): bool
+   /*  private function waktudiizinkan($datetime): bool
     {
         $modelboking = new BookingModel();
         $data  = $modelboking
@@ -89,13 +89,14 @@ class Pesanan extends BaseController
             ->whereNotIn('status', ['Permintaan ditolak', 'batal'])
             ->countAllResults();
         return ($data > 0);
-    }
+    } */
     private function listwaktu($datetime)
     {
+        $model = new BookingModel();
         $data = [];
         for ($i = 0; $i <= 12; $i++) {
             $val = date('Y-m-d H:i:s', strtotime($datetime . "+8 hours +" . ($i * 60) . " minutes"));
-            $data[$val] =  $this->waktudiizinkan($val);
+            $data[$val] =  $model->waktudiizinkan($val);
         }
         return $data;
     }
