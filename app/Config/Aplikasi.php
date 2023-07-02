@@ -122,4 +122,5 @@ class Aplikasi extends BaseConfig
             'jawap' =>   'Boleh, tetapi asal tidak melebihi batas waktu paket!',
         ],
     ];
+    public string $bataspesanan="6 months";
 }

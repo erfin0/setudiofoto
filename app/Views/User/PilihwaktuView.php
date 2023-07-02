@@ -32,18 +32,36 @@
 <section>
     <div class="container  mb-5  ">
 
+    <input type="date" style="width: 25rem;margin: auto;" class="form-control my-3" id="myDate" name="" min="<?= $sekarang ?>" max="<?= $bataswaktu ?>" value="<?= $tgl ?>" id="">
+
         <div class="row justify-content-evenly">
 
-            <?php
+      
 
+            <?php
             $today = date('Y-m-d');
             $tgl = $tgl ?? date('Y-m-d', strtotime('+ 1 days', strtotime($today)));
-            $con = 1;
+            $con = 0;
             $a = true;
-            while ($con <= 8) {
-                $date = date('Y-m-d', strtotime('+' . $con . ' days', strtotime($today))); ?>
+            //////////////////
+           
+            // Get the day of the week of the specified date
+            $dayOfWeek = date("w", strtotime($tgl));
 
-                <a href="<?= base_url('/pilihwaktu?paket=') . $terpilih->id . '&tgl=' . $date ?>" class="btn p-3 zoom rounded-2 border col text-center <?= ($tgl == $date) ? 'border border-danger' : '' ?>" style="background-color: var(<?= $a ? '--bs-secondary-bg' : '--bs-primary-bg-subtle' ?>);">
+            // Calculate the number of days to subtract from the specified date
+            $daysToSubtract = $dayOfWeek - 1;
+
+            // Get the date on Monday of the specified date
+            $tglx=  date("Y-m-d", strtotime($tgl . "-2 days"));
+            $mondayDate = date("Y-m-d", strtotime($tglx . "-$daysToSubtract days"));
+
+           
+            ///////////////
+
+            while ($con <=8) {
+                $date = date('Y-m-d', strtotime('+' . $con . ' days', strtotime($mondayDate))); ?>
+
+                <a  href="<?= base_url('/pilihwaktu?paket=') . $terpilih->id . '&tgl=' . $date ?>" class="btn p-3  <?= ($date<=$today || $date>=$bataswaktu ) ? 'disabled' : 'zoom' ?> rounded-2 border col text-center <?= ($tgl == $date) ? 'border border-danger' : '' ?>" style="background-color: var(<?= $a ? '--bs-secondary-bg' : '--bs-primary-bg-subtle' ?>);">
                     <?= date('d M', strtotime($date)) ?> <br>
                     <?= date('D', strtotime($date)) ?>
 
@@ -58,14 +76,14 @@
 
     <div class="container text-center ">
         <div class="row justify-content-evenly row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-            <?php foreach($waktuterboking as $key =>$val){?>
-                <a href="<?= base_url("/booking?tgl=".date('Y-m-d', strtotime($key))."&time=".date('H:i', strtotime($key)) )?>" class="btn col px-3 m-3 btn-secondary <?=(!$val)?'disabled':''?>"   role="button"><?= date('H:i', strtotime($key))?></a>
+            <?php foreach ($waktuterboking as $key => $val) { ?>
+                <a href="<?= base_url("/booking?tgl=" . date('Y-m-d', strtotime($key)) . "&time=" . date('H:i', strtotime($key))) ?>" class="btn col px-3 m-3 btn-secondary <?= (!$val) ? 'disabled' : '' ?>" role="button"><?= date('H:i', strtotime($key)) ?></a>
             <?php } ?>
 
         </div>
-       
+
     </div>
-    
+
 </section>
 <?= $this->endSection() ?>
 
@@ -93,10 +111,27 @@
                 path: uri
             }, '', uri);
         }
+        window.location.href=uri;
     }
     dateparameter = function(e) {
         update_query_parameters('tgl', $(e).data("tgl"));
     }
+
+    const input = document.getElementById("myDate");
+
+    function validateDate() {
+        const date = new Date(input.value);
+        const minDate = new Date("<?= $sekarang ?>");
+        const maxDate = new Date("<?= $bataswaktu ?>");
+
+        if ((date < minDate) || (date > maxDate)) {
+            input.value = minDate.toISOString();
+        }else{
+           if (input.value !=''){ update_query_parameters('tgl',  input.value)}
+        }
+    }
+
+   input.addEventListener("change", validateDate);
 </script>
 
 <?= $this->endSection() ?>
