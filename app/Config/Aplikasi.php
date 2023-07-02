@@ -38,16 +38,15 @@ class Aplikasi extends BaseConfig
     public string $about = 'Melayani pas photo,foto panggilan dan cetak foto dari berbagai media seperti Hp,CD,Flashdisk dengan kualitas cetak unggul';
     public array $about_team = [
         [
-            'title' => 'xxxxxxxxx',
+            'title' => 'cs 2',
             'image' => 'https://picsum.photos/600?1',
         ], [
-            'title' => 'xxxxxxxxx',
+            'title' => 'cs 5',
             'image' => 'https://picsum.photos/600?2',
         ]
     ];
     public array $contact = [
         'alamat' => 'Jl. Imogiri Timur No 141, Giwangan, Kec. Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55163',
-
         'map' => 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15810.46939705836!2d110.3900343!3d-7.8302609!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5704ae19ca9f%3A0xb05bec832fda2bdd!2sWilis%20Photo!5e0!3m2!1sid!2sid!4v1687626983848!5m2!1sid!2sid',
         'wa' => '+6287839594951',
         'mail' => 'photowilis88@gmail.com',
