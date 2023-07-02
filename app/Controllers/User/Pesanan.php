@@ -155,6 +155,9 @@ class Pesanan extends BaseController
             $row[] = date('d F Y H:i', strtotime($list->tgl_pesan));
             $row[] = "$paket->name $paket->jenis <br> <small> $paket->keterangan <small>";
             $row[] = $list->status;
+            $row[] = $list->code;
+            $row[] = number_to_currency($list->Total_harga, 'idr', 'id_ID') .'/ terbayar '.number_to_currency($list->terbayar() ?? 0, 'idr', 'id_ID');
+           
             $aksi = (in_array($list->status, ['Menunggu Pembayaran', 'Bukti pembayaran ditolak','Belum lunas'])) ?  '<a class="btn mt-1 mx-1 btn-light" href="'
                 . base_url("transaksi/$list->id/pembayaran")
                 . '" role="button"> <i class="fa-solid fa-money-bill"></i> Bayar</a>' : '';

@@ -24,7 +24,8 @@ class BookingModel extends Model
         'tgl_booking_start',
         'tgl_booking_end',
         'create_by',
-       'keterangan'
+       'keterangan',
+       "code" ,
     ];
 
     // Dates

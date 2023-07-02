@@ -82,7 +82,7 @@ class Pesanan extends BaseController
             $row[] = date('d F Y H:i', strtotime($list->tgl_booking_start)) . '<br>sampai<br>' . date('d F Y H:i', strtotime($list->tgl_booking_end));
             $row[] = ($list->qty_peserta == 0) ? '-' : $list->qty_peserta;
 
-            $row[] = number_to_currency($list->Total_harga, 'idr', 'id_ID');
+            $row[] = number_to_currency($list->Total_harga, 'idr', 'id_ID').'/ terbayar '.number_to_currency($list->terbayar() ?? 0, 'idr', 'id_ID');
             // $row[] = number_to_currency($list->terbayar() ?? 0, 'idr', 'id_ID');
             $row[] = $list->status;
             $row[] = $list->keterangan;
@@ -96,10 +96,10 @@ class Pesanan extends BaseController
                 . '<i class="fa-regular fa-circle-xmark"></i> Tolak'
                 . ' </button> '
                 . '</form>';
-           
-            $bayarx='<a class="btn outline-secondary" href="' . base_url("admin/booking/$list->id/pembayaran") . '" role="button"><i class="fa-solid fa-money-bill"></i></a>';
-            
-            $row[] = ($list->status == 'Menunggu Persetujuan') ? $aksi : (($list->status == 'Menunggu Pembayaran') ? $bayarx   : '');
+
+            $bayarx = '<a class="btn outline-secondary" href="' . base_url("admin/booking/$list->id/pembayaran") . '" role="button"><i class="fa-solid fa-money-bill"></i></a>';
+
+            $row[] = ( $list->status == 'Menunggu Persetujuan') ? $aksi : ((in_array(  $list->status, ['Menunggu Pembayaran', "Belum lunas" ])) ? $bayarx   : '');
             $data[] = $row;
         }
         $output = [
@@ -128,7 +128,7 @@ class Pesanan extends BaseController
             $row[] = "$paket->name $paket->jenis <br> <small> $paket->keterangan <small>";
             //$row[] = ($list->qty_peserta == 0) ? '-' : $list->qty_peserta;
 
-            $row[] = number_to_currency($list->Total_harga, 'idr', 'id_ID');
+            $row[] = number_to_currency($list->Total_harga, 'idr', 'id_ID') .'/ terbayar '.number_to_currency($list->terbayar() ?? 0, 'idr', 'id_ID');
             /*   $row[] = number_to_currency($list->terbayar() ?? 0, 'idr', 'id_ID'); */
             $row[] = $listx->setuju ?? 'menunggu';
 
@@ -168,7 +168,12 @@ class Pesanan extends BaseController
         $bayar = $pembayaranmodel->find($id);
 
         $pembayaranmodel->update($id, ["setuju" => "disetujui"]);
-        $model->update($bayar->booking_id, ["status" => ($bayar->jenis == 'Dp') ? "Belum lunas" : "lunas"]);
+        $adacode=$model->find($id) ;
+        $datar["status"]= ($bayar->jenis == 'Dp') ? "Belum lunas" : "lunas";
+        if ($adacode->code==''){
+            $datar["code"] = 'odr-' . uniqid();
+        }
+        $model->update($bayar->booking_id, $datar);
         return redirect()->to(base_url("admin/pembayaran"))->with('message', "Pembayaran disetujui");
     }
     public function pembayarna_tolak($id)
@@ -199,7 +204,8 @@ class Pesanan extends BaseController
         return view('Admin/PembayaranaddView', $data);
     }
 
-    public function booking_pembayaran_pos($id) {
+    public function booking_pembayaran_pos($id)
+    {
         $model = new BookingModel();
         $pembayaran = $model->find($id);
         if (!$pembayaran) {
@@ -228,20 +234,24 @@ class Pesanan extends BaseController
         $modelbayar = new PembayaranModel();
         $data = [
             'booking_id' => $id,
-            'nominal'=> $this->request->getPost('nominal'),
-           // 'bukti' => $this->simpan_img('image'),
+            'nominal' => $this->request->getPost('nominal'),
+            // 'bukti' => $this->simpan_img('image'),
             'jenis' => $this->request->getPost('jenis'),
-            'setuju'=> 'disetujui'
+            'setuju' => 'disetujui',
+
         ];
-        if ($this->request->getPost('image')!=''){
+        if ($this->request->getPost('image') != '') {
             $data['bukti'] = $this->simpan_img('image');
         }
         $modelbayar->insert($data);
 
-        $model->update($id,  ["status" => ($this->request->getPost('jenis') == 'Dp') ? "Belum lunas" : "lunas"]);
-        return redirect()->to(base_url("admin/booking"))->with('message', "pesanan tanggal $pembayaran->tgl_pesan menunggu konfirmasi dari admin");
-
+        $datar["status"]= ($this->request->getPost('jenis') == 'Dp') ? "Belum lunas" : "lunas";
+        if ($pembayaran->code==''){
+            $datar["code"] = 'odr-' . uniqid();
+        }
        
+        $model->update($id, $datar);
+        return redirect()->to(base_url("admin/booking"))->with('message', "pesanan tanggal $pembayaran->tgl_pesan menunggu konfirmasi dari admin");
     }
 
     private function simpan_img($files)
