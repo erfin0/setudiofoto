@@ -10,6 +10,8 @@ class All extends Seeder
     {
         $this->call('admin');
         $this->call('paket');
-       
+        $this->call('poto');
+        $this->call('boking');
+        $this->call('testi');
     }
 }
