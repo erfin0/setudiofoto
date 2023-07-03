@@ -24,8 +24,8 @@ class BookingModel extends Model
         'tgl_booking_start',
         'tgl_booking_end',
         'create_by',
-       'keterangan',
-       "code" ,
+        'keterangan',
+        "code",
     ];
 
     // Dates
@@ -61,11 +61,11 @@ class BookingModel extends Model
         $data['data']['tgl_booking_start'] =  $data['data']['tgl_pesan'];
         $data['data']['Total_harga'] = $paketterpilih->harga;
         //jika dalam databse paket ada batasan peserta atau harga perpeserta ada dan max simal pesereta melebihi 
-        if (($paketterpilih->max_peserta!==null) && ($paketterpilih->harga_perpeserta !==null)  && ($paketterpilih->max_peserta < $data['data']['qty_peserta'])) {
+        if (($paketterpilih->max_peserta !== null) && ($paketterpilih->harga_perpeserta !== null)  && ($paketterpilih->max_peserta < $data['data']['qty_peserta'])) {
             //total harga ditambah dengan harga perpeserta dikali jumlah sisa
             $data['data']['Total_harga'] += $paketterpilih->harga_perpeserta * ((int)$data['data']['qty_peserta'] - (int)$paketterpilih->max_peserta);
         }
-        $data['data']['tgl_booking_end'] = date('Y-m-d H:i:s', strtotime( $data['data']['tgl_pesan'] . "+$paketterpilih->max_time minutes")); 
+        $data['data']['tgl_booking_end'] = date('Y-m-d H:i:s', strtotime($data['data']['tgl_pesan'] . "+$paketterpilih->max_time minutes"));
 
 
         return $data;
@@ -74,7 +74,7 @@ class BookingModel extends Model
 
     public function waktudiizinkan($datetime): bool
     {
-        
+
         $data  = $this
             ->where('DATE(tgl_pesan)', date("Y-m-d", strtotime($datetime)))
             ->where('TIME(tgl_booking_start)<=', date("H:i:s", strtotime($datetime)))
@@ -82,15 +82,24 @@ class BookingModel extends Model
             //  ->where("status <>'batal'")
             ->whereNotIn('status', ['Permintaan ditolak', 'batal'])
             ->countAllResults();
-        return ($data == 0);
+
+        $boleh = false;
+        $now = time();
+        $dtime = strtotime($datetime);
+        
+        if ((date("Y-m-d") < date("Y-m-d", strtotime($datetime))) &&  ($now < $dtime)) {
+            $boleh = true;
+        }
+
+        return (($data == 0) && $boleh);
     }
 
 
 
 
 
-    
-    protected $column_order = ['tgl_pesan','paket_id','status'];
+
+    protected $column_order = ['tgl_pesan', 'paket_id', 'status'];
     protected $column_search = [
         'paket_id',
         'users_id',
@@ -100,7 +109,7 @@ class BookingModel extends Model
         'Total_harga',
         'tgl_booking_start',
         'tgl_booking_end',
-        
+
     ];
     protected $order = ['id' => 'DESC'];
 
@@ -128,9 +137,9 @@ class BookingModel extends Model
             $this->orderBy(key($order), $order[key($order)]);
         }
 
-       
-        if (! auth()->user()->inGroup('superadmin', 'admin')) {
-           $this->where('users_id' , auth()->getUser()->id);
+
+        if (!auth()->user()->inGroup('superadmin', 'admin')) {
+            $this->where('users_id', auth()->getUser()->id);
         }
     }
 

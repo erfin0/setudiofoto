@@ -31,7 +31,6 @@
 </section>
 <section>
     <div class="container  mb-5  ">
-
     <input type="date" style="width: 25rem;margin: auto;" class="form-control my-3" id="myDate" name="" min="<?= $sekarang ?>" max="<?= $bataswaktu ?>" value="<?= $tgl ?>" id="">
 
         <div class="row justify-content-evenly">
