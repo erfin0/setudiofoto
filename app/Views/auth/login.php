@@ -48,6 +48,10 @@
                         <div class="form-floating mb-3">
                             <input name="password" type="password" class="form-control f-tin inlogin <?= isset(session('errors')['password']) ? 'is-invalid' : '' ?> " id="floatingPassword" placeholder="Password">
                             <label for="floatingPassword " class="f-tin ">Password</label>
+                            <span id="show-password">
+                                <i id="mata" class="fas fa-eye-slash" style="float: right;margin-top: -30px;margin-right: -20px;"></i>
+
+                            </span>
                         </div>
                         <!-- Remember me -->
                         <?php if (setting('Auth.sessionConfig')['allowRemembering']) : ?>
@@ -79,4 +83,28 @@
 </div>
 
 
+<?= $this->endSection() ?>
+
+
+<?= $this->Section('pageScripts') ?>
+<script>
+    const showPassword = document.querySelector('#show-password');
+    const passwordInput = document.querySelector('#floatingPassword');
+    const mata = document.querySelector('#mata');
+
+    showPassword.addEventListener('click', function() {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordInput.setAttribute('aria-label', 'Show password');
+            mata.classList.remove('fa-eye-slash');
+            mata.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            passwordInput.setAttribute('aria-label', 'Hide password');
+          
+            mata.classList.add('fa-eye-slash');
+            mata.classList.remove('fa-eye');
+        }
+    });
+</script>
 <?= $this->endSection() ?>
