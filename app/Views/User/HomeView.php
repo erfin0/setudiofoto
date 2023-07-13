@@ -12,7 +12,7 @@
         <div class="px-5 mx-auto text-center ">
             <p class=" mt-5 mb-0 sarif text-uppercase"><?= setting()->get('aplikasi.slogan') ?></p>
             <p class="logoname sarif text-uppercase"><?= setting()->get('aplikasi.perusahaan') ?></p>
-            <a type="button"  href="<?=base_url('pricelist')?>" class="btn btn-dark px-4">BOOK NOW</a>
+            <a type="button" href="<?= base_url('pricelist') ?>" class="btn btn-dark px-4">BOOK NOW</a>
 
         </div>
     </div>
@@ -40,7 +40,7 @@
                                         <h1><?= $potox->judul ?></h1>
                                         <p><?= $potox->keterangan ?></p>
                                     </div>
-                                  
+
                                 </div>
                             <?php $a = false;
                             } ?>
@@ -64,39 +64,40 @@
         </div>
         <div class="row">
             <div class="col-12 ">
-              
-            <div class="owl-carousel owl-theme owl-loaded">
-                <div class="owl-stage-outer">
-                    <div class="owl-stage">
-                        
-                        <?php if (isset($testimoni)) {
-                             foreach ($testimoni as $testi) { ?>
-                            <div class="owl-item">
-                                <div class="card  border border-0 bg-transparent" style="width: 18rem;">
-                                    <img src="<?= $testi->ximage('max') ?>" class="card-img-top" alt="" style="object-fit: cover;width: 100%;height: 100%;max-height: 14rem;">
-                                    <div class="card-body text-center ">
-                                        <p class=" sarif card-text"><?= $testi->keterangan?></p>
-                                    </div>
-                                </div>
-                            </div>
 
-                        <?php }} ?>
+                <div class="owl-carousel owl-theme owl-loaded">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage">
+
+                            <?php if (isset($testimoni)) {
+                                foreach ($testimoni as $testi) { ?>
+                                    <div class="owl-item">
+                                        <div class="card  border border-0 bg-transparent" style="width: 18rem;" data-bs-toggle="popover" data-trigger="hover" data-bs-title="Balasan" data-bs-content="<?= $testi->getcommnt() ?>">
+                                            <img src="<?= $testi->ximage('max') ?>" class="card-img-top" alt="" style="object-fit: cover;width: 100%;height: 100%;max-height: 14rem;">
+                                            <div class="card-body text-center ">
+                                                <p class=" sarif card-text"><?= $testi->keterangan ?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            <?php }
+                            } ?>
+                        </div>
                     </div>
-                </div>
-                <div class="owl-nav">
-                    <div class="owl-prev">prev</div>
-                    <div class="owl-next">next</div>
-                </div>
-                <!--   <div class="owl-dots">
+                    <div class="owl-nav">
+                        <div class="owl-prev">prev</div>
+                        <div class="owl-next">next</div>
+                    </div>
+                    <!--   <div class="owl-dots">
                     <div class="owl-dot active"><span></span></div>
                     <div class="owl-dot"><span></span></div>
                     <div class="owl-dot"><span></span></div>
                 </div>
             </div> -->
-            </div>
-                    
+                </div>
 
-                
+
+
             </div>
         </div>
     </div>
@@ -150,7 +151,7 @@
             autoplayTimeout: 4000,
             autoplayHoverPause: true,
             margin: 100,
-              nav: true,
+            nav: true,
             loop: true,
             responsiveClass: true,
             navText: ["<div class='nav-btn prev-slide'><i class='fa-solid fa-angle-left'></i></div>", "<div class='nav-btn next-slide'><i class='fa-solid fa-angle-right'></i></div>"],
@@ -167,7 +168,18 @@
             }
         });
 
+       
+
     });
+
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl, {
+            placement : 'top',
+            trigger: 'hover',
+            html:true
+        })
+    })
 </script>
 
 <?= $this->endSection() ?>

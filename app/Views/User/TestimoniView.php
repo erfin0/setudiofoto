@@ -15,7 +15,7 @@
                 if (count($testimoni) > 2) {
                     for ($i = 0; $i < 3; $i++) { ?>
                         <div class="col-12 col-sm-12 col-md-6 col-xl-4 col-xxl-4 d-flex justify-content-center">
-                            <div class="card mt-3 border border-0 bg-secondary-subtle p-3" style="width: 18rem;">
+                            <div class="card mt-3 border border-0 bg-secondary-subtle p-3" style="width: 18rem;"  data-bs-toggle="popover" data-trigger="hover" data-bs-title="Balasan" data-bs-content="<?= $testimoni[$i]->getcommnt() ?>">
                                 <img src="<?= $testimoni[$i]->ximage('max') ?>" class="d-block img20 " alt="...">
                                 <div class="card-body  text-center">
 
@@ -50,7 +50,7 @@
                         <?php if (isset($testimoni)) {
                             foreach ($testimoni as $testi) { ?> ?>
                                 <div class="owl-item">
-                                    <div class="card  border border-0 p-1">
+                                    <div class="card  border border-0 p-1" data-bs-toggle="popover" data-trigger="hover" data-bs-title="Balasan" data-bs-content="<?= $testi->getcommnt() ?>">
                                         <img src="<?= $testi->ximage('max') ?>" class="d-block img20 card-img-top" alt="...">
                                         <div class="card-body text-center ">
                                             <p class=" sarif card-text"><?= $testi->keterangan ?></p>
@@ -82,7 +82,7 @@
                 if (count($testimoni) > 5) {
                     for ($i = 3; $i < 6; $i++) { ?>
                         <div class="col-12 col-sm-12 col-md-6 col-xl-4 col-xxl-4 d-flex justify-content-center">
-                            <div class="card mt-3 border border-0 bg-secondary-subtle p-3" style="width: 18rem;">
+                            <div class="card mt-3 border border-0 bg-secondary-subtle p-3" style="width: 18rem;" data-bs-toggle="popover" data-trigger="hover" data-bs-title="Balasan" data-bs-content="<?= $testimoni[$i]->getcommnt() ?>">
                                 <img src="<?= $testimoni[$i]->ximage('max') ?>" class="d-block img20 " alt="...">
                                 <div class="card-body  text-center">
                                     <p class="sarif text-light card-text"><?= $testimoni[$i]->keterangan ?></p>
@@ -131,6 +131,14 @@
                 /* loop: false */
             }
         }
+    })
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl, {
+            placement : 'top',
+            trigger: 'hover',
+            html:true
+        })
     })
 </script>
 
