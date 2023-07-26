@@ -42,7 +42,7 @@ class Booking extends Entity
     public function setTglPesan(string $tgl_pesan): Booking
     {
         $this->attributes['tgl_pesan'] = date('Y-m-d H:i:s', strtotime($tgl_pesan));
-
+        $this->attributes['created_at'] = date('Y-m-d H:i:s');
         return $this;
     }
     public function paket()
@@ -58,7 +58,23 @@ class Booking extends Entity
     public function Terbayar()
     {
         $model = new PembayaranModel();
-        return $model->selectSum('nominal', 'total')->where('booking_id', $this->attributes['id'])->where('setuju','disetujui' )->findAll()[0]->total;
+        return $model->selectSum('nominal', 'total')->where('booking_id', $this->attributes['id'])->where('setuju', 'disetujui')->findAll()[0]->total;
     }
-   
+
+    public function getStatus()
+    {
+        if (($this->attributes['code'] == '') && (in_array($this->attributes['status'], ['Menunggu Pembayaran', 'Bukti pembayaran ditolak']))) {
+            $waktu_sekarang = new \DateTime();
+            $waktu_awal = new \DateTime($this->attributes['created_at']);
+            $selisih = $waktu_sekarang->diff($waktu_awal);
+
+            if (($selisih->y <= 0)&&($selisih->m <= 0)&&($selisih->d <= 0) ){
+                return $this->attributes['status'];
+               //&&($selisih->h < 12 ) &&($selisih->i <= 0)&&($selisih->s <= 0)
+            } 
+            return  "batal otomatis";         
+        }
+
+        return $this->attributes['status'];
+    }
 }
