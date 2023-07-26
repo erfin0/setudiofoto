@@ -9,7 +9,7 @@ use App\Models\UserModel;
 
 class Booking extends Entity
 {
-     /* 
+    /* 
     Menunggu Persetujuan  
     Permintaan ditolak  
     Menunggu Pembayaran
@@ -53,11 +53,12 @@ class Booking extends Entity
     public function PenikikPemesan()
     {
         $model = new UserModel();
-           return $model->find($this->attributes['users_id']);
+        return $model->find($this->attributes['users_id']);
     }
     public function Terbayar()
     {
         $model = new PembayaranModel();
-           return $model->selectSum('nominal','total')->where('booking_id',$this->attributes['id'])->findAll()[0]->total;
+        return $model->selectSum('nominal', 'total')->where('booking_id', $this->attributes['id'])->where('setuju','disetujui' )->findAll()[0]->total;
     }
+   
 }
