@@ -11,22 +11,30 @@
             <h5 class=" mt-5  sarif">Testimoni</h5>
         </div>
         <div class="row justify-content-evenly">
-            <?php for ($i = 0; $i < 3; $i++) { ?>
-                <div class="col-12 col-sm-12 col-md-6 col-xl-4 col-xxl-4 d-flex justify-content-center">
-                    <div class="card mt-3 border border-0 bg-secondary-subtle p-3" style="width: 18rem;">
-                        <img src="https://picsum.photos/600?<?= $i ?>" class="d-block img20 " alt="...">
-                        <div class="card-body  text-center">
+            <?php if (isset($testimoni)) {
+                if (count($testimoni) > 2) {
+                    for ($i = 0; $i < 3; $i++) { ?>
+                        <div class="col-12 col-sm-12 col-md-6 col-xl-4 col-xxl-4 d-flex justify-content-center">
+                            <div class="card mt-3 border border-0 bg-secondary-subtle p-3" style="width: 18rem;"  data-bs-toggle="popover" data-trigger="hover" data-bs-title="Balasan" data-bs-content="<?= $testimoni[$i]->getcommnt() ?>">
+                                <img src="<?= $testimoni[$i]->ximage('max') ?>" class="d-block img20 " alt="...">
+                                <div class="card-body  text-center">
 
-                            <p class="sarif text-light card-text">XXXXXXXXXXXX</p>
+                                    <p class="sarif text-light card-text"><?= $testimoni[$i]->keterangan ?></p>
 
 
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            <?php } ?>
+            <?php }
+                }
+            } ?>
         </div>
     </div>
 </section>
+
+
+
+
 <section>
     <div class="container  mb-5  py-3">
         <div class="mx-auto text-center mb-5 ">
@@ -38,18 +46,20 @@
             <div class="owl-carousel owl-theme owl-loaded">
                 <div class="owl-stage-outer">
                     <div class="owl-stage">
-                        
-                        <?php for ($i = 0; $i < 14; $i++) { ?>
-                            <div class="owl-item">
-                                <div class="card  border border-0 p-1" style="width: 18rem;">
-                                    <img src="https://picsum.photos/600?<?= $i ?>" class="card-img-top" alt="...">
-                                    <div class="card-body text-center ">
-                                        <p class=" sarif card-text">xxxxxxxxxxxxxxx</p>
+
+                        <?php if (isset($testimoni)) {
+                            foreach ($testimoni as $testi) { ?> ?>
+                                <div class="owl-item">
+                                    <div class="card  border border-0 p-1" data-bs-toggle="popover" data-trigger="hover" data-bs-title="Balasan" data-bs-content="<?= $testi->getcommnt() ?>">
+                                        <img src="<?= $testi->ximage('max') ?>" class="d-block img20 card-img-top" alt="...">
+                                        <div class="card-body text-center ">
+                                            <p class=" sarif card-text"><?= $testi->keterangan ?></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        <?php } ?>
+                        <?php }
+                        } ?>
                     </div>
                 </div>
                 <div class="owl-nav">
@@ -68,19 +78,22 @@
 <section>
     <div class="container  mb-5">
         <div class="row justify-content-evenly">
-            <?php for ($i = 0; $i < 3; $i++) { ?>
-                <div class="col-12 col-sm-12 col-md-6 col-xl-4 col-xxl-4 d-flex justify-content-center">
-                    <div class="card mt-3 border border-0 bg-secondary-subtle p-3" style="width: 18rem;">
-                        <img src="https://picsum.photos/600?<?= $i + 3 ?>" class="d-block img20 " alt="...">
-                        <div class="card-body  text-center">
+        <?php if (isset($testimoni)) {
+                if (count($testimoni) > 5) {
+                    for ($i = 3; $i < 6; $i++) { ?>
+                        <div class="col-12 col-sm-12 col-md-6 col-xl-4 col-xxl-4 d-flex justify-content-center">
+                            <div class="card mt-3 border border-0 bg-secondary-subtle p-3" style="width: 18rem;" data-bs-toggle="popover" data-trigger="hover" data-bs-title="Balasan" data-bs-content="<?= $testimoni[$i]->getcommnt() ?>">
+                                <img src="<?= $testimoni[$i]->ximage('max') ?>" class="d-block img20 " alt="...">
+                                <div class="card-body  text-center">
+                                    <p class="sarif text-light card-text"><?= $testimoni[$i]->keterangan ?></p>
 
-                            <p class="sarif text-light card-text">XXXXXXXXXXXX</p>
 
-
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            <?php } ?>
+            <?php }
+                }
+            } ?>
         </div>
     </div>
 </section>
@@ -94,14 +107,14 @@
         $(".owl-carousel").owlCarousel();
     });
     $('.owl-carousel').owlCarousel({
-        loop: true,       
-        items: 3,       
+        loop: true,
+        items: 3,
         margin: 10,
-        autoWidth:true,
+        // autoWidth:true,
         autoplay: true,
-        autoplayTimeout: 1000,
+        autoplayTimeout: 2000,
         autoplayHoverPause: true,
-        center:true,
+        center: true,
         responsiveClass: true,
         responsive: {
             0: {
@@ -118,6 +131,14 @@
                 /* loop: false */
             }
         }
+    })
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl, {
+            placement : 'top',
+            trigger: 'hover',
+            html:true
+        })
     })
 </script>
 

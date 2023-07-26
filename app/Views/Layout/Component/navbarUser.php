@@ -17,23 +17,29 @@
                 <?php if (auth()->loggedIn()) { ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                        <i class="fa-regular fa-circle-user fa-xl"></i>
+                            <i class="fa-regular fa-circle-user fa-xl"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="nav-item">
-                                <a class="dropdown-item text-white " href="<?=base_url('transaksi') ?>">transaksi</a></li>
-                            
+                                <a class="dropdown-item text-white " href="<?= base_url('transaksi') ?>">transaksi</a>
+                            </li>
+
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
+                            <?php if (auth()->user()->inGroup('admin')) { ?>
+                                <li class="nav-item">
+                                    <a class="dropdown-item text-white " href="<?= base_url('/admin/admin') ?>"><i class="fa-solid fa-gears"></i> admin</a>
+                                </li>
+                            <?php } ?>
                             <li class="nav-item">
-                                <a class="dropdown-item text-white " href="<?= url_to('logout') ?>">Logout</a>
+                                <a class="dropdown-item text-white " href="<?= url_to('logout') ?>"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
                     <!-- <li class="nav-item"><a class="nav-link text-white mx-2" href="<?= url_to('logout') ?>">Logout</a></li> -->
                 <?php } else { ?>
-                   
+
 
 
                     <li class="nav-item"><a class="nav-link text-white mx-2" href="<?= url_to('login') ?>">Login</a></li>

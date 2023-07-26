@@ -42,6 +42,8 @@
                     <th>Tanggal </th>
                     <th>Daftar booking </th>
                     <th>Status </th>
+                    <th>code booking </th>
+                    <th>Total</th>
                     <th>action </th>
                     <th>testimoni </th>
                 </tr>

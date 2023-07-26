@@ -28,62 +28,60 @@
             <a type="button" class="btn btn-dark px-4">BOOK NOW</a>
 
         </div>
-       
+
     </div>
 
 </section>
 
-<section id="galery">
-    <div class="container mb-5 pt-3 d-flex flex-wrap">
-        <div class="row">
-            <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                <img src="<?= isset($poto[0]) ? $poto[0]->ximage('max') : 'https://picsum.photos/600?1' ?>" class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
-                <img src="<?= isset($poto[1]) ? $poto[1]->ximage('max') : 'https://picsum.photos/600?2' ?>" class="w-100 shadow-1-strong rounded mb-4" alt="Wintry Mountain Landscape" />
+
+<?php if (isset($poto)) {
+    if (count($poto) > 5) { ?>
+        <section id="galery">
+            <!-- Gallery -->
+            <div class="container mb-5 pt-3 d-flex flex-wrap">
+                <div class="row">
+                    <div class="col-lg-4  my-2 mb-lg-0">
+                        <img src="<?= $poto[0]->ximage('max') ?>" class="w-100 shadow-1-strong rounded mb-4" style="object-fit: cover;width: 100%;height: 100%;max-height: 35%;" />
+                        <img src="<?= $poto[1]->ximage('max') ?>" class="w-100 shadow-1-strong rounded mb-4" style="object-fit: cover;width: 100%;height: 100%;max-height: 65%;" />
+                    </div>
+                    <div class="col-lg-4  my-2 mb-lg-0">
+                        <img src="<?= $poto[2]->ximage('max') ?>" class="w-100 shadow-1-strong rounded mb-4" style="object-fit: cover;width: 100%;height: 100%;max-height: 65%;" />
+                        <img src="<?= $poto[3]->ximage('max') ?>" class="w-100 shadow-1-strong rounded mb-4" style="object-fit: cover;width: 100%;height: 100%;max-height: 35%;" />
+                    </div>
+                    <div class="col-lg-4  my-2 mb-lg-0">
+                        <img src="<?= $poto[4]->ximage('max') ?>" class="w-100 shadow-1-strong rounded mb-4" style="object-fit: cover;width: 100%;height: 100%;max-height: 35%;" />
+                        <img src="<?= $poto[5]->ximage('max') ?>" class="w-100 shadow-1-strong rounded mb-4" style="object-fit: cover;width: 100%;height: 100%;max-height: 65%;" />
+                    </div>
+                </div>
+                <div class="text-over-image">
+                    <p class=" subname text-center sarif text-uppercase m-0">galery</p>
+                </div>
             </div>
-
-            <div class="col-lg-4 mb-4 mb-lg-0">
-                <img src="<?= isset($poto[2]) ? $poto[2]->ximage('max') : 'https://picsum.photos/600?3' ?>" class="w-100 shadow-1-strong rounded mb-4" alt="Mountains in the Clouds" />
-                <img src="<?= isset($poto[3]) ? $poto[3]->ximage('max') : 'https://picsum.photos/600?4' ?>" class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
-            </div>
-
-            <div class="col-lg-4 mb-4 mb-lg-0">
-                <img src="<?= isset($poto[4]) ? $poto[4]->ximage('max') : 'https://picsum.photos/600?5' ?>" class="w-100 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
-                <img src="<?= isset($poto[5]) ? $poto[5]->ximage('max') : 'https://picsum.photos/600?6' ?>" class="w-100 shadow-1-strong rounded mb-4" alt="Yosemite National Park" />
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-
-
-
+            <!-- Gallery -->
+        </section>
+<?php }
+} ?>
 
 <section>
     <div class="container  mb-5  py-3">
-        <div class="mx-auto text-center mb-5 ">
-            <h5 class="til sarif ">Apa Kata Mereka?</h5>
-        </div>
-
-
-        <div class=" bg-secondary-subtle py-4 ">
+        <div class="bg-secondary-subtle py-4 ">
             <div class="owl-carousel owl-theme owl-loaded">
                 <div class="owl-stage-outer">
                     <div class="owl-stage">
-
-                        <?php for ($i = 0; $i < 14; $i++) { ?>
-                            <div class="owl-item">
-                                <div class="card  border border-0 p-1" style="width: 18rem;">
-                                    <img src="https://picsum.photos/600?<?= $i ?>" class="card-img-top" alt="...">
-                                    <div class="card-body text-center ">
-                                        <p class=" sarif card-text">xxxxxxxxxxxxxxx</p>
+                        <?php
+                        if (isset($poto)) {
+                            foreach ($poto as $pt) {
+                        ?>
+                                <div class="owl-item">
+                                    <div class="card bg-secondary-subtle border border-0 p-1">
+                                        <img src="<?= $pt->ximage('max') ?>" class="d-block img20" alt="...">
+                                        <div class="card-body text-center ">
+                                            <p class=" sarif card-text"><?= $pt->keterangan ?></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                        <?php } ?>
+                        <?php }
+                        } ?>
                     </div>
                 </div>
                 <div class="owl-nav">
@@ -102,19 +100,20 @@
 <section>
     <div class="container  mb-5">
         <div class="row justify-content-evenly">
-            <?php for ($i = 0; $i < 3; $i++) { ?>
-                <div class="col-12 col-sm-12 col-md-6 col-xl-4 col-xxl-4 d-flex justify-content-center">
-                    <div class="card mt-3 border border-0 bg-secondary-subtle p-3" style="width: 18rem;">
-                        <img src="https://picsum.photos/600?<?= $i + 3 ?>" class="d-block img20 " alt="...">
-                        <div class="card-body  text-center">
-
-                            <p class="sarif text-light card-text">XXXXXXXXXXXX</p>
-
-
+            <?php
+            if (isset($poto)) {
+                foreach ($poto as $pt) {
+            ?>
+                    <div class="col-12 col-sm-12 col-md-6 col-xl-4 col-xxl-4 d-flex justify-content-center">
+                        <div class="card mt-3 border border-0 bg-secondary-subtle p-3">
+                            <img src="<?= $pt->ximage('max') ?>" class="d-block img20 " alt="...">
+                            <div class="card-body  text-center">
+                                <p class="sarif  card-text"><?= $pt->keterangan ?></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php } ?>
+            <?php }
+            } ?>
         </div>
     </div>
 </section>
@@ -131,9 +130,9 @@
         loop: true,
         items: 3,
         margin: 10,
-        autoWidth: true,
+        // autoWidth: true,
         autoplay: true,
-        autoplayTimeout: 1000,
+        autoplayTimeout: 2300,
         autoplayHoverPause: true,
         center: true,
         responsiveClass: true,

@@ -100,7 +100,7 @@ class Portofolio extends BaseController
         foreach ($lists as $list) {
             $no++;
             $row = [];
-            $row[] = '<img src="' . $list->ximage('mini') . '"  style="height: 50px;">'  . $list->judul;
+            $row[] = '<img src="' . $list->ximage('mini') . '"  style="height: 50px;"><br>'  . $list->judul;
             $row[] = $list->keterangan;
             $row[] = '<a class="btn mt-1 mx-1 btn-light" href="'
                 . base_url("admin/portofolio/$list->id/edit")

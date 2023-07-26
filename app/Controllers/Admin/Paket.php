@@ -119,16 +119,6 @@ class Paket extends BaseController
         }
     }
 
-
-
-
-
-
-
-
-
-
-
     public function tabel()
     {
         /*  'name',

@@ -16,7 +16,7 @@ class Paket extends Seeder
                 'harga'=> 500000,        
                 'harga_perpeserta'=> null,
                 'keterangan'=> '50 photo cetak 3R + Album DVD file photo',
-                'max_time'=> null ,
+                'max_time'=> 200 ,
                 'image'=>'pwepa.jpg'
             ],
             [
@@ -26,7 +26,7 @@ class Paket extends Seeder
                 'harga'=> 1000000,        
                 'harga_perpeserta'=> null,
                 'keterangan'=> '80 photo cetak 3R + Album DVD file photo 12R + figur',
-                'max_time'=> null ,
+                'max_time'=> 480 ,
                 'image'=>'pwepb.jpg'
             ],
             [

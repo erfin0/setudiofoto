@@ -8,7 +8,7 @@ use App\Models\PembayaranModel;
 use App\Entities\Pembayaran;
 use App\Entities\Booking;
 use App\Controllers\BaseController;
-
+use CodeIgniter\I18n\Time;
 
 class Pesanan extends BaseController
 {
@@ -25,6 +25,9 @@ class Pesanan extends BaseController
         }
         if ($pembayaran->status == "lunas") {
             return redirect()->to(base_url("transaksi"))->with('message', 'Pembayaran sudah lunas tidak perlu dibayar');
+        }
+        if ($pembayaran->status == "batal") {
+            return redirect()->to(base_url("transaksi"))->with('message', 'Pembayaran sudah dibatalkan');
         }
         $data['pesanan'] = $pembayaran;
 
@@ -61,11 +64,14 @@ class Pesanan extends BaseController
         }
         $timepilih = date('Y-m-d', strtotime('+ 1 days', strtotime(date('Y-m-d'))));
 
+
+
+        $bataswaktu= date('Y-m-d', strtotime("+" . setting('Aplikasi.bataspesanan')?? '6 months', strtotime(date('Y-m-d'))));
         if ($this->request->getGet('tgl') != null) {
             $tmptime = date('Y-m-d', strtotime($_GET['tgl']));
 
             ///tidak bisa memiliki masa lalu
-            if ($timepilih <= $tmptime) {
+            if ($timepilih >= $tmptime || $tmptime <= $bataswaktu) {
                 $timepilih = $tmptime;
             }
         }
@@ -76,9 +82,13 @@ class Pesanan extends BaseController
 
         $_SESSION['paket'] = $this->request->getGet('paket');
         $data['terpilih'] = $terpilih;
+
+        $data['sekarang'] = date('Y-m-d');
+        $data['bataswaktu'] =$bataswaktu;
+
         return view('User/PilihwaktuView', $data);
     }
-    private function waktudiizinkan($datetime): bool
+    /*  private function waktudiizinkan($datetime): bool
     {
         $modelboking = new BookingModel();
         $data  = $modelboking
@@ -89,13 +99,14 @@ class Pesanan extends BaseController
             ->whereNotIn('status', ['Permintaan ditolak', 'batal'])
             ->countAllResults();
         return ($data > 0);
-    }
+    } */
     private function listwaktu($datetime)
     {
+        $model = new BookingModel();
         $data = [];
         for ($i = 0; $i <= 12; $i++) {
             $val = date('Y-m-d H:i:s', strtotime($datetime . "+8 hours +" . ($i * 60) . " minutes"));
-            $data[$val] =  $this->waktudiizinkan($val);
+            $data[$val] =  $model->waktudiizinkan($val);
         }
         return $data;
     }
@@ -112,14 +123,19 @@ class Pesanan extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
+
         $booking = new Booking();
         $model = new BookingModel();
+
+        if (!$model->waktudiizinkan($this->request->getPost('tgl_pesan'))) {
+            return redirect()->back()->withInput()->with('errors', ['tgl_pesan' => "tanggal ini sudah terpakai"]);
+        }
 
         $data = [
             'paket_id' => $this->request->getPost('paket_id'),
             'users_id' => auth()->getUser()->id,
             'tgl_pesan' => $this->request->getPost('tgl_pesan'),
-            'status' => 'Menunggu Persetujuan',
+            'status' => 'Menunggu Pembayaran',
             'qty_peserta' => $this->request->getPost('qty_peserta'),
             //'Total_harga',
             //'tgl_booking_start',
@@ -146,7 +162,10 @@ class Pesanan extends BaseController
             $row[] = date('d F Y H:i', strtotime($list->tgl_pesan));
             $row[] = "$paket->name $paket->jenis <br> <small> $paket->keterangan <small>";
             $row[] = $list->status;
-            $aksi = (in_array($list->status, ['Menunggu Pembayaran', 'Bukti pembayaran ditolak','Belum lunas'])) ?  '<a class="btn mt-1 mx-1 btn-light" href="'
+            $row[] = $list->code;
+            $row[] = number_to_currency($list->Total_harga, 'idr', 'id_ID') . '/ terbayar ' . number_to_currency($list->terbayar() ?? 0, 'idr', 'id_ID');
+
+            $aksi = (in_array($list->status, ['Menunggu Pembayaran', 'Bukti pembayaran ditolak', 'Belum lunas'])) ?  '<a class="btn mt-1 mx-1 btn-light" href="'
                 . base_url("transaksi/$list->id/pembayaran")
                 . '" role="button"> <i class="fa-solid fa-money-bill"></i> Bayar</a>' : '';
             $aksi .= (in_array($list->status, ['Menunggu Persetujuan', 'Menunggu Pembayaran'])) ? $batal : '';
@@ -205,7 +224,7 @@ class Pesanan extends BaseController
         $modelbayar = new PembayaranModel();
         $data = [
             'booking_id' => $id,
-            'nominal'=> $this->request->getPost('nominal'),
+            'nominal' => $this->request->getPost('nominal'),
             'bukti' => $this->simpan_img('image'),
             'jenis' => $this->request->getPost('jenis'),
         ];

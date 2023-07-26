@@ -92,5 +92,21 @@ class UserFilter extends UserModel
 
         return $use;
     }
+
+    public function ggrub(  $params = null)
+    {
+        
+        if (isset($params ) ) {
+          
+            $this->select('users.id');
+            $this->join('auth_groups_users agu', 'agu.user_id = users.id')
+                ->where('agu.group', $params);
+        } else {
+           
+            $this->select('users.*');
+        }
+
+        return $this;
+    }
    
 }

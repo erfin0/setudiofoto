@@ -10,8 +10,10 @@ class Testimoni extends BaseController
 {
     public function index()
     {
-
-        return view('User/TestimoniView');
+       
+        $testi=New TestimoniModel();       
+        $data['testimoni']= $testi->getrandom(6);
+        return view('User/TestimoniView', $data);
     }
 
     public function boking_testimoni_new($id)
