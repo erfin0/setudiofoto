@@ -67,7 +67,7 @@ class Paket extends BaseController
         }
 
         $rules = [
-            'name' => "required|max_length[255]|min_length[3]|is_unique[paket.name,id,{$paketId}]",
+            'name' => "required|max_length[255]|min_length[3]",
             'jenis' => 'required|max_length[255]',
             'harga' => 'numeric',
             'max_peserta' => 'permit_empty|numeric',
