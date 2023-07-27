@@ -94,8 +94,8 @@ class User extends ShieldUser
         if (! empty($postfix)) {
             $url .= "/{$postfix}";
         }
-
-        return trim(site_url($url));
+        return $url;
+        /* return trim(site_url($url)); */
     }
 
 
