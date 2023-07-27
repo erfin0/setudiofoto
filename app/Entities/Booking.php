@@ -5,6 +5,7 @@ namespace App\Entities;
 use CodeIgniter\Entity\Entity;
 use App\Models\PaketModel;
 use App\Models\PembayaranModel;
+use App\Models\BookingModel;
 use App\Models\UserModel;
 
 class Booking extends Entity
@@ -72,6 +73,8 @@ class Booking extends Entity
                 return $this->attributes['status'];
                //&&($selisih->h < 12 ) &&($selisih->i <= 0)&&($selisih->s <= 0)
             } 
+            $BookingModel=new BookingModel();
+            $BookingModel->update($this->attributes['id'],['status'=>"batal otomatis"]);
             return  "batal otomatis";         
         }
 

@@ -80,7 +80,7 @@ class BookingModel extends Model
             ->where('TIME(tgl_booking_start)<=', date("H:i:s", strtotime($datetime)))
             ->where('TIME(tgl_booking_end) >=', date("H:i:s", strtotime($datetime)))
             //  ->where("status <>'batal'")
-            ->whereNotIn('status', ['Permintaan ditolak', 'batal'])
+            ->whereNotIn('status', ['Permintaan ditolak', 'batal','batal otomatis'])
             ->countAllResults();
 
         $boleh = false;
