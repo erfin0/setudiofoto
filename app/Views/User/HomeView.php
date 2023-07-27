@@ -50,7 +50,7 @@
 
                 </div>
             <?php } ?>
-            <div class=" p-0 col-sm-12 col-md-12 col-lg-4 "><img src="https://picsum.photos/600?4" class="d-block  mx-auto img400" alt="..."></div>
+            <div class=" p-0 col-sm-12 col-md-12 col-lg-4 "><img src="<?= base_url('img/logo.png') ?>" class="d-block p-3 mx-auto " alt="..."></div>
         </div>
 
     </div>
