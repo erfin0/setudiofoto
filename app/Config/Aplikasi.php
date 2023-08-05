@@ -122,4 +122,11 @@ class Aplikasi extends BaseConfig
         ],
     ];
     public string $bataspesanan="6 months";
+
+    public array $rekening = [
+       'atasnama' => "erlanga adi pamungkas",
+       'no'=>'7000 0101 7707 533',
+       'bank' => 'BRI',
+       'img' =>''
+    ];
 }

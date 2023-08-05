@@ -61,7 +61,7 @@
         </div>
     </div></form>
 </div>
-
+<?= $this->include('/user/bank') ?>
 <?= $this->endSection() ?>
 
 

@@ -7,7 +7,7 @@
 <?= $this->section('main') ?>
 <div class="container f-sarabon mb-5">
     <div class="px-5 mx-auto text-center ">
-        <h1 class=" mt-5  f-b text-uppercase">pembayaran</h1>
+        <h1 class=" mt-5  f-b text-uppercase">Booking</h1>
     </div>
 
     <?php if (session('error') !== null) : ?>
