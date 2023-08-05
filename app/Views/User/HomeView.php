@@ -34,8 +34,8 @@
                             <?php
                             $a = true;
                             foreach ($potohider as $potox) { ?>
-                                <div class="carousel-item <?= ($a) ? 'active' : '' ?>" data-bs-interval="10000">
-                                    <img src="<?= $potox->ximage('max') ?> " class="d-block  mx-auto img400 " alt="...">
+                                <div class="carousel-item <?= ($a) ? 'active' : '' ?>" data-bs-interval="10000" style="height: 40rem;">
+                                    <img src="<?= $potox->ximage('max') ?> "  style="object-fit: cover; overflow-y: hidden; top: 0; width: 100%;"  alt="...">
                                     <div class=" carousel-caption  d-none d-md-block">
                                         <h1><?= $potox->judul ?></h1>
                                         <p><?= $potox->keterangan ?></p>
