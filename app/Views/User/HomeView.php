@@ -22,7 +22,7 @@
 
         <div class="row">
             <?php if (isset($potohider)) { ?>
-                <div class=" p-0 col-sm-12 col-md-12 col-lg-8 ">
+                <div class=" p-0 col-sm-12 col-md-12 col-lg-12 ">
                     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-indicators consual-indikator-kanan ">
                             <?php for ($i = 0; $i < count($potohider); $i++) { ?>
@@ -50,7 +50,7 @@
 
                 </div>
             <?php } ?>
-            <div class=" p-0 col-sm-12 col-md-12 col-lg-4 "><img src="<?= base_url('img/logo.png') ?>" class="d-block p-3 mx-auto " alt="..."></div>
+           <!--  <div class=" p-0 col-sm-12 col-md-12 col-lg-4 "><img src="<?= base_url('img/logo.png') ?>" class="d-block p-3 mx-auto " alt="..."></div> -->
         </div>
 
     </div>
